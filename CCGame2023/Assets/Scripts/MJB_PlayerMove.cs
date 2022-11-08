@@ -39,6 +39,7 @@ public class MJB_PlayerMove : MonoBehaviour
         Vector2 velocity = rb.velocity;
         velocity.x = Input.GetAxis("Horizontal") * playerSpeed * (Time.deltaTime + 1);
         rb.velocity = velocity;
+        myAnim.SetFloat("PlayerSpeed", Mathf.Abs(velocity.x));
 
         //flips character to face correct direction when walking
          if(Input.GetAxis("Horizontal") < 0)
@@ -52,12 +53,12 @@ public class MJB_PlayerMove : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, playerRotation, 0f);
 
         //sets walking bool for animation
-        if(Input.GetAxis("Horizontal") != 0 && !isWalking) {
-            isWalking = true;
-        }
-        if(Input.GetAxis("Horizontal") <= 0.9 && Input.GetAxis("Horizontal") >= -0.9 && isWalking == true) {
-            isWalking = false;
-        }        
+        // if(Input.GetAxis("Horizontal") != 0 && !isWalking) {
+        //     isWalking = true;
+        // }
+        // if(Input.GetAxis("Horizontal") <= 0.9 && Input.GetAxis("Horizontal") >= -0.9 && isWalking == true) {
+        //     isWalking = false;
+        // }        
 
         RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.56f), new Vector2(0.95f, 0.1f), 0, -Vector2.up, 0.1f); //checking if player is touching ground using boxcast
 

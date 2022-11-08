@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpTime: 0.3
-  playerSpeed: 5
+  playerSpeed: 7
   jumpForce: 4
   maxJumps: 1
   playerRotation: 0
