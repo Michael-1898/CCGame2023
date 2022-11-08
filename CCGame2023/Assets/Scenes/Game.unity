@@ -285,7 +285,7 @@ MonoBehaviour:
   jumpTime: 0.3
   playerSpeed: 7
   jumpForce: 4
-  maxJumps: 1
+  maxJumps: 2
   playerRotation: 0
   myAnim: {fileID: 327016864}
   isWalking: 0

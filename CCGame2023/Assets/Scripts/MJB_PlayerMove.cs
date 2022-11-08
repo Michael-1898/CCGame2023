@@ -52,17 +52,10 @@ public class MJB_PlayerMove : MonoBehaviour
         }
         transform.rotation = Quaternion.Euler(0f, playerRotation, 0f);
 
-        //sets walking bool for animation
-        // if(Input.GetAxis("Horizontal") != 0 && !isWalking) {
-        //     isWalking = true;
-        // }
-        // if(Input.GetAxis("Horizontal") <= 0.9 && Input.GetAxis("Horizontal") >= -0.9 && isWalking == true) {
-        //     isWalking = false;
-        // }        
 
-        RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.56f), new Vector2(0.95f, 0.1f), 0, -Vector2.up, 0.1f); //checking if player is touching ground using boxcast
+        RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.95f, 0.02f), 0, -Vector2.up, 0.1f); //checking if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
 
-        if(ground.collider != null)
+        if(ground.collider != null) //double jump code
         {
             isGrounded = true;
             numJumps = maxJumps;
@@ -73,8 +66,9 @@ public class MJB_PlayerMove : MonoBehaviour
                 numJumps--;
             }
         }
+
         
-        if((Input.GetKeyDown("up")) && (isGrounded == true || numJumps > 0))
+        if((Input.GetKeyDown("up")) && (isGrounded == true || numJumps > 0)) //jump code
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
@@ -88,7 +82,7 @@ public class MJB_PlayerMove : MonoBehaviour
             }
         }
 
-        if((Input.GetKey("up")) && isJumping == true)
+        if((Input.GetKey("up")) && isJumping == true) //extended jump code
         {
             if(jumpTimeCounter > 0)
             {
@@ -102,7 +96,7 @@ public class MJB_PlayerMove : MonoBehaviour
         }
 
 
-        if(Input.GetKeyUp("up"))
+        if(Input.GetKeyUp("up")) //ends jump
         {
             isJumping = false;
         }
