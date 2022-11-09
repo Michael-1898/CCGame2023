@@ -59,6 +59,8 @@ public class MJB_PlayerMove : MonoBehaviour
         {
             isGrounded = true;
             numJumps = maxJumps;
+            myAnim.SetBool("isJumping", false);
+            myAnim.SetBool("JumpPeaked", false);
         } else {
             isGrounded = false;
             if(numJumps == maxJumps)
@@ -77,6 +79,8 @@ public class MJB_PlayerMove : MonoBehaviour
             velocity.y = 1 * jumpForce;
             rb.velocity = velocity;
 
+            myAnim.SetBool("isJumping", true);
+
             if(rb.gravityScale == 0) {
                 rb.gravityScale = 5;
             }
@@ -89,9 +93,13 @@ public class MJB_PlayerMove : MonoBehaviour
                 velocity.y = 1 * jumpForce;
                 rb.velocity = velocity;
 
+                myAnim.SetBool("isJumping", true);
+
                 jumpTimeCounter -= Time.deltaTime;
             } else {
                 isJumping = false;
+                myAnim.SetBool("isJumping", false);
+                myAnim.SetBool("JumpPeaked", true);
             }
         }
 
@@ -99,6 +107,8 @@ public class MJB_PlayerMove : MonoBehaviour
         if(Input.GetKeyUp("up")) //ends jump
         {
             isJumping = false;
+            myAnim.SetBool("isJumping", false);
+            myAnim.SetBool("JumpPeaked", true);
         }
     }
 }
