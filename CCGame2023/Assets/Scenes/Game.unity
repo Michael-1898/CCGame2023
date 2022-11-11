@@ -284,11 +284,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpTime: 0.3
   playerSpeed: 7
-  jumpForce: 4
+  jumpForce: 5
   maxJumps: 2
   playerRotation: 0
   myAnim: {fileID: 327016864}
-  isWalking: 0
 --- !u!95 &327016864
 Animator:
   serializedVersion: 3

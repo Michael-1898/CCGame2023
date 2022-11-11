@@ -37,10 +37,10 @@ public class MJB_PlayerMove : MonoBehaviour
     {
         //player movement
         playerPos = transform.position;
-
         Vector2 velocity = rb.velocity;
         velocity.x = Input.GetAxis("Horizontal") * playerSpeed * (Time.deltaTime + 1);
         rb.velocity = velocity;
+
         //sets playerSpeed parameter for animator
         myAnim.SetFloat("PlayerSpeed", Mathf.Abs(velocity.x));
 
@@ -60,9 +60,8 @@ public class MJB_PlayerMove : MonoBehaviour
         //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
         RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f), 0, -Vector2.up, 0.1f);
 
-
         //grounded code (uses boxcast to determine if player is grounded)
-        if(ground.collider != null)
+        if((ground.collider != null) && (ground.collider.gameObject != this.gameObject))
         {
             isGrounded = true;
             numJumps = maxJumps;
