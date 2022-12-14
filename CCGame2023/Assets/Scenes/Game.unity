@@ -287,6 +287,7 @@ MonoBehaviour:
   jumpForce: 8
   maxJumps: 2
   playerRotation: 0
+  comboTime: 1.25
   myAnim: {fileID: 327016864}
 --- !u!95 &327016864
 Animator:
@@ -490,7 +491,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

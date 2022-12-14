@@ -17,6 +17,12 @@ public class MJB_PlayerMove : MonoBehaviour
     [SerializeField] private int maxJumps;
     public float playerRotation;
 
+    //variables for attacking
+    // public int attkNum;
+    public float attkTimer;
+    // public float comboTime;
+    public bool isAttacking;
+
     //variables for animator
     public Animator myAnim;
     public static MJB_PlayerMove instance;
@@ -30,6 +36,9 @@ public class MJB_PlayerMove : MonoBehaviour
         isJumping = false;
         rb = GetComponent<Rigidbody2D>();
         playerRotation = 0;
+        //attkNum = 0;
+        isAttacking = false;
+        myAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -46,7 +55,7 @@ public class MJB_PlayerMove : MonoBehaviour
 
 
         //flips character to face correct direction when walking
-         if(Input.GetAxis("Horizontal") < 0)
+        if(Input.GetAxis("Horizontal") < 0)
         {
             playerRotation = 0;    
         }
@@ -55,6 +64,12 @@ public class MJB_PlayerMove : MonoBehaviour
             playerRotation = 180;    
         }
         transform.rotation = Quaternion.Euler(0f, playerRotation, 0f);
+
+
+        //attack code (animator)
+        if(Input.GetKeyDown("z") && !isAttacking) {
+            isAttacking = true;
+        }
 
 
         //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
@@ -119,5 +134,10 @@ public class MJB_PlayerMove : MonoBehaviour
             myAnim.SetBool("isJumping", false);
             myAnim.SetBool("JumpPeaked", true);
         }
+    }
+
+    //attack code
+    void Attack() {
+
     }
 }
