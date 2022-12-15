@@ -287,7 +287,11 @@ MonoBehaviour:
   jumpForce: 8
   maxJumps: 2
   playerRotation: 0
-  comboTime: 1.25
+  attkTimer: 0
+  isAttacking: 0
+  comboHit: 0
+  comboDone: 0
+  attkCooldown: 0.15
   myAnim: {fileID: 327016864}
 --- !u!95 &327016864
 Animator:

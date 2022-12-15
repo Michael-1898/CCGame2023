@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class attk1Script : StateMachineBehaviour
+public class attk3Script : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -11,19 +11,17 @@ public class attk1Script : StateMachineBehaviour
     //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        //Debug.Log(MJB_PlayerMove.instance.myAnim.GetCurrentAnimatorStateInfo(0).length);
-        
-        if(MJB_PlayerMove.instance.isAttacking == true) {
-            MJB_PlayerMove.instance.myAnim.Play("PlayerAttk2");
-        }      
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         MJB_PlayerMove.instance.isAttacking = false;
+        MJB_PlayerMove.instance.comboDone = true;
+        MJB_PlayerMove.instance.attkTimer = -1.5f * MJB_PlayerMove.instance.attkCooldown;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

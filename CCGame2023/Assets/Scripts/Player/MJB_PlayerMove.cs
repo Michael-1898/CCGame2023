@@ -18,10 +18,11 @@ public class MJB_PlayerMove : MonoBehaviour
     public float playerRotation;
 
     //variables for attacking
-    // public int attkNum;
     public float attkTimer;
-    // public float comboTime;
     public bool isAttacking;
+    public bool comboHit;
+    public bool comboDone;
+    public float attkCooldown;
 
     //variables for animator
     public Animator myAnim;
@@ -36,9 +37,11 @@ public class MJB_PlayerMove : MonoBehaviour
         isJumping = false;
         rb = GetComponent<Rigidbody2D>();
         playerRotation = 0;
-        //attkNum = 0;
         isAttacking = false;
         myAnim = GetComponent<Animator>();
+        comboDone = false;
+        comboHit = false;
+        attkTimer = 0f;
     }
 
     // Update is called once per frame
@@ -67,8 +70,16 @@ public class MJB_PlayerMove : MonoBehaviour
 
 
         //attack code (animator)
-        if(Input.GetKeyDown("z") && !isAttacking) {
+        if(Input.GetKeyDown("x") && !isAttacking && comboDone == false) {
             isAttacking = true;
+        }
+
+        if(comboDone == true) {
+            attkTimer += Time.deltaTime;
+            if(attkTimer >= attkCooldown) {
+                comboDone = false;
+                attkTimer = 0f;
+            }
         }
 
 
@@ -93,7 +104,7 @@ public class MJB_PlayerMove : MonoBehaviour
         }
 
         //jump code (initial jump)
-        if((Input.GetKeyDown("up")) && (isGrounded == true || numJumps > 0))
+        if((Input.GetKeyDown("z")) && (isGrounded == true || numJumps > 0))
         {
             isJumping = true;
             jumpTimeCounter = jumpTime;
@@ -110,7 +121,7 @@ public class MJB_PlayerMove : MonoBehaviour
         }
 
         //jump code (extended jump/holding down jump)
-        if((Input.GetKey("up")) && isJumping == true)
+        if((Input.GetKey("z")) && isJumping == true)
         {
             if(jumpTimeCounter > 0)
             {
@@ -128,7 +139,7 @@ public class MJB_PlayerMove : MonoBehaviour
         }
 
         //jump code (ends jump when lifting button/taking finger off button)
-        if(Input.GetKeyUp("up"))
+        if(Input.GetKeyUp("z"))
         {
             isJumping = false;
             myAnim.SetBool("isJumping", false);
