@@ -17,18 +17,22 @@ public class attk1Script : StateMachineBehaviour
         
         if(MJB_PlayerMove.instance.isAttacking == true) {
             MJB_PlayerMove.instance.comboHit = true;
-        }      
+            Debug.Log("boom");
+        }
+
+        MJB_PlayerMove.instance.attkAnimPlaying = true;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        MJB_PlayerMove.instance.isAttacking = false;
+        //MJB_PlayerMove.instance.isAttacking = false;
         if(MJB_PlayerMove.instance.comboHit == true) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk2");
             MJB_PlayerMove.instance.comboHit = false;
         } else if(MJB_PlayerMove.instance.comboHit == false) {
             MJB_PlayerMove.instance.comboDone = true;
+            MJB_PlayerMove.instance.attkAnimPlaying = false;
         }
     }
 
