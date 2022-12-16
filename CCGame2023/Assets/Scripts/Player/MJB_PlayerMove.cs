@@ -15,7 +15,7 @@ public class MJB_PlayerMove : MonoBehaviour
     bool isGrounded;
     private int numJumps;
     [SerializeField] private int maxJumps;
-    public float playerRotation;
+    private float playerRotation;
 
     //variables for attacking
     public float attkTimer;
@@ -25,6 +25,7 @@ public class MJB_PlayerMove : MonoBehaviour
     public float attkCooldown;
     public bool attkAnimPlaying;
     public bool canRotate;
+    [SerializeField] private float attkLunge;
 
     //variables for animator
     public Animator myAnim;
@@ -77,10 +78,12 @@ public class MJB_PlayerMove : MonoBehaviour
         if(canRotate) {
             if(Input.GetAxis("Horizontal") < 0)
             {
+                //facing left
                 playerRotation = 0;    
             }
             if(Input.GetAxis("Horizontal") > 0)
             {
+                //facing right
                 playerRotation = 180;    
             }
             transform.rotation = Quaternion.Euler(0f, playerRotation, 0f);
@@ -90,6 +93,7 @@ public class MJB_PlayerMove : MonoBehaviour
         //attack code (animator)
         if(Input.GetKeyDown("x") && !isAttacking && !comboDone) {
             isAttacking = true;
+            Attack();
         }
 
         if(comboDone == true) {
@@ -167,6 +171,11 @@ public class MJB_PlayerMove : MonoBehaviour
 
     //attack code
     void Attack() {
-
+        if(playerRotation == 180) {
+            rb.AddForce(transform.right * attkLunge, ForceMode2D.Impulse);
+        } else {
+            rb.AddForce(transform.right * attkLunge, ForceMode2D.Impulse);
+        }
+        
     }
 }
