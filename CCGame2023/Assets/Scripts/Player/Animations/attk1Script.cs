@@ -30,11 +30,12 @@ public class attk1Script : StateMachineBehaviour
         if(MJB_PlayerMove.instance.comboHit == true) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk2");
             MJB_PlayerMove.instance.comboHit = false;
-            MJB_PlayerMove.instance.canRotate = true;
         } else if(MJB_PlayerMove.instance.comboHit == false) {
             MJB_PlayerMove.instance.comboDone = true;
             MJB_PlayerMove.instance.attkAnimPlaying = false;
         }
+
+        MJB_PlayerMove.instance.canRotate = true;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
