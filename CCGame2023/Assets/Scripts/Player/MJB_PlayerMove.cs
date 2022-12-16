@@ -66,7 +66,7 @@ public class MJB_PlayerMove : MonoBehaviour
         if(!attkAnimPlaying) {
             rb.velocity = velocity;
         } else if(attkAnimPlaying) {
-            rb.velocity = new Vector2(0,0);
+            //rb.velocity = new Vector2(0,0);
         }
         
 
@@ -94,6 +94,7 @@ public class MJB_PlayerMove : MonoBehaviour
         if(Input.GetKeyDown("x") && !isAttacking && !comboDone) {
             isAttacking = true;
             Attack();
+            Debug.Log("press");
         }
 
         if(comboDone == true) {
@@ -171,11 +172,6 @@ public class MJB_PlayerMove : MonoBehaviour
 
     //attack code
     void Attack() {
-        if(playerRotation == 180) {
-            rb.AddForce(transform.right * attkLunge, ForceMode2D.Impulse);
-        } else {
-            rb.AddForce(transform.right * attkLunge, ForceMode2D.Impulse);
-        }
-        
+        //rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
     }
 }
