@@ -24,11 +24,13 @@ public class MJB_PlayerMove : MonoBehaviour
     public bool comboDone;
     public float attkCooldown;
     public bool attkAnimPlaying;
+    public bool canRotate;
 
     //variables for animator
     public Animator myAnim;
     public static MJB_PlayerMove instance;
 
+    //way to make a var private but still access it from the animation scripts
     // public bool IsJumping
     // {
     //     get{ return isJumping;}
@@ -50,6 +52,7 @@ public class MJB_PlayerMove : MonoBehaviour
         comboHit = false;
         attkTimer = 0f;
         attkAnimPlaying = false;
+        canRotate = true;
     }
 
     // Update is called once per frame
@@ -71,7 +74,7 @@ public class MJB_PlayerMove : MonoBehaviour
 
 
         //flips character to face correct direction when walking
-        if(!isAttacking && !comboHit) {
+        if(canRotate) {
             if(Input.GetAxis("Horizontal") < 0)
             {
                 playerRotation = 0;    
@@ -87,7 +90,6 @@ public class MJB_PlayerMove : MonoBehaviour
         //attack code (animator)
         if(Input.GetKeyDown("x") && !isAttacking && !comboDone) {
             isAttacking = true;
-            Debug.Log("bap");
         }
 
         if(comboDone == true) {

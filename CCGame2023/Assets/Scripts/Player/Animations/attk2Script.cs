@@ -5,10 +5,10 @@ using UnityEngine;
 public class attk2Script : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        MJB_PlayerMove.instance.canRotate = true;    
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,15 +18,17 @@ public class attk2Script : StateMachineBehaviour
         }
 
         MJB_PlayerMove.instance.attkAnimPlaying = true;
+        MJB_PlayerMove.instance.canRotate = false;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       // MJB_PlayerMove.instance.isAttacking = false;
+        MJB_PlayerMove.instance.isAttacking = false;
         if(MJB_PlayerMove.instance.comboHit == true) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk3");
             MJB_PlayerMove.instance.comboHit = false;
+            MJB_PlayerMove.instance.canRotate = true;
         } else if(MJB_PlayerMove.instance.comboHit == false) {
             MJB_PlayerMove.instance.comboDone = true;
             MJB_PlayerMove.instance.attkAnimPlaying = false;
