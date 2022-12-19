@@ -26,6 +26,7 @@ public class MJB_PlayerMove : MonoBehaviour
     public bool attkAnimPlaying;
     public bool canRotate;
     [SerializeField] private float attkLunge;
+    public int attkNum;
 
     //variables for animator
     public Animator myAnim;
@@ -54,6 +55,7 @@ public class MJB_PlayerMove : MonoBehaviour
         attkTimer = 0f;
         attkAnimPlaying = false;
         canRotate = true;
+        attkNum = 0;
     }
 
     // Update is called once per frame
@@ -93,8 +95,9 @@ public class MJB_PlayerMove : MonoBehaviour
         //attack code (animator)
         if(Input.GetKeyDown("x") && !isAttacking && !comboDone) {
             isAttacking = true;
+
             Attack();
-            Debug.Log("press");
+            Debug.Log("attack");
         }
 
         if(comboDone == true) {
@@ -102,8 +105,10 @@ public class MJB_PlayerMove : MonoBehaviour
             if(attkTimer >= attkCooldown) {
                 comboDone = false;
                 attkTimer = 0f;
+                attkNum = 0;
             }
         }
+        //Debug.Log(attkNum);
 
 
         //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
@@ -172,6 +177,13 @@ public class MJB_PlayerMove : MonoBehaviour
 
     //attack code
     void Attack() {
-        //rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
+        //attack lunges
+        Debug.Log(attkNum);
+        if(attkNum == 2) {
+            rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
+        }
+        if(attkNum == 3) {
+            rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
+        }
     }
 }

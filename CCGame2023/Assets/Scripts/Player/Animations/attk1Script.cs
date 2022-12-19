@@ -5,10 +5,12 @@ using UnityEngine;
 public class attk1Script : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // if(MJB_PlayerMove.instance.attkNum < 1) {
+        //     MJB_PlayerMove.instance.attkNum++;
+        // }
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -30,6 +32,7 @@ public class attk1Script : StateMachineBehaviour
         if(MJB_PlayerMove.instance.comboHit == true) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk2");
             MJB_PlayerMove.instance.comboHit = false;
+            MJB_PlayerMove.instance.attkNum = 2;
         } else if(MJB_PlayerMove.instance.comboHit == false) {
             MJB_PlayerMove.instance.comboDone = true;
             MJB_PlayerMove.instance.attkAnimPlaying = false;

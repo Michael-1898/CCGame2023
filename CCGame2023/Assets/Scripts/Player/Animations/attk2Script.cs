@@ -7,7 +7,11 @@ public class attk2Script : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        MJB_PlayerMove.instance.canRotate = true;    
+        MJB_PlayerMove.instance.canRotate = true;
+
+        // if(MJB_PlayerMove.instance.attkNum < 2) {
+        //     MJB_PlayerMove.instance.attkNum++;
+        // }    
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -28,6 +32,7 @@ public class attk2Script : StateMachineBehaviour
         if(MJB_PlayerMove.instance.comboHit == true) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk3");
             MJB_PlayerMove.instance.comboHit = false;
+            MJB_PlayerMove.instance.attkNum = 3;
         } else if(MJB_PlayerMove.instance.comboHit == false) {
             MJB_PlayerMove.instance.comboDone = true;
             MJB_PlayerMove.instance.attkAnimPlaying = false;

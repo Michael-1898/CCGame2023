@@ -7,7 +7,10 @@ public class attk3Script : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        MJB_PlayerMove.instance.canRotate = true;    
+        MJB_PlayerMove.instance.canRotate = true;
+        // if(MJB_PlayerMove.instance.attkNum < 3) {
+        //     MJB_PlayerMove.instance.attkNum++;
+        // }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
