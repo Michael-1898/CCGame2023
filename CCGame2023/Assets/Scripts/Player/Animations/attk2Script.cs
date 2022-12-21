@@ -9,14 +9,17 @@ public class attk2Script : StateMachineBehaviour
     {
         MJB_PlayerMove.instance.canRotate = true;
 
-        // if(MJB_PlayerMove.instance.attkNum < 2) {
-        //     MJB_PlayerMove.instance.attkNum++;
-        // }    
+        MJB_PlayerMove.instance.isAttacking = false;
+        MJB_PlayerMove.instance.attkStart = true; 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if(MJB_PlayerMove.instance.attkStart == true) {
+            MJB_PlayerMove.instance.attkStart = false;
+        }
+
         if(MJB_PlayerMove.instance.isAttacking == true) {
             MJB_PlayerMove.instance.comboHit = true;
         }
@@ -33,6 +36,7 @@ public class attk2Script : StateMachineBehaviour
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk3");
             MJB_PlayerMove.instance.comboHit = false;
             MJB_PlayerMove.instance.attkNum = 3;
+            MJB_PlayerMove.instance.isAttacking = true;
         } else if(MJB_PlayerMove.instance.comboHit == false) {
             MJB_PlayerMove.instance.comboDone = true;
             MJB_PlayerMove.instance.attkAnimPlaying = false;

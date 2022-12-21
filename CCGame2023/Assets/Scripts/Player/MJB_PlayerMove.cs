@@ -27,6 +27,7 @@ public class MJB_PlayerMove : MonoBehaviour
     public bool canRotate;
     [SerializeField] private float attkLunge;
     public int attkNum;
+    public bool attkStart;
 
     //variables for animator
     public Animator myAnim;
@@ -56,19 +57,22 @@ public class MJB_PlayerMove : MonoBehaviour
         attkAnimPlaying = false;
         canRotate = true;
         attkNum = 0;
+        attkStart = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
+        RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f), 0, -Vector2.up, 0.1f);
+
+
         //player movement
         playerPos = transform.position;
         Vector2 velocity = rb.velocity;
         velocity.x = Input.GetAxis("Horizontal") * playerSpeed * (Time.deltaTime + 1);
         if(!attkAnimPlaying) {
             rb.velocity = velocity;
-        } else if(attkAnimPlaying) {
-            //rb.velocity = new Vector2(0,0);
         }
         
 
@@ -93,11 +97,8 @@ public class MJB_PlayerMove : MonoBehaviour
 
 
         //attack code (animator)
-        if(Input.GetKeyDown("x") && !isAttacking && !comboDone) {
+        if(Input.GetKeyDown("x") && !isAttacking && !comboDone && (ground.collider != null) && (ground.collider.gameObject != this.gameObject)) {
             isAttacking = true;
-
-            Attack();
-            Debug.Log("attack");
         }
 
         if(comboDone == true) {
@@ -108,11 +109,8 @@ public class MJB_PlayerMove : MonoBehaviour
                 attkNum = 0;
             }
         }
-        //Debug.Log(attkNum);
+        Debug.Log(attkNum);
 
-
-        //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
-        RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f), 0, -Vector2.up, 0.1f);
 
         //grounded code (uses boxcast to determine if player is grounded)
         if((ground.collider != null) && (ground.collider.gameObject != this.gameObject))
@@ -178,12 +176,13 @@ public class MJB_PlayerMove : MonoBehaviour
     //attack code
     void Attack() {
         //attack lunges
-        Debug.Log(attkNum);
         if(attkNum == 2) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
+            //Debug.Log("thrust1");
         }
         if(attkNum == 3) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
+            //Debug.Log("thrust2");
         }
     }
 }

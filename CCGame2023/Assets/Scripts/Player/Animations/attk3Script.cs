@@ -8,14 +8,19 @@ public class attk3Script : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         MJB_PlayerMove.instance.canRotate = true;
-        // if(MJB_PlayerMove.instance.attkNum < 3) {
-        //     MJB_PlayerMove.instance.attkNum++;
-        // }
+
+        MJB_PlayerMove.instance.isAttacking = false;
+
+        MJB_PlayerMove.instance.attkStart = true; 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if(MJB_PlayerMove.instance.attkStart == true) {
+            MJB_PlayerMove.instance.attkStart = false;
+        }
+
         MJB_PlayerMove.instance.canRotate = false;    
     }
 
