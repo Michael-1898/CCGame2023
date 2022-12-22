@@ -109,7 +109,10 @@ public class MJB_PlayerMove : MonoBehaviour
                 attkNum = 0;
             }
         }
-        Debug.Log(attkNum);
+
+        if(attkStart) {
+            Attack();
+        }
 
 
         //grounded code (uses boxcast to determine if player is grounded)
@@ -178,11 +181,9 @@ public class MJB_PlayerMove : MonoBehaviour
         //attack lunges
         if(attkNum == 2) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
-            //Debug.Log("thrust1");
         }
         if(attkNum == 3) {
-            rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
-            //Debug.Log("thrust2");
+            rb.AddForce(-transform.right * 1.6f * attkLunge, ForceMode2D.Impulse);
         }
     }
 }

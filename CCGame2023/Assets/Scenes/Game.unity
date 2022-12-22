@@ -293,7 +293,9 @@ MonoBehaviour:
   attkCooldown: 0.15
   attkAnimPlaying: 0
   canRotate: 0
-  attkLunge: 3
+  attkLunge: 5
+  attkNum: 0
+  attkStart: 0
   myAnim: {fileID: 327016864}
 --- !u!95 &327016864
 Animator:
