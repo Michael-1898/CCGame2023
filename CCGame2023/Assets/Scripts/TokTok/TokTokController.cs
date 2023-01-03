@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class TokTokController : MonoBehaviour
 {
+    //Variables for movement
+    Rigidbody2D rb;
+    Vector3 playerPos;
+    [SerializeField] private float moveSpeed;
+
+    private bool isAlive;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        isAlive = true;
     }
 
     // Update is called once per frame
