@@ -10,6 +10,8 @@ public class TokTokController : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     private bool isAlive;
+    private bool isGrounded;
+    private bool isFacingRight;
 
     // Start is called before the first frame update
     void Start()
