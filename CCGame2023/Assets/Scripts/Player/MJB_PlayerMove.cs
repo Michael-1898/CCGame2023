@@ -12,7 +12,7 @@ public class MJB_PlayerMove : MonoBehaviour
     public float jumpForce;
     bool isJumping;
     Vector3 playerPos;
-    bool isGrounded;
+    [SerializeField] bool isGrounded;
     private int numJumps;
     [SerializeField] private int maxJumps;
     private float playerRotation;
@@ -65,6 +65,7 @@ public class MJB_PlayerMove : MonoBehaviour
     {
         //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
         RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f), 0, -Vector2.up, 0.1f);
+        //Debug.Log(ground.collider.gameObject);
 
 
         //player movement
@@ -185,5 +186,10 @@ public class MJB_PlayerMove : MonoBehaviour
         if(attkNum == 3) {
             rb.AddForce(-transform.right * 1.6f * attkLunge, ForceMode2D.Impulse);
         }
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f));
     }
 }

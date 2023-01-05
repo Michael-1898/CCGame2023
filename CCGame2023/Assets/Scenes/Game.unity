@@ -285,6 +285,7 @@ MonoBehaviour:
   jumpTime: 0.3
   playerSpeed: 7
   jumpForce: 8
+  isGrounded: 0
   maxJumps: 2
   attkTimer: 0
   isAttacking: 0
@@ -335,7 +336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &450943219
 Rigidbody2D:
   serializedVersion: 4
@@ -441,9 +442,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450943218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.59, y: -2.21, z: 0}
+  m_LocalPosition: {x: -4.59, y: -4.42, z: 0}
   m_LocalScale: {x: 0.35176748, y: 0.35176748, z: 0.35176748}
-  m_Children: []
+  m_Children:
+  - {fileID: 1737578768}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -459,6 +461,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3260f58e857cc459fb10469ff65aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 6.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  groundCheck: {fileID: 1737578767}
+  circleRadius: 0.16
+--- !u!1 &1737578767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1737578768}
+  m_Layer: 4
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1737578768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737578767}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.19, y: 0.05, z: -8.219936}
+  m_LocalScale: {x: 2.842787, y: 2.842787, z: 2.842787}
+  m_Children: []
+  m_Father: {fileID: 450943222}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1993722674
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +509,7 @@ GameObject:
   - component: {fileID: 1993722675}
   - component: {fileID: 1993722678}
   - component: {fileID: 1993722677}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
