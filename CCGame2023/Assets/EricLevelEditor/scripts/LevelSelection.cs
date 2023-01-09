@@ -19,7 +19,7 @@ public class LevelSelection : MonoBehaviour
         foreach(FileInfo i in info)
         {
             if(i.Name.Substring(i.Name.Length-4, 4)!="meta")
-            {
+            {   
                 GameObject newPanel = Instantiate(levelPanel, newPanelPosition, Quaternion.identity);
                 newPanel.transform.parent = canvas;
                 if(newPanelPosition.y < 0f)
@@ -27,7 +27,25 @@ public class LevelSelection : MonoBehaviour
                     newPanelPosition = new Vector3(newPanelPosition.x + 5f, 2.5f, 0f);
                 }
                 else newPanelPosition = new Vector3(newPanelPosition.x, -2f, 0f);
-                
+
+                Text levelName = newPanel.transform.GetChild(0).gameObject.GetComponent<Text>();
+                levelName.text = i.Name.Substring(0, i.Name.Length-4);
+
+                /*try
+                { 
+                    using (StreamReader reader = new StreamReader(fileName))  
+                    {  
+                        columns = int.Parse(reader.ReadLine());
+                        rows = int.Parse(reader.ReadLine());
+                        levelInformation = reader.ReadLine();
+                    }  
+
+                }
+                catch
+                {
+                    print("This file can't be read");
+                }
+                */
             }
         }
     }
