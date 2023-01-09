@@ -64,8 +64,10 @@ public class MJB_PlayerMove : MonoBehaviour
     void Update()
     {
         //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
-        RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f), 0, -Vector2.up, 0.1f);
-        //Debug.Log(ground.collider.gameObject);
+        RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y - 0.1f), new Vector2(0.2f, 0.02f), 0, -Vector2.up, 0.1f);
+        if(ground.collider != null) {
+            Debug.Log(ground.collider.gameObject.name);
+        }
 
 
         //player movement
@@ -188,7 +190,7 @@ public class MJB_PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmos() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f));
     }
