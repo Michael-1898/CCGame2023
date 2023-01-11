@@ -12,7 +12,6 @@ public class MJB_PlayerMove : MonoBehaviour
     public float jumpForce;
     bool isJumping;
     Vector3 playerPos;
-    [SerializeField] bool isGrounded;
     private int numJumps;
     [SerializeField] private int maxJumps;
     private float playerRotation;
@@ -25,9 +24,22 @@ public class MJB_PlayerMove : MonoBehaviour
     public float attkCooldown;
     public bool attkAnimPlaying;
     public bool canRotate;
+
+    //variables for attk func
     [SerializeField] private float attkLunge;
     public int attkNum;
     public bool attkStart;
+    [SerializeField] private GameObject attkPoint;
+    [SerializeField] private Vector2 attkBoxSize;
+    [SerializeField] private LayerMask enemyLayer;
+    private GameObject enemy;
+
+    //variables for groundCheck
+    private bool ground;
+    private bool isGrounded;
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private GameObject groundCheck;
+    [SerializeField] private float circleRadius;
 
     //variables for animator
     public Animator myAnim;
@@ -63,11 +75,8 @@ public class MJB_PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //checks if player is touching ground using boxcast: BoxCast(origin, size, direction, distance)
-        RaycastHit2D ground = Physics2D.BoxCast(new Vector2(playerPos.x, playerPos.y - 0.1f), new Vector2(0.2f, 0.02f), 0, -Vector2.up, 0.1f);
-        if(ground.collider != null) {
-            Debug.Log(ground.collider.gameObject.name);
-        }
+        //checks if player is touching ground using overlap circle
+        ground = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
 
 
         //player movement
@@ -100,7 +109,7 @@ public class MJB_PlayerMove : MonoBehaviour
 
 
         //attack code (animator)
-        if(Input.GetKeyDown("x") && !isAttacking && !comboDone && (ground.collider != null) && (ground.collider.gameObject != this.gameObject)) {
+        if(Input.GetKeyDown("x") && !isAttacking && !comboDone && (ground)) {
             isAttacking = true;
         }
 
@@ -119,7 +128,7 @@ public class MJB_PlayerMove : MonoBehaviour
 
 
         //grounded code (uses boxcast to determine if player is grounded)
-        if((ground.collider != null) && (ground.collider.gameObject != this.gameObject))
+        if(ground)
         {
             isGrounded = true;
             numJumps = maxJumps;
@@ -188,10 +197,17 @@ public class MJB_PlayerMove : MonoBehaviour
         if(attkNum == 3) {
             rb.AddForce(-transform.right * 1.6f * attkLunge, ForceMode2D.Impulse);
         }
+
+        //if attack hits something do damage and knockback
+        if(Physics2D.OverlapBox(attkPoint.transform.position, attkBoxSize, enemyLayer)) {
+            enemy = Physics2D.OverlapBox(attkPoint.transform.position, attkBoxSize, enemyLayer).gameObject;
+            Debug.Log(enemy);
+        }
     }
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(new Vector2(playerPos.x, playerPos.y -0.1f), new Vector2(0.2f, 0.02f));
+        Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
+        Gizmos.DrawWireCube(attkPoint.transform.position, attkBoxSize);
     }
 }
