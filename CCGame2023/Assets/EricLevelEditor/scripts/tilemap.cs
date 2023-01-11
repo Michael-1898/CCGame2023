@@ -138,7 +138,6 @@ public class tilemap : MonoBehaviour
         FileInfo[] info = dir.GetFiles("*.*");
         foreach(FileInfo i in info)
         {
-            //USE FILE EXISTS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             if(File.Exists(fileName))
             {
                 fileExists = true;
