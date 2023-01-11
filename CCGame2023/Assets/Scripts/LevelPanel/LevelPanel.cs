@@ -7,7 +7,7 @@ public class LevelPanel : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    public string levelPath;
+    
     
     void Start()
     {
@@ -22,7 +22,7 @@ public class LevelPanel : MonoBehaviour
 
     public void playLevel()
     {
-        print("HI");
-        SceneManager.LoadScene("Game");
+        LoadLevel.LoadLevelFilePath = gameObject.name + ".txt";
+        SceneManager.LoadScene("TestGame");
     }
 }

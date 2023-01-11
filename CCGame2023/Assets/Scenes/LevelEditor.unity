@@ -1490,39 +1490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap1: {fileID: 1846527624}
-  allTiles:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 04e0638e016cba642ab46df5949d0de8, type: 2}
-  - {fileID: 11400000, guid: 18916e3d692a847498445bfe5daba512, type: 2}
-  - {fileID: 11400000, guid: 8dabac1ae09399546b0ef17ec926c0ed, type: 2}
-  - {fileID: 11400000, guid: f9024827dcd7b604a84e2df26dc4fa98, type: 2}
-  allTileCharacters:
-  - a
-  - b
-  - c
-  - d
-  - e
-  - f
-  - g
-  - h
-  - i
-  - j
-  - k
-  - l
-  - m
-  - n
-  - o
-  - p
-  - q
-  - r
-  - s
-  - t
-  - u
-  - v
-  - w
-  - x
-  - y
-  - z
   allTileButtons:
   - {fileID: 0}
   - {fileID: 394093833}

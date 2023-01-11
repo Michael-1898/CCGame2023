@@ -10,8 +10,8 @@ public class tilemap : MonoBehaviour
 {
     // Start is called before the first frame update
     public Tilemap tilemap1;
-    public List<Tile> allTiles = new List<Tile>();
-    public List<string> allTileCharacters = new List<string>();
+    public static List<Tile> allTiles = new List<Tile>();
+    public static List<string> allTileCharacters = new List<string>();
     public List<Button> allTileButtons = new List<Button>();
     [SerializeField] private Text levelNameText;
     [SerializeField] private string levelInformation;
