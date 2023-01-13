@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 327016860}
   - component: {fileID: 327016859}
   - component: {fileID: 327016863}
+  - component: {fileID: 327016865}
   - component: {fileID: 327016864}
   m_Layer: 0
   m_Name: Player
@@ -299,10 +300,12 @@ MonoBehaviour:
   attkNum: 0
   attkStart: 0
   attkPoint: {fileID: 1635503368}
-  attkBoxSize: {x: 0.5, y: 2}
+  attkRadius: 1
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2
+  playerDamage: 3
+  playerKnockback: 48
   groundLayer:
     serializedVersion: 2
     m_Bits: 16
@@ -328,6 +331,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &327016865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327016857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 182
 --- !u!1 &450943218
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,7 +357,8 @@ GameObject:
   - component: {fileID: 450943220}
   - component: {fileID: 450943219}
   - component: {fileID: 450943223}
-  m_Layer: 0
+  - component: {fileID: 450943224}
+  m_Layer: 1
   m_Name: TokTok
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,6 +495,21 @@ MonoBehaviour:
     m_Bits: 16
   groundCheck: {fileID: 1737578767}
   circleRadius: 0.16
+  enemyKnockback: 3
+  enemyDmg: 2
+--- !u!114 &450943224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450943218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
 --- !u!1 &469144644
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,7 +564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635503368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.86, y: 3.99, z: -51.052982}
+  m_LocalPosition: {x: -2.48, y: 3.36, z: -51.052982}
   m_LocalScale: {x: 4.0093246, y: 4.0093246, z: 4.0093246}
   m_Children: []
   m_Father: {fileID: 327016858}
@@ -547,7 +579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737578768}
-  m_Layer: 4
+  m_Layer: 1
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
