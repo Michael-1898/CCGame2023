@@ -13,7 +13,7 @@ public class MJB_PlayerMove : MonoBehaviour
     bool isJumping;
     Vector3 playerPos;
     private int numJumps;
-    [SerializeField] private int maxJumps;
+    [SerializeField] int maxJumps;
     private float playerRotation;
 
     //variables for attacking
@@ -29,17 +29,18 @@ public class MJB_PlayerMove : MonoBehaviour
     [SerializeField] private float attkLunge;
     public int attkNum;
     public bool attkStart;
-    [SerializeField] private GameObject attkPoint;
-    [SerializeField] private Vector2 attkBoxSize;
-    [SerializeField] private LayerMask enemyLayer;
-    private GameObject enemy;
+    [SerializeField] GameObject attkPoint;
+    [SerializeField] float attkRadius;
+    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] int playerDamage;
+    [SerializeField] int playerKnockback;
 
     //variables for groundCheck
     private bool ground;
     private bool isGrounded;
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private GameObject groundCheck;
-    [SerializeField] private float circleRadius;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] GameObject groundCheck;
+    [SerializeField] float circleRadius;
 
     //variables for animator
     public Animator myAnim;
@@ -190,6 +191,8 @@ public class MJB_PlayerMove : MonoBehaviour
 
     //attack code
     void Attack() {
+        
+
         //attack lunges
         if(attkNum == 2) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
@@ -199,15 +202,19 @@ public class MJB_PlayerMove : MonoBehaviour
         }
 
         //if attack hits something do damage and knockback
-        if(Physics2D.OverlapBox(attkPoint.transform.position, attkBoxSize, enemyLayer)) {
-            enemy = Physics2D.OverlapBox(attkPoint.transform.position, attkBoxSize, enemyLayer).gameObject;
-            Debug.Log(enemy);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attkPoint.transform.position, attkRadius, enemyLayer);
+
+        //foreach collider in hit enemies do damage/knock back
+        foreach(Collider2D hitEnemy in hitEnemies) {
+            //get component to get health/damage script of enemy and apply damage 
+            hitEnemy.GetComponent<Health>().TakeDamage(playerDamage);
+            //hitEnemy.GetComponent<Rigidbody2D>().AddForce((hitEnemy.transform.position - transform.position) * playerKnockback, ForceMode2D.Impulse);
         }
     }
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
-        Gizmos.DrawWireCube(attkPoint.transform.position, attkBoxSize);
+        Gizmos.DrawWireSphere(attkPoint.transform.position, attkRadius);
     }
 }
