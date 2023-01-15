@@ -31,6 +31,7 @@ public class TokTokController : MonoBehaviour
     {
         //movement
         rb.velocity = -Vector2.right * moveSpeed * Time.deltaTime * 100;
+        //rb.velocity = new Vector2(moveSpeed * Time.deltaTime * 100, 0);
 
         //ai (flipping at edges)
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
@@ -49,9 +50,9 @@ public class TokTokController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.CompareTag("Player")) {
-            Debug.Log("hit");
             col.gameObject.GetComponent<Health>().TakeDamage(enemyDmg);
-            //col.gameObject.GetComponent<Rigidbody2D>().AddForce(col.gameObject.transform.right * enemyKnockback, ForceMode2D.Impulse);
+            //col.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-enemyKnockback, 0);
+            //Debug.Log("zoom");
         }
     }
 
