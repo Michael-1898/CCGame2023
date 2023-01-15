@@ -34,7 +34,6 @@ public class TokTokController : MonoBehaviour
     void Update()
     {
         //movement
-        Debug.Log(gameObject.GetComponent<Health>().hit);
         if(gameObject.GetComponent<Health>().hit == true) {
             kbTimer = kbTime;
         }
