@@ -208,7 +208,7 @@ public class MJB_PlayerMove : MonoBehaviour
         foreach(Collider2D hitEnemy in hitEnemies) {
             //get component to get health/damage script of enemy and apply damage 
             hitEnemy.GetComponent<Health>().TakeDamage(playerDamage);
-            //hitEnemy.GetComponent<Rigidbody2D>().AddForce((hitEnemy.transform.position - transform.position) * playerKnockback, ForceMode2D.Impulse);
+            //hitEnemy.GetComponent<Rigidbody2D>().velocity = new Vector2(-playerKnockback, 0);
         }
     }
 

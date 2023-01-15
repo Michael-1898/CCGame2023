@@ -495,7 +495,7 @@ MonoBehaviour:
     m_Bits: 16
   groundCheck: {fileID: 1737578767}
   circleRadius: 0.16
-  enemyKnockback: 3
+  enemyKnockback: 171
   enemyDmg: 2
 --- !u!114 &450943224
 MonoBehaviour:
