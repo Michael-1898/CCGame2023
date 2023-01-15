@@ -28,8 +28,6 @@ public class tilemap : MonoBehaviour
     
     void Start()
     {
-        printTilemapInformation("444");
-        getTilemapInformation(columns, rows);
         tilePreviewSR = tilePreview.GetComponent<SpriteRenderer>();
         Cursor.lockState = CursorLockMode.Confined;
     }
@@ -155,6 +153,7 @@ public class tilemap : MonoBehaviour
                 {  
                     writer.WriteLine(columns);
                     writer.WriteLine(rows);
+                    print(getTilemapInformation(columns, rows));
                     writer.WriteLine(getTilemapInformation(columns, rows));  
                 }  
                 SceneManager.LoadScene("LevelSelection");
