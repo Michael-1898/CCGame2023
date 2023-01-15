@@ -18,7 +18,7 @@ public class MJB_SceneSwitch : MonoBehaviour
             levelEditorMenu.transform.position = new Vector3(0f, 200f, 0f);
             levelEditorMenu.SetActive(false);
             levelEditorMenuBackground = GameObject.Find("levelEditorMenuBackground");
-            levelEditorMenuBackground.transform.position = new Vector3(0f, 200f, 0f);
+            //levelEditorMenuBackground.transform.position = new Vector3(0f, 200f, 0f);
             levelEditorMenuBackground.SetActive(false);
         }
     }

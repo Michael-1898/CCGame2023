@@ -14,18 +14,15 @@ public class LoadLevel : MonoBehaviour
     
     int columns;
     int rows;
-    public string levelPath;
+    string levelPath;
     public Tilemap tilemap1;
-    public List<Tile> allTiles = new List<Tile>();
-    public List<string> allTileCharacters = new List<string>();
-    [SerializeField] private Text levelNameText;
-    [SerializeField] private string levelInformation;
+    private string levelInformation;
 
 
 
     void Start()
     {
-        PrintLevel(LoadLevel.LoadLevelFilePath);
+        PrintLevel(LoadLevelFilePath);
     }
 
     // Update is called once per frame
@@ -36,15 +33,17 @@ public class LoadLevel : MonoBehaviour
 
     void PrintLevel(string levelName)
     {
-        string fileName =  Application.streamingAssetsPath + "/" + levelName + ".txt";
-            
+        string fileName =  Application.streamingAssetsPath + "/" + levelName;
+        print(fileName);
         try
         { 
             using (StreamReader reader = new StreamReader(fileName))  
             {  
                 columns = int.Parse(reader.ReadLine());
                 rows = int.Parse(reader.ReadLine());
+                print(rows);
                 levelInformation = reader.ReadLine();
+                print(levelInformation);
             }  
 
         }
@@ -56,11 +55,11 @@ public class LoadLevel : MonoBehaviour
         
         for(int k = 0; k < levelInformation.Length; k++)
         {
-            for(int l = 0; l < allTileCharacters.Count; l++)
+            for(int l = 0; l < tilemap.allTileCharacters.Count; l++)
             {
-                if(levelInformation.Substring(k, 1) == allTileCharacters[l])
+                if(levelInformation.Substring(k, 1) == tilemap.allTileCharacters[l])
                 {
-                    tilemap1.SetTile(new Vector3Int(k % columns, Mathf.FloorToInt(k/columns), 0), allTiles[l]);
+                    tilemap1.SetTile(new Vector3Int(k % columns, Mathf.FloorToInt(k/columns), 0), tilemap.allTiles[l]);
                 }
             }
         }
