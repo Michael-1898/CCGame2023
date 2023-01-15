@@ -305,7 +305,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2
   playerDamage: 3
-  playerKnockback: 48
+  playerKnockback: 10
+  kbTotalTime: 0.2
+  kbCurrentTime: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 16
@@ -344,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 182
+  hit: 0
 --- !u!1 &450943218
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +498,8 @@ MonoBehaviour:
     m_Bits: 16
   groundCheck: {fileID: 1737578767}
   circleRadius: 0.16
-  enemyKnockback: 171
+  enemyKnockback: 10
+  kbTime: 0.2
   enemyDmg: 2
 --- !u!114 &450943224
 MonoBehaviour:
@@ -509,7 +513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 50
+  hit: 0
 --- !u!1 &469144644
 GameObject:
   m_ObjectHideFlags: 0

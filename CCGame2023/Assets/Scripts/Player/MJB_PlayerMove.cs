@@ -12,9 +12,9 @@ public class MJB_PlayerMove : MonoBehaviour
     public float jumpForce;
     bool isJumping;
     Vector3 playerPos;
-    private int numJumps;
+    int numJumps;
     [SerializeField] int maxJumps;
-    private float playerRotation;
+    float playerRotation;
 
     //variables for attacking
     public float attkTimer;
@@ -35,9 +35,13 @@ public class MJB_PlayerMove : MonoBehaviour
     [SerializeField] int playerDamage;
     [SerializeField] int playerKnockback;
 
+    //variables for knockback
+    public float kbTotalTime;
+    public float kbCurrentTime;
+
     //variables for groundCheck
-    private bool ground;
-    private bool isGrounded;
+    bool ground;
+    bool isGrounded;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] GameObject groundCheck;
     [SerializeField] float circleRadius;
@@ -83,7 +87,11 @@ public class MJB_PlayerMove : MonoBehaviour
         //player movement
         playerPos = transform.position;
         Vector2 velocity = rb.velocity;
-        velocity.x = Input.GetAxis("Horizontal") * playerSpeed * (Time.deltaTime + 1);
+        if(kbCurrentTime <= 0) {
+            velocity.x = Input.GetAxis("Horizontal") * playerSpeed * (Time.deltaTime + 1);
+        } else {
+            kbCurrentTime -= Time.deltaTime;
+        }
         if(!attkAnimPlaying) {
             rb.velocity = velocity;
         }
@@ -206,9 +214,17 @@ public class MJB_PlayerMove : MonoBehaviour
 
         //foreach collider in hit enemies do damage/knock back
         foreach(Collider2D hitEnemy in hitEnemies) {
+
             //get component to get health/damage script of enemy and apply damage 
             hitEnemy.GetComponent<Health>().TakeDamage(playerDamage);
-            //hitEnemy.GetComponent<Rigidbody2D>().velocity = new Vector2(-playerKnockback, 0);
+
+            //knockback
+            if(transform.position.x < hitEnemy.transform.position.x) {
+                hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * playerKnockback * (Time.deltaTime + 1);
+            } else {
+                hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * playerKnockback * (Time.deltaTime + 1);
+            }
+            
         }
     }
 

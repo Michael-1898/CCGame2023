@@ -16,6 +16,10 @@ public class TokTokController : MonoBehaviour
     [SerializeField] float circleRadius;
     [SerializeField] int enemyKnockback;
 
+    //variables for knockback
+    [SerializeField] float kbTime;
+    float kbTimer;
+
     //variables for attack
     [SerializeField] int enemyDmg;
 
@@ -30,8 +34,16 @@ public class TokTokController : MonoBehaviour
     void Update()
     {
         //movement
-        rb.velocity = -Vector2.right * moveSpeed * Time.deltaTime * 100;
-        //rb.velocity = new Vector2(moveSpeed * Time.deltaTime * 100, 0);
+        Debug.Log(gameObject.GetComponent<Health>().hit);
+        if(gameObject.GetComponent<Health>().hit == true) {
+            kbTimer = kbTime;
+        }
+        if(kbTimer <= 0) {
+            rb.velocity = -Vector2.right * moveSpeed * (Time.deltaTime + 1);
+        } else {
+            kbTimer -= Time.deltaTime;
+        }
+
 
         //ai (flipping at edges)
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
@@ -51,8 +63,12 @@ public class TokTokController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.CompareTag("Player")) {
             col.gameObject.GetComponent<Health>().TakeDamage(enemyDmg);
-            //col.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-enemyKnockback, 0);
-            //Debug.Log("zoom");
+            col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime = col.gameObject.GetComponent<MJB_PlayerMove>().kbTotalTime;
+            if(transform.position.x < col.transform.position.x) {
+                col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * enemyKnockback * (Time.deltaTime + 1);
+            } else {
+                col.gameObject.GetComponent<Rigidbody2D>().velocity = -Vector2.right * enemyKnockback * (Time.deltaTime + 1);
+            }
         }
     }
 
