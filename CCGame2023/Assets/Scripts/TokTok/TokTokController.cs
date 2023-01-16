@@ -61,7 +61,7 @@ public class TokTokController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.CompareTag("Player")) {
-            col.gameObject.GetComponent<Health>().TakeDamage(enemyDmg);
+            col.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDmg);
             col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime = col.gameObject.GetComponent<MJB_PlayerMove>().kbTotalTime;
             if(transform.position.x < col.transform.position.x) {
                 col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * enemyKnockback * (Time.deltaTime + 1);

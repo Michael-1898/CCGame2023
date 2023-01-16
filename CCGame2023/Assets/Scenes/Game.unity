@@ -157,6 +157,7 @@ Transform:
   m_Children:
   - {fileID: 469144645}
   - {fileID: 1635503369}
+  - {fileID: 1494811117}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -296,16 +297,17 @@ MonoBehaviour:
   attkCooldown: 0.15
   attkAnimPlaying: 0
   canRotate: 0
-  attkLunge: 5
+  attkLunge: 7
   attkNum: 0
   attkStart: 0
-  attkPoint: {fileID: 1635503368}
+  attkPoint1: {fileID: 1635503368}
+  attkPoint2: {fileID: 1494811116}
   attkRadius: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
   playerDamage: 3
-  playerKnockback: 10
+  playerKnockback: 9
   kbTotalTime: 0.2
   kbCurrentTime: 0
   groundLayer:
@@ -342,11 +344,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 327016857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
+  m_Script: {fileID: 11500000, guid: 12ff5c17f7de01843b73f0191ecae6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 182
+  maxHealth: 7
   hit: 0
+  hearts:
+  - {fileID: 1182486039}
+  - {fileID: 1529459750}
+  - {fileID: 2010499983}
+  - {fileID: 1370708918}
+  - {fileID: 2111786871}
+  - {fileID: 1200773385}
+  - {fileID: 698847898}
+  fullHeart: {fileID: 405151763489027049, guid: c5c3cc15a008a04489c520b4240291e1,
+    type: 3}
+  emptyHeart: {fileID: -2738550867990453573, guid: c5c3cc15a008a04489c520b4240291e1,
+    type: 3}
 --- !u!1 &450943218
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +514,7 @@ MonoBehaviour:
   circleRadius: 0.16
   enemyKnockback: 10
   kbTime: 0.2
-  enemyDmg: 2
+  enemyDmg: 1
 --- !u!114 &450943224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,6 +960,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1370708916}
   m_CullTransparentMesh: 0
+--- !u!1 &1494811116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1494811117}
+  m_Layer: 0
+  m_Name: AttkPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1494811117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494811116}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.4, y: 3.36, z: -51.052982}
+  m_LocalScale: {x: 4.0093246, y: 4.0093246, z: 4.0093246}
+  m_Children: []
+  m_Father: {fileID: 327016858}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1529459748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,7 +1074,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1635503369}
   m_Layer: 0
-  m_Name: AttkPoint
+  m_Name: AttkPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

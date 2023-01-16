@@ -28,19 +28,19 @@ public class PlayerHealth : MonoBehaviour
             hit = false;
         }
 
-        // for(int i = 0; i < hearts.length; i++) {
-        //     if(i < currentHealth) {
-        //         hearts[i].sprite = fullHeart;
-        //     } else {
-        //         hearts[i].sprite = emptyHeart;
-        //     }
+        for(int i = 0; i < hearts.Length; i++) {
+            if(i < currentHealth) {
+                hearts[i].sprite = fullHeart;
+            } else {
+                hearts[i].sprite = emptyHeart;
+            }
 
-        //     if(i < maxHealth) {
-        //         hearts[i].enabled = true;
-        //     } else {
-        //         hearts[i].enabled = false;
-        //     }
-        // }
+            if(i < maxHealth) {
+                hearts[i].enabled = true;
+            } else {
+                hearts[i].enabled = false;
+            }
+        }
     }
 
     public void TakeDamage(int dmg) {
@@ -48,6 +48,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= dmg;
 
         if(currentHealth <= 0) {
+            hearts[0].sprite = emptyHeart;
             Die();
         }
     }

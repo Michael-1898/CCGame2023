@@ -29,11 +29,13 @@ public class MJB_PlayerMove : MonoBehaviour
     [SerializeField] private float attkLunge;
     public int attkNum;
     public bool attkStart;
-    [SerializeField] GameObject attkPoint;
+    [SerializeField] GameObject attkPoint1;
+    [SerializeField] GameObject attkPoint2;
     [SerializeField] float attkRadius;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] int playerDamage;
     [SerializeField] int playerKnockback;
+    Vector2 attkPos;
 
     //variables for knockback
     public float kbTotalTime;
@@ -199,18 +201,22 @@ public class MJB_PlayerMove : MonoBehaviour
 
     //attack code
     void Attack() {
-        
 
+        if(attkNum == 1) {
+            attkPos = attkPoint1.transform.position;
+        }
         //attack lunges
         if(attkNum == 2) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
+            attkPos = attkPoint2.transform.position;
         }
         if(attkNum == 3) {
             rb.AddForce(-transform.right * 1.6f * attkLunge, ForceMode2D.Impulse);
+            attkPos = attkPoint2.transform.position;
         }
 
         //if attack hits something do damage and knockback
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attkPoint.transform.position, attkRadius, enemyLayer);
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attkPos, attkRadius, enemyLayer);
 
         //foreach collider in hit enemies do damage/knock back
         foreach(Collider2D hitEnemy in hitEnemies) {
@@ -219,11 +225,20 @@ public class MJB_PlayerMove : MonoBehaviour
             hitEnemy.GetComponent<Health>().TakeDamage(playerDamage);
 
             //knockback
-            if(transform.position.x < hitEnemy.transform.position.x) {
-                hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * playerKnockback * (Time.deltaTime + 1);
-            } else {
-                hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * playerKnockback * (Time.deltaTime + 1);
+            if(attkNum < 3) {
+                if(transform.position.x < hitEnemy.transform.position.x) {
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * playerKnockback * (Time.deltaTime + 1);
+                } else {
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * playerKnockback * (Time.deltaTime + 1);
+                }
+            } else if(attkNum == 3) {
+                if(transform.position.x < hitEnemy.transform.position.x) {
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback * 3.6f) * (Time.deltaTime + 1);
+                } else {
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.6f) * (Time.deltaTime + 1);
+                }
             }
+            
             
         }
     }
@@ -231,6 +246,7 @@ public class MJB_PlayerMove : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
-        Gizmos.DrawWireSphere(attkPoint.transform.position, attkRadius);
+        Gizmos.DrawWireSphere(attkPoint1.transform.position, attkRadius);
+        Gizmos.DrawWireSphere(attkPos, attkRadius);
     }
 }
