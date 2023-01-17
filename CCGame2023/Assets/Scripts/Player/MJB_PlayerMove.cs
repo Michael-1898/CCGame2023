@@ -127,9 +127,15 @@ public class MJB_PlayerMove : MonoBehaviour
         if(comboDone == true) {
             attkTimer += Time.deltaTime;
             if(attkTimer >= attkCooldown) {
+                if(attkNum > 1) {
+                    attkRadius /= 1.2f;
+                }
+
                 comboDone = false;
                 attkTimer = 0f;
                 attkNum = 0;
+                
+                GetComponent<PlayerHealth>().invincible = false;
             }
         }
 
@@ -209,10 +215,13 @@ public class MJB_PlayerMove : MonoBehaviour
         if(attkNum == 2) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
             attkPos = attkPoint2.transform.position;
+            attkRadius *= 1.2f;
         }
         if(attkNum == 3) {
-            rb.AddForce(-transform.right * 1.6f * attkLunge, ForceMode2D.Impulse);
+            rb.AddForce(-transform.right * 1.4f * attkLunge, ForceMode2D.Impulse);
             attkPos = attkPoint2.transform.position;
+
+            GetComponent<PlayerHealth>().invincible = true;
         }
 
         //if attack hits something do damage and knockback
@@ -233,9 +242,9 @@ public class MJB_PlayerMove : MonoBehaviour
                 }
             } else if(attkNum == 3) {
                 if(transform.position.x < hitEnemy.transform.position.x) {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback * 3.6f) * (Time.deltaTime + 1);
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
                 } else {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.6f) * (Time.deltaTime + 1);
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
                 }
             }
             

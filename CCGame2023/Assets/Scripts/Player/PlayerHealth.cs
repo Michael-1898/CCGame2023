@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth;
     int currentHealth;
     public bool hit;
+    public bool invincible;
 
     //variables for health display
     [SerializeField] Image[] hearts;
@@ -44,13 +45,16 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void TakeDamage(int dmg) {
-        hit = true;
-        currentHealth -= dmg;
+        if(!invincible) {
+            hit = true;
+            currentHealth -= dmg;
 
-        if(currentHealth <= 0) {
-            hearts[0].sprite = emptyHeart;
-            Die();
+            if(currentHealth <= 0) {
+                hearts[0].sprite = emptyHeart;
+                Die();
+            }
         }
+        
     }
 
     void Die() {
