@@ -34,12 +34,12 @@ public class TokTokController : MonoBehaviour
     void Update()
     {
         //movement
-        if(gameObject.GetComponent<Health>().hit == true) {
+        if(gameObject.GetComponent<Health>().hit == true) { //if hit, start kb timer
             kbTimer = kbTime;
         }
-        if(kbTimer <= 0) {
+        if(kbTimer <= 0) {  //if there is no knockback, do movement
             rb.velocity = -Vector2.right * moveSpeed * (Time.deltaTime + 1);
-        } else {
+        } else {    //if there is knock back, subtract kb timer
             kbTimer -= Time.deltaTime;
         }
 
@@ -60,12 +60,16 @@ public class TokTokController : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        if(col.gameObject.CompareTag("Player")) {
+        if(col.gameObject.CompareTag("Player")) {   //if collided with player
+            //deal damage
             col.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDmg);
+
+            //set kb time for player
             col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime = col.gameObject.GetComponent<MJB_PlayerMove>().kbTotalTime;
-            if(transform.position.x < col.transform.position.x) {
+
+            if(transform.position.x < col.transform.position.x) {   //if player is on right
                 col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * enemyKnockback * (Time.deltaTime + 1);
-            } else {
+            } else {    //if player is on left
                 col.gameObject.GetComponent<Rigidbody2D>().velocity = -Vector2.right * enemyKnockback * (Time.deltaTime + 1);
             }
         }

@@ -207,7 +207,7 @@ public class MJB_PlayerMove : MonoBehaviour
 
     //attack code
     void Attack() {
-
+        //sets attk point based on which attk num (attk 2 and 3 have larger and further out hitboxes)
         if(attkNum == 1) {
             attkPos = attkPoint1.transform.position;
         }
@@ -221,6 +221,7 @@ public class MJB_PlayerMove : MonoBehaviour
             rb.AddForce(-transform.right * 1.4f * attkLunge, ForceMode2D.Impulse);
             attkPos = attkPoint2.transform.position;
 
+            //adds invincibility on third attack
             GetComponent<PlayerHealth>().invincible = true;
         }
 
@@ -235,6 +236,7 @@ public class MJB_PlayerMove : MonoBehaviour
 
             //knockback
             if(attkNum < 3) {
+                //knockback according to direction (if hit enemy is on left or right of player)
                 if(transform.position.x < hitEnemy.transform.position.x) {
                     hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * playerKnockback * (Time.deltaTime + 1);
                 } else {
@@ -247,8 +249,6 @@ public class MJB_PlayerMove : MonoBehaviour
                     hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
                 }
             }
-            
-            
         }
     }
 
