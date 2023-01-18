@@ -14,19 +14,16 @@ public class MJB_SceneSwitch : MonoBehaviour
         if(gameObject.name=="btnEditor")
         {
             print("Hi");
-            levelEditorMenu = GameObject.Find("levelEditorMenu");
-            levelEditorMenu.transform.position = new Vector3(0f, 200f, 0f);
-            levelEditorMenu.SetActive(false);
-            levelEditorMenuBackground = GameObject.Find("levelEditorMenuBackground");
-            levelEditorMenuBackground.transform.position = new Vector3(0f, 200f, 0f);
-            levelEditorMenuBackground.SetActive(false);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown("escape") && gameObject.name == "btnEditor")
+        {
+            Camera.main.transform.position = new Vector3(0f, 0f, 0f);
+        }
     }
 
     public void moveToScene(int sceneID) {
@@ -36,11 +33,7 @@ public class MJB_SceneSwitch : MonoBehaviour
         }
         else
         {
-            levelEditorMenu.SetActive(true);
-            levelEditorMenu.transform.position = new Vector3(0f, 0f, 0f);
-            levelEditorMenuBackground.SetActive(true);
-            levelEditorMenuBackground.transform.position = new Vector3(0f, 0f, 0f);
-
+            Camera.main.transform.position = new Vector3(30f, 0f, -10f);
         }
     }
 }
