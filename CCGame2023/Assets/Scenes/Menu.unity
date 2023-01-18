@@ -600,6 +600,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 18916e3d692a847498445bfe5daba512, type: 2}
   - {fileID: 11400000, guid: 8dabac1ae09399546b0ef17ec926c0ed, type: 2}
   - {fileID: 11400000, guid: f9024827dcd7b604a84e2df26dc4fa98, type: 2}
+  - {fileID: 11400000, guid: 79a81baf13a83f341ae9c807ff604700, type: 2}
   allTileCharacters:
   - a
   - b
