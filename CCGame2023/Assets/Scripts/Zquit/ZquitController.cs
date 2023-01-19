@@ -10,6 +10,7 @@ public class ZquitController : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] Transform player;
+    bool isFacingRight;
 
     //attk variables
     [SerializeField] float attkCooldown;
@@ -32,6 +33,7 @@ public class ZquitController : MonoBehaviour
         isAttacking = false;
         aggroTaken = false;
         rb = GetComponent<Rigidbody2D>();
+        isFacingRight = false;
     }
 
     // Update is called once per frame
@@ -57,6 +59,13 @@ public class ZquitController : MonoBehaviour
             }
         }
 
+
+        //flipping to look at player
+        if(transform.position.x < player.position.x && !isFacingRight) {
+            Flip();
+        } else if(transform.position.x > player.position.x && isFacingRight) {
+            Flip();
+        }
 
 
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
@@ -101,6 +110,13 @@ public class ZquitController : MonoBehaviour
         
     }
 
+
+    void Flip() {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(new Vector3(0, 180, 0));
+    }
+
+
     void OnTriggerEnter2D(Collider2D col) {
         if(col.gameObject.layer == 8) {
             rb.velocity = Vector3.zero;
@@ -112,16 +128,19 @@ public class ZquitController : MonoBehaviour
         }
     }
 
+
     void OnTriggerExit2D(Collider2D col) {
         if(playerHit) {
             playerHit = false;
         }
     }
 
+
     void Attack() {
         Vector3 attkDir = (player.position - transform.position).normalized;
         rb.velocity = attkDir * attkingSpeed * (Time.deltaTime + 1);
     }
+
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;

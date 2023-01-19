@@ -53,11 +53,13 @@ public class TokTokController : MonoBehaviour
         }
     }
 
+
     void Flip() {
         isFacingRight = !isFacingRight;
         transform.Rotate(new Vector3(0, 180, 0));
         moveSpeed = -moveSpeed;
     }
+
 
     void OnCollisionEnter2D(Collision2D col) {
         if(col.gameObject.CompareTag("Player")) {   //if collided with player
@@ -74,6 +76,7 @@ public class TokTokController : MonoBehaviour
             }
         }
     }
+
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;

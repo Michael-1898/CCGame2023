@@ -13,6 +13,9 @@ public class Enemy3Controller : MonoBehaviour
     [SerializeField] Transform player;
     bool aggroTaken;
 
+    //attk variables
+    [SerializeField] int enemyDmg;
+    [SerializeField] int enemyKnockback;
 
     //knockbacked variables
     float hitTimer;
@@ -66,6 +69,26 @@ public class Enemy3Controller : MonoBehaviour
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, -moveSpeed * Time.deltaTime);
         }
     }
+
+
+    void OnCollisionEnter2D(Collision2D col) {
+        rb.velocity = Vector3.zero;
+        
+        if(col.gameObject.CompareTag("Player")) {   //if collided with player
+            //deal damage
+            col.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDmg);
+
+            //set kb time for player
+            col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime = col.gameObject.GetComponent<MJB_PlayerMove>().kbTotalTime;
+
+            if(transform.position.x < col.transform.position.x) {   //if player is on right
+                col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * enemyKnockback * (Time.deltaTime + 1);
+            } else {    //if player is on left
+                col.gameObject.GetComponent<Rigidbody2D>().velocity = -Vector2.right * enemyKnockback * (Time.deltaTime + 1);
+            }
+        }
+    }
+
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
