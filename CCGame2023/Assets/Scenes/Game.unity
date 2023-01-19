@@ -490,7 +490,7 @@ MonoBehaviour:
   aggroRadius: 10
   followRadius: 6
   runRadius: 5
-  moveSpeed: 2.5
+  moveSpeed: 2
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -1325,7 +1325,7 @@ PrefabInstance:
     - target: {fileID: 3720008993417496547, guid: ee12cf54e29557443ad84517a515ac87,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3720008993417496548, guid: ee12cf54e29557443ad84517a515ac87,
         type: 3}
