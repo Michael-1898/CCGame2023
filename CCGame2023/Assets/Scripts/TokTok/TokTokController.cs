@@ -10,11 +10,13 @@ public class TokTokController : MonoBehaviour
 
     //variables for ai
     bool grounded;
+    bool hardGrounded;
     bool isFacingRight;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] GameObject groundCheck;
     [SerializeField] float circleRadius;
     [SerializeField] int enemyKnockback;
+    [SerializeField] GameObject hardGroundCheck;
 
     //variables for knockback
     [SerializeField] float kbTime;
@@ -33,11 +35,17 @@ public class TokTokController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Physics2D.OverlapCircle(hardGroundCheck.transform.position, circleRadius, groundLayer) == false && hardGrounded) {
+            hardGrounded = false;
+        } else if(Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer) == true && !hardGrounded) {
+            hardGrounded = true;
+        }
+
         //movement
         if(gameObject.GetComponent<Health>().hit == true) { //if hit, start kb timer
             kbTimer = kbTime;
         }
-        if(kbTimer <= 0) {  //if there is no knockback, do movement
+        if(kbTimer <= 0 && hardGrounded) {  //if there is no knockback, do movement
             rb.velocity = -Vector2.right * moveSpeed * (Time.deltaTime + 1);
         } else {    //if there is knock back, subtract kb timer
             kbTimer -= Time.deltaTime;
@@ -46,9 +54,9 @@ public class TokTokController : MonoBehaviour
 
         //ai (flipping at edges)
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
-        if(!grounded && isFacingRight) {
+        if(!grounded && isFacingRight && hardGrounded) {
             Flip();
-        } else if(!grounded && !isFacingRight) {
+        } else if(!grounded && !isFacingRight && hardGrounded) {
             Flip();
         }
     }
@@ -81,5 +89,6 @@ public class TokTokController : MonoBehaviour
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(hardGroundCheck.transform.position, circleRadius);
     }
 }
