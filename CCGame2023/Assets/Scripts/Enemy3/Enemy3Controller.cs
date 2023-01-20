@@ -16,9 +16,6 @@ public class Enemy3Controller : MonoBehaviour
     //attk variables
     [SerializeField] int enemyDmg;
     [SerializeField] int enemyKnockback;
-    [SerializeField] float attkCooldown;
-    float attkTimer;
-    [SerializeField] GameObject bullet;
 
     //knockbacked variables
     float hitTimer;
@@ -66,27 +63,10 @@ public class Enemy3Controller : MonoBehaviour
         //if player is within aggro distance follow and outside of follow distance then follow (stops following if within follow radius)
         if(distanceFromPlayer < aggroRadius && distanceFromPlayer > followRadius) {
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, moveSpeed * Time.deltaTime);
-            rb.velocity = Vector3.zero;
         } else if(distanceFromPlayer <= followRadius && distanceFromPlayer > runRadius) {
-            if(transform.position.y <= player.position.y + 1.5) {
-                rb.velocity = Vector2.up * (moveSpeed/2) * (Time.deltaTime + 1);
-            } else {
-                rb.velocity = Vector3.zero;   
-            }
+            transform.position = transform.position;
         } else if(distanceFromPlayer <= runRadius) {
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, -moveSpeed * Time.deltaTime);
-            rb.velocity = Vector3.zero;
-        }
-
-
-        //Attk cooldown code
-        if(distanceFromPlayer < aggroRadius) {
-            attkTimer += Time.deltaTime;
-
-            if(attkTimer >= attkCooldown) {
-                attkTimer = 0;
-                Attack();
-            }
         }
     }
 
@@ -107,11 +87,6 @@ public class Enemy3Controller : MonoBehaviour
                 col.gameObject.GetComponent<Rigidbody2D>().velocity = -Vector2.right * enemyKnockback * (Time.deltaTime + 1);
             }
         }
-    }
-
-
-    void Attack() {
-        Instantiate(bullet, transform.position, Quaternion.identity);
     }
 
 

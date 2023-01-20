@@ -45,10 +45,6 @@ public class ZquitController : MonoBehaviour
             isKnocked = true;
         }
 
-        if(GetComponent<Health>().hit == true && isKnocked == true) {
-            hitTimer = 0;
-        }
-
         if(isKnocked) {
             hitTimer += Time.deltaTime;
         }
