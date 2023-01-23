@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 public class MJB_SceneSwitch : MonoBehaviour
 {
     // Start is called before the first frame update
-    GameObject levelEditorMenu;
-    GameObject levelEditorMenuBackground;
     
     void Start()
     {

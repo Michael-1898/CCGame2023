@@ -57,9 +57,15 @@ public class LoadLevel : MonoBehaviour
         {
             for(int l = 0; l < tilemap.allTileCharacters.Count; l++)
             {
-                if(levelInformation.Substring(k, 1) == tilemap.allTileCharacters[l])
+            
+                if (levelInformation.Substring(k, 1) == tilemap.allTileCharacters[l])
                 {
-                    tilemap1.SetTile(new Vector3Int(k % columns, Mathf.FloorToInt(k/columns), 0), tilemap.allTiles[l]);
+                    tilemap1.SetTile(new Vector3Int(k % columns, Mathf.FloorToInt(k / columns), 0), tilemap.allTiles[l]);
+                    if(tilemap.allTileGameObjects[l] != null)
+                    {
+                        tilemap1.SetTile(new Vector3Int(k % columns, Mathf.FloorToInt(k / columns), 0), null);
+                        Instantiate(tilemap.allTileGameObjects[l], new Vector3((k % columns) + 0.5f, Mathf.FloorToInt(k / columns) + 0.5f, 0), Quaternion.identity);
+                    }
                 }
             }
         }

@@ -12,6 +12,7 @@ public class tilemap : MonoBehaviour
     public Tilemap tilemap1;
     public static List<Tile> allTiles = new List<Tile>();
     public static List<string> allTileCharacters = new List<string>();
+    public static List<GameObject> allTileGameObjects = new List<GameObject>();
     public List<Button> allTileButtons = new List<Button>();
     [SerializeField] private Text levelNameText;
     [SerializeField] private string levelInformation;
