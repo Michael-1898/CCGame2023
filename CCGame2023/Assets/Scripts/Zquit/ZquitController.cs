@@ -65,9 +65,9 @@ public class ZquitController : MonoBehaviour
 
 
         //flipping to look at player
-        if(transform.position.x < player.position.x && !isFacingRight) {
+        if(transform.position.x < player.position.x && !isFacingRight && !isAttacking) {
             Flip();
-        } else if(transform.position.x > player.position.x && isFacingRight) {
+        } else if(transform.position.x > player.position.x && isFacingRight && !isAttacking) {
             Flip();
         }
 
