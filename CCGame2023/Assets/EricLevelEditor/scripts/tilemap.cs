@@ -13,12 +13,16 @@ public class tilemap : MonoBehaviour
     public static List<Tile> allTiles = new List<Tile>();
     public static List<string> allTileCharacters = new List<string>();
     public static List<GameObject> allTileGameObjects = new List<GameObject>();
+    public static List<Vector3> allTileSizes = new List<Vector3>();
+
     public List<Button> allTileButtons = new List<Button>();
     [SerializeField] private Text levelNameText;
     [SerializeField] private string levelInformation;
+    [SerializeField] private Tile xTile;
     public GameObject tilePreview;
     SpriteRenderer tilePreviewSR;
     Tile currentTile;
+    Vector3 currentTileSize;
     
 
     public int columns;
@@ -47,9 +51,17 @@ public class tilemap : MonoBehaviour
                 currentTile = null;
                 tilePreviewSR.sprite = null;
             }
-            if(Input.GetMouseButton(0))
+            if(Input.GetMouseButtonDown(0))
             {
                 tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                if (currentTileSize != new Vector3(0f, 0f, 0f))
+                {
+                    for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
+                    {
+                        print(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0));
+                        tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
+                    }
+                }
             }
         }
         else tilePreviewSR.sprite = null;
@@ -89,7 +101,7 @@ public class tilemap : MonoBehaviour
         {
             for(int l = 0; l < allTileCharacters.Count; l++)
             {
-                if(levelInformation.Substring(k, 1) == allTileCharacters[l])
+                if (levelInformation.Substring(k, 1) == allTileCharacters[l])
                 {
                     tilemap1.SetTile(new Vector3Int(k % columns, Mathf.FloorToInt(k/columns), 0), allTiles[l]);
                 }
@@ -122,6 +134,7 @@ public class tilemap : MonoBehaviour
             if(allTileCharacters[i] == name)
             {
                 currentTile = allTiles[i];
+                currentTileSize = allTileSizes[i];
             }
         }
         print(currentTile);

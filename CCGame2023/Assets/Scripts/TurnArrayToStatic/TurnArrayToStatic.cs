@@ -10,6 +10,8 @@ public class TurnArrayToStatic : MonoBehaviour
     [SerializeField] List<Tile> allTiles = new List<Tile>();
     [SerializeField] List<string> allTileCharacters = new List<string>();
     [SerializeField] List<GameObject> allTileGameObjects = new List<GameObject>();
+    [SerializeField] List<Vector3> allTileSizes = new List<Vector3>();
+
 
 
     void Start()
@@ -17,6 +19,7 @@ public class TurnArrayToStatic : MonoBehaviour
         tilemap.allTiles = allTiles;
         tilemap.allTileCharacters = allTileCharacters;
         tilemap.allTileGameObjects = allTileGameObjects;
+        tilemap.allTileSizes = allTileSizes;
     }
 
     // Update is called once per frame

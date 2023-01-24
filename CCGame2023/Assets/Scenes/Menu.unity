@@ -601,7 +601,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8dabac1ae09399546b0ef17ec926c0ed, type: 2}
   - {fileID: 11400000, guid: f9024827dcd7b604a84e2df26dc4fa98, type: 2}
   - {fileID: 11400000, guid: 79a81baf13a83f341ae9c807ff604700, type: 2}
-  - {fileID: 11400000, guid: 79a81baf13a83f341ae9c807ff604700, type: 2}
   allTileCharacters:
   - a
   - b
@@ -637,6 +636,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 3624078812657250628, guid: e2ea95c4ae3258e43a6b6932854c948f, type: 3}
   - {fileID: 3624078812657250628, guid: e2ea95c4ae3258e43a6b6932854c948f, type: 3}
+  allTileSizes:
+  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 1, z: 0}
+  - {x: 2, y: 4, z: 0}
+  - {x: 4, y: 2, z: 0}
+  - {x: 16, y: 4, z: 0}
+  - {x: 1, y: 2, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
