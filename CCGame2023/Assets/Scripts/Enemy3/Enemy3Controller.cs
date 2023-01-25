@@ -42,6 +42,10 @@ public class Enemy3Controller : MonoBehaviour
             isKnocked = true;
         }
 
+        if(GetComponent<Health>().hit == true && isKnocked == true) {
+            hitTimer = 0;
+        }
+
         if(isKnocked) {
             hitTimer += Time.deltaTime;
         }
@@ -64,16 +68,16 @@ public class Enemy3Controller : MonoBehaviour
 
 
         //if player is within aggro distance follow and outside of follow distance then follow (stops following if within follow radius)
-        if(distanceFromPlayer < aggroRadius && distanceFromPlayer > followRadius) {
+        if(distanceFromPlayer < aggroRadius && distanceFromPlayer > followRadius && !isKnocked) {
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, moveSpeed * Time.deltaTime);
             rb.velocity = Vector3.zero;
-        } else if(distanceFromPlayer <= followRadius && distanceFromPlayer > runRadius) {
+        } else if(distanceFromPlayer <= followRadius && distanceFromPlayer > runRadius && !isKnocked) {
             if(transform.position.y <= player.position.y + 1.5) {
                 rb.velocity = Vector2.up * (moveSpeed/2) * (Time.deltaTime + 1);
             } else {
                 rb.velocity = Vector3.zero;   
             }
-        } else if(distanceFromPlayer <= runRadius) {
+        } else if(distanceFromPlayer <= runRadius && !isKnocked) {
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, -moveSpeed * Time.deltaTime);
             rb.velocity = Vector3.zero;
         }

@@ -82,10 +82,10 @@ public class ZquitController : MonoBehaviour
 
         
         //if player is within aggro distance follow and outside of follow distance then follow (stops following if within follow radius)
-        if(distanceFromPlayer < aggroRadius && distanceFromPlayer > followRadius && !isAttacking) {
+        if(distanceFromPlayer < aggroRadius && distanceFromPlayer > followRadius && !isAttacking && !isKnocked) {
             rb.velocity = Vector3.zero;
             transform.position = Vector2.MoveTowards(this.transform.position, player.position, moveSpeed * Time.deltaTime);
-        } else if(distanceFromPlayer <= followRadius && !isAttacking) {
+        } else if(distanceFromPlayer <= followRadius && !isAttacking && !isKnocked) {
             rb.velocity = Vector2.up * moveSpeed * (Time.deltaTime + 1);
         }
 

@@ -24,6 +24,7 @@ public class MJB_PlayerMove : MonoBehaviour
     public float attkCooldown;
     public bool attkAnimPlaying;
     public bool canRotate;
+    public int attkType; //int which uses numbers to describe type of attack (0 is normal, 1 is side aerial, 2 is down aerial, 3 is up aerial)
 
     //variables for attk func
     [SerializeField] private float attkLunge;
@@ -42,8 +43,8 @@ public class MJB_PlayerMove : MonoBehaviour
     public float kbCurrentTime;
 
     //variables for groundCheck
-    bool ground;
-    bool isGrounded;
+    bool ground; //bool for ground check
+    bool isGrounded; //bool used for jumping code
     [SerializeField] LayerMask groundLayer;
     [SerializeField] GameObject groundCheck;
     [SerializeField] float circleRadius;
@@ -120,9 +121,19 @@ public class MJB_PlayerMove : MonoBehaviour
 
 
         //attack code (animator)
-        if(Input.GetKeyDown("x") && !isAttacking && !comboDone && (ground)) {
+        if(Input.GetKeyDown("x") && !isAttacking && !comboDone && ground) {
             isAttacking = true;
-        }
+            attkType = 0;
+        } else if(Input.GetKeyDown("x") && !isAttacking && !comboDone && !ground) {
+            isAttacking = true;
+            attkType = 1;
+        } /* else if(Input.GetKeyDown("x") && !isAttacking && !comboDone && !ground && pressing up/ pressing down)
+            isAttacking = true;
+            attkType = 2/3;
+
+            Note: put this commented section above the other aerial attk if statement, so that if the up or down is being pressed it does that respective direction, but
+            otherwise if no direction or left or right is inputted it will default to the side attk
+        */
 
         if(comboDone == true) {
             attkTimer += Time.deltaTime;
@@ -144,7 +155,7 @@ public class MJB_PlayerMove : MonoBehaviour
         }
 
 
-        //grounded code (uses boxcast to determine if player is grounded)
+        //grounded code (uses overlap circle to determine if player is grounded)
         if(ground)
         {
             isGrounded = true;
@@ -207,22 +218,21 @@ public class MJB_PlayerMove : MonoBehaviour
 
     //attack code
     void Attack() {
-        //sets attk point based on which attk num (attk 2 and 3 have larger and further out hitboxes)
+        //sets attk point based on which attk num (attk 2 and 3 have larger and further out hitboxes) & handles attk lunges
         if(attkNum == 1) {
             attkPos = attkPoint1.transform.position;
-        }
-        //attack lunges
-        if(attkNum == 2) {
+        } else if(attkNum == 2) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
             attkPos = attkPoint2.transform.position;
             attkRadius *= 1.2f;
-        }
-        if(attkNum == 3) {
+        } else if(attkNum == 3) {
             rb.AddForce(-transform.right * 1.4f * attkLunge, ForceMode2D.Impulse);
             attkPos = attkPoint2.transform.position;
 
             //adds invincibility on third attack
             GetComponent<PlayerHealth>().invincible = true;
+        } else {
+            attkPos = attkPoint1.transform.position;
         }
 
         //if attack hits something do damage and knockback

@@ -15,7 +15,7 @@ public class IdleScript : StateMachineBehaviour
     {
         if(MJB_PlayerMove.instance.isAttacking == true) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk1");
-        }  
+        } 
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

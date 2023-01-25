@@ -1096,6 +1096,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy3
       objectReference: {fileID: 0}
+    - target: {fileID: 1001754325587228152, guid: 46a5bc3deeffd8f4c97c76acb88a263b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1001754325587228153, guid: 46a5bc3deeffd8f4c97c76acb88a263b,
         type: 3}
       propertyPath: player
@@ -1114,6 +1119,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TokTok
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401932322914695365, guid: ca09996c170e6aa488c931f9dba20464,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2401932322914695391, guid: ca09996c170e6aa488c931f9dba20464,
         type: 3}
