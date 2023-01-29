@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1265356436048542455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6007519119375749718}
+  m_Layer: 0
+  m_Name: AttkPointDown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6007519119375749718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265356436048542455}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -3.8, z: -4.852875}
+  m_LocalScale: {x: 4.0093246, y: 4.0093246, z: 4.0093246}
+  m_Children: []
+  m_Father: {fileID: 3624078812657250631}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2828930445481340227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 35591452384295861}
+  m_Layer: 0
+  m_Name: AttkPointUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &35591452384295861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2828930445481340227}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 11, z: -4.852875}
+  m_LocalScale: {x: 4.0093246, y: 4.0093246, z: 4.0093246}
+  m_Children: []
+  m_Father: {fileID: 3624078812657250631}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3624078812532114585
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,6 +127,8 @@ Transform:
   - {fileID: 3624078812532114584}
   - {fileID: 3624078813965737428}
   - {fileID: 3624078813556674864}
+  - {fileID: 35591452384295861}
+  - {fileID: 6007519119375749718}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -206,11 +268,14 @@ MonoBehaviour:
   attkCooldown: 0.15
   attkAnimPlaying: 0
   canRotate: 0
+  attkType: 0
   attkLunge: 7
   attkNum: 0
   attkStart: 0
   attkPoint1: {fileID: 3624078813965737429}
   attkPoint2: {fileID: 3624078813556674865}
+  attkPointUp: {fileID: 2828930445481340227}
+  attkPointDown: {fileID: 1265356436048542455}
   attkRadius: 1
   enemyLayer:
     serializedVersion: 2
@@ -325,7 +390,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3624078813965737429}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.48, y: 3.36, z: -51.052982}
+  m_LocalPosition: {x: -4.1, y: 3.36, z: -51.052982}
   m_LocalScale: {x: 4.0093246, y: 4.0093246, z: 4.0093246}
   m_Children: []
   m_Father: {fileID: 3624078812657250631}
