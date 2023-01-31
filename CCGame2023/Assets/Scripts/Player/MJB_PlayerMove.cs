@@ -32,6 +32,8 @@ public class MJB_PlayerMove : MonoBehaviour
     public bool attkStart;
     [SerializeField] GameObject attkPoint1;
     [SerializeField] GameObject attkPoint2;
+    [SerializeField] GameObject attkPointUp;
+    [SerializeField] GameObject attkPointDown;
     [SerializeField] float attkRadius;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] int playerDamage;
@@ -119,21 +121,24 @@ public class MJB_PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, playerRotation, 0f);
         }
 
-
+       
         //attack code (animator)
-        if(Input.GetKeyDown("x") && !isAttacking && !comboDone && ground) {
+        if(Input.GetKeyDown("x") && !isAttacking && !comboDone && ground && Input.GetKey("up")) {
+            isAttacking = true;
+            attkType = 2;
+        } else if(Input.GetKeyDown("x") && !isAttacking && !comboDone && ground) {
             isAttacking = true;
             attkType = 0;
+        } else if(Input.GetKeyDown("x") && !isAttacking && !comboDone && !ground && Input.GetKey("up")) {
+            isAttacking = true;
+            attkType = 2;
+        } else if(Input.GetKeyDown("x") && !isAttacking && !comboDone && !ground && Input.GetKey("down")) {
+            isAttacking = true;
+            attkType = 3;
         } else if(Input.GetKeyDown("x") && !isAttacking && !comboDone && !ground) {
             isAttacking = true;
             attkType = 1;
-        } /* else if(Input.GetKeyDown("x") && !isAttacking && !comboDone && !ground && pressing up/ pressing down)
-            isAttacking = true;
-            attkType = 2/3;
-
-            Note: put this commented section above the other aerial attk if statement, so that if the up or down is being pressed it does that respective direction, but
-            otherwise if no direction or left or right is inputted it will default to the side attk
-        */
+        }
 
         if(comboDone == true) {
             attkTimer += Time.deltaTime;
@@ -219,7 +224,7 @@ public class MJB_PlayerMove : MonoBehaviour
     //attack code
     void Attack() {
         //sets attk point based on which attk num (attk 2 and 3 have larger and further out hitboxes) & handles attk lunges
-        if(attkNum == 1) {
+        if(attkNum == 1 && attkType < 2) {
             attkPos = attkPoint1.transform.position;
         } else if(attkNum == 2) {
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
@@ -231,6 +236,10 @@ public class MJB_PlayerMove : MonoBehaviour
 
             //adds invincibility on third attack
             GetComponent<PlayerHealth>().invincible = true;
+        } else if(attkType == 2) {
+            attkPos = attkPointUp.transform.position;
+        } else if(attkType == 3) {
+            attkPos = attkPointDown.transform.position;
         } else {
             attkPos = attkPoint1.transform.position;
         }
@@ -245,18 +254,24 @@ public class MJB_PlayerMove : MonoBehaviour
             hitEnemy.GetComponent<Health>().TakeDamage(playerDamage);
 
             //knockback
-            if(attkNum < 3) {
+            if(attkNum < 3 && attkType < 2) {
                 //knockback according to direction (if hit enemy is on left or right of player)
                 if(transform.position.x < hitEnemy.transform.position.x) {
                     hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * playerKnockback * (Time.deltaTime + 1);
                 } else {
                     hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * playerKnockback * (Time.deltaTime + 1);
                 }
-            } else if(attkNum == 3) {
+            } else if(attkNum == 3 && attkType < 2) {
                 if(transform.position.x < hitEnemy.transform.position.x) {
                     hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
                 } else {
                     hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
+                }
+            } else if(attkType > 1) {
+                if(transform.position.y < hitEnemy.transform.position.y) {
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.up * playerKnockback * (Time.deltaTime + 1);
+                } else {
+                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.up * playerKnockback * (Time.deltaTime + 1);
                 }
             }
         }
@@ -271,5 +286,7 @@ public class MJB_PlayerMove : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
         Gizmos.DrawWireSphere(attkPoint1.transform.position, attkRadius);
         Gizmos.DrawWireSphere(attkPos, attkRadius);
+        Gizmos.DrawWireSphere(attkPointUp.transform.position, attkRadius);
+        Gizmos.DrawWireSphere(attkPointDown.transform.position, attkRadius);
     }
 }

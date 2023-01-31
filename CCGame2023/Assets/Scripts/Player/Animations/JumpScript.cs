@@ -15,6 +15,10 @@ public class JumpScript : StateMachineBehaviour
     {
         if(MJB_PlayerMove.instance.isAttacking == true && MJB_PlayerMove.instance.attkType == 1) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttkAirSide");
+        } else if(MJB_PlayerMove.instance.isAttacking == true && MJB_PlayerMove.instance.attkType == 2) {
+            MJB_PlayerMove.instance.myAnim.Play("PlayerAttkAirUp");
+        } else if(MJB_PlayerMove.instance.isAttacking == true && MJB_PlayerMove.instance.attkType == 3) {
+            MJB_PlayerMove.instance.myAnim.Play("PlayerAttkAirDown");
         }
     }
 

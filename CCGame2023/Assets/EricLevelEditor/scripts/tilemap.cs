@@ -51,15 +51,35 @@ public class tilemap : MonoBehaviour
                 currentTile = null;
                 tilePreviewSR.sprite = null;
             }
-            if(Input.GetMouseButtonDown(0))
-            {
-                tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
-                if (currentTileSize != new Vector3(0f, 0f, 0f))
+            print(currentTileSize);
+            if(currentTileSize != new Vector3(1f, 1f, 0f))
+            {    
+                if(Input.GetMouseButtonDown(0))
                 {
-                    for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
+                    tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                    if (currentTileSize != new Vector3(0f, 0f, 0f))
                     {
-                        print(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0));
-                        tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
+                        for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
+                        {
+                            print(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0));
+                            tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
+                        }
+                    }
+                }
+            }
+            else 
+            {
+                print("yo");
+                if(Input.GetMouseButton(0))
+                {
+                    tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                    if (currentTileSize != new Vector3(0f, 0f, 0f))
+                    {
+                        for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
+                        {
+                            print(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0));
+                            tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
+                        }
                     }
                 }
             }
