@@ -636,7 +636,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 3624078812657250628, guid: e2ea95c4ae3258e43a6b6932854c948f, type: 3}
   allTileSizes:
-  - {x: 0, y: 0, z: 0}
+  - {x: 1, y: 1, z: 0}
   - {x: 1, y: 1, z: 0}
   - {x: 2, y: 4, z: 0}
   - {x: 4, y: 2, z: 0}

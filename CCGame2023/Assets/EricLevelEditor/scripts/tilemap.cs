@@ -22,6 +22,7 @@ public class tilemap : MonoBehaviour
     public GameObject tilePreview;
     SpriteRenderer tilePreviewSR;
     Tile currentTile;
+    Vector3Int currentDeletionLocation;
     Vector3 currentTileSize;
     
 
@@ -51,35 +52,48 @@ public class tilemap : MonoBehaviour
                 currentTile = null;
                 tilePreviewSR.sprite = null;
             }
-            print(currentTileSize);
-            if(currentTileSize != new Vector3(1f, 1f, 0f))
-            {    
-                if(Input.GetMouseButtonDown(0))
+            if (currentTileSize != new Vector3(1f, 1f, 0f))
+            {
+                bool noXTiles = true;
+                for (int w = 1; w < (currentTileSize.x * currentTileSize.y); w++)
                 {
-                    tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
-                    if (currentTileSize != new Vector3(0f, 0f, 0f))
+                    if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (w % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(w / currentTileSize.x), 0)) == xTile)
                     {
+                        noXTiles = false;
+                    }
+                }
+                if (noXTiles)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+
+                        if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0)) != xTile)
+                        {
+                            currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
+                            deleteXTiles();
+                            tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                        }
                         for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
                         {
-                            print(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0));
+                            if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0)) != xTile)
+                            {
+                                currentDeletionLocation = new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0);
+                                deleteXTiles();
+                            }
                             tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
                         }
                     }
                 }
             }
-            else 
+            else
             {
-                print("yo");
-                if(Input.GetMouseButton(0))
+                if (Input.GetMouseButton(0))
                 {
-                    tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
-                    if (currentTileSize != new Vector3(0f, 0f, 0f))
+                    if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0))!=xTile)
                     {
-                        for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
-                        {
-                            print(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0));
-                            tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
-                        }
+                        currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
+                        deleteXTiles();
+                        tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
                     }
                 }
             }
@@ -97,6 +111,21 @@ public class tilemap : MonoBehaviour
         }
     }
 
+    public void deleteXTiles()
+    {
+        for (int temp = 1; temp < tilemap.allTiles.Count; temp++)
+        {
+            if (tilemap1.GetTile(currentDeletionLocation) == tilemap.allTiles[temp] && tilemap1.GetTile(currentDeletionLocation) != null && tilemap1.GetTile(currentDeletionLocation) != xTile)
+            {
+                print(tilemap.allTiles[temp]);
+                for (int temp2 = 1; temp2 < (tilemap.allTileSizes[temp].x * tilemap.allTileSizes[temp].y); temp2++)
+                {
+                    print(new Vector3Int(Mathf.FloorToInt(currentDeletionLocation.x + (temp2 % tilemap.allTileSizes[temp].x)), currentDeletionLocation.y + Mathf.FloorToInt(temp2 / tilemap.allTileSizes[temp].x), 0));
+                    tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(currentDeletionLocation.x + (temp2 % tilemap.allTileSizes[temp].x)), currentDeletionLocation.y + Mathf.FloorToInt(temp2 / tilemap.allTileSizes[temp].x), 0), null);
+                }
+            }
+        }
+    }
     public void printTilemapInformation(string levelName)
     {
         string fileName =  Application.streamingAssetsPath + "/" + levelName + ".txt";
@@ -157,7 +186,6 @@ public class tilemap : MonoBehaviour
                 currentTileSize = allTileSizes[i];
             }
         }
-        print(currentTile);
     }
 
     public void saveLevel(string levelName)
