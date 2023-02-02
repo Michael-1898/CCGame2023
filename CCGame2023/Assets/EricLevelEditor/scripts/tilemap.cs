@@ -24,7 +24,7 @@ public class tilemap : MonoBehaviour
     Tile currentTile;
     Vector3Int currentDeletionLocation;
     Vector3 currentTileSize;
-    
+    bool delete = false;
 
     public int columns;
     public int rows;
@@ -43,7 +43,7 @@ public class tilemap : MonoBehaviour
     {
         if(currentTile != null && (Camera.main.ScreenToWorldPoint(Input.mousePosition).x < (Camera.main.orthographicSize * (16f/9f))-6.2f+Camera.main.transform.position.x))
         {
-            tilePreviewSR.sprite = currentTile.sprite;
+            
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             tilePreview.transform.position = new Vector3(Mathf.Floor(mousePos.x)+0.5f, Mathf.Floor(mousePos.y)+0.5f, 0f);
             if(Input.GetKeyDown("escape"))
@@ -51,9 +51,11 @@ public class tilemap : MonoBehaviour
                 print("escape");
                 currentTile = null;
                 tilePreviewSR.sprite = null;
+                delete=false;
             }
-            if (currentTileSize != new Vector3(1f, 1f, 0f))
+            if (currentTileSize != new Vector3(1f, 1f, 0f) && currentTile.name != "delete")
             {
+                tilePreviewSR.sprite = currentTile.sprite;
                 bool noXTiles = true;
                 for (int w = 0; w < (currentTileSize.x * currentTileSize.y); w++)
                 {
@@ -85,6 +87,19 @@ public class tilemap : MonoBehaviour
                     }
                 }
             }
+            else if(currentTile.name != "delete")
+            {
+                tilePreviewSR.sprite = currentTile.sprite;
+                if (Input.GetMouseButton(0))
+                {
+                    if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0))!=xTile)
+                    {
+                        currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
+                        deleteXTiles();
+                        tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                    }
+                }
+            }
             else
             {
                 if (Input.GetMouseButton(0))
@@ -93,7 +108,7 @@ public class tilemap : MonoBehaviour
                     {
                         currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
                         deleteXTiles();
-                        tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                        tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), null);
                     }
                 }
             }
@@ -184,7 +199,14 @@ public class tilemap : MonoBehaviour
             {
                 currentTile = allTiles[i];
                 currentTileSize = allTileSizes[i];
+                delete = false;
             }
+        }
+        if(name == "delete")
+        {
+            delete = true;
+          //  currentTile = GameObject.Find("delete");
+            tilePreviewSR.sprite = GameObject.Find("delete").GetComponent<Image>().sprite;
         }
     }
 
