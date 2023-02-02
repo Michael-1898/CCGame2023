@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265356436048542455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.8, z: -4.852875}
+  m_LocalPosition: {x: 0, y: -4.2, z: -4.852875}
   m_LocalScale: {x: 4.0093246, y: 4.0093246, z: 4.0093246}
   m_Children: []
   m_Father: {fileID: 3624078812657250631}
@@ -282,6 +282,7 @@ MonoBehaviour:
     m_Bits: 512
   playerDamage: 3
   playerKnockback: 9
+  attkPushback: 12
   kbTotalTime: 0.2
   kbCurrentTime: 0
   groundLayer:

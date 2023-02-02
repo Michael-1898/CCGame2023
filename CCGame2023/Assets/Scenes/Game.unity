@@ -999,6 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0152d1f2fb7844783abdd894290aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothTime: 0.17
   target: {fileID: 327016858}
 --- !u!1 &2111786869
 GameObject:
@@ -1234,6 +1235,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3624078812657250626, guid: e2ea95c4ae3258e43a6b6932854c948f,
+        type: 3}
+      propertyPath: attkPushback
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3624078812657250626, guid: e2ea95c4ae3258e43a6b6932854c948f,
         type: 3}
       propertyPath: playerDamage

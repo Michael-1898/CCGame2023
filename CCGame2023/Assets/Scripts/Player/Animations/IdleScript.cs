@@ -17,6 +17,8 @@ public class IdleScript : StateMachineBehaviour
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttk1");
         } else if(MJB_PlayerMove.instance.isAttacking == true && MJB_PlayerMove.instance.attkType == 2) {
             MJB_PlayerMove.instance.myAnim.Play("PlayerAttkAirUp");
+        } else if(MJB_PlayerMove.instance.isAttacking == true && MJB_PlayerMove.instance.attkType == 3) {
+            MJB_PlayerMove.instance.myAnim.Play("PlayerAttkAirDown");
         }
     }
 

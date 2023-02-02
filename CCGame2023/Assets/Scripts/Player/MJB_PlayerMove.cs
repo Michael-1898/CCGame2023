@@ -38,6 +38,7 @@ public class MJB_PlayerMove : MonoBehaviour
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] int playerDamage;
     [SerializeField] int playerKnockback;
+    [SerializeField] float attkPushback;
     Vector2 attkPos;
 
     //variables for knockback
@@ -273,6 +274,14 @@ public class MJB_PlayerMove : MonoBehaviour
                 } else {
                     hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.up * playerKnockback * (Time.deltaTime + 1);
                 }
+            }
+        }
+
+        //knock player back after hitting
+        if(hitEnemies.Length > 0) {
+            if(attkType == 3) {
+                rb.velocity = Vector2.up * attkPushback * (Time.deltaTime + 1);
+                kbCurrentTime = kbTotalTime;
             }
         }
     }
