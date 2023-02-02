@@ -55,7 +55,7 @@ public class tilemap : MonoBehaviour
             if (currentTileSize != new Vector3(1f, 1f, 0f))
             {
                 bool noXTiles = true;
-                for (int w = 1; w < (currentTileSize.x * currentTileSize.y); w++)
+                for (int w = 0; w < (currentTileSize.x * currentTileSize.y); w++)
                 {
                     if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (w % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(w / currentTileSize.x), 0)) == xTile)
                     {
