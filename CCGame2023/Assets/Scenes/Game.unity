@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 1423966666}
   - component: {fileID: 1423966665}
   - component: {fileID: 1423966669}
+  - component: {fileID: 1423966670}
   m_Layer: 0
   m_Name: ToucanBoss
   m_TagString: Untagged
@@ -574,9 +575,9 @@ PolygonCollider2D:
       - {x: -0.31298587, y: 0.11188549}
       - {x: -0.30811617, y: -0.01}
       - {x: -0.18935913, y: 0.022458144}
-      - {x: -0.11895779, y: -0.07832943}
-      - {x: 0.040521167, y: -0.18565634}
-      - {x: 0.15428878, y: -0.19701672}
+      - {x: -0.13900244, y: -0.10087992}
+      - {x: 0.022981903, y: -0.21572371}
+      - {x: 0.16431111, y: -0.21455601}
       - {x: 0.23785557, y: -0.13508359}
       - {x: 0.2145494, y: -0.071837835}
       - {x: 0.1885776, y: -0.027016696}
@@ -663,7 +664,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.4, y: 3.3, z: 0}
   m_LocalScale: {x: 7.374701, y: 7.374701, z: 7.374701}
-  m_Children: []
+  m_Children:
+  - {fileID: 2117326125}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -683,6 +685,26 @@ MonoBehaviour:
   maxJumpCooldown: 1.6
   jumpChance: 0.12
   jumpStrength: 22
+  anim: {fileID: 0}
+--- !u!95 &1423966670
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423966664}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6222e356719f3bc47b47fa802dc91ac9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1529459748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1236,6 +1258,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111786869}
   m_CullTransparentMesh: 0
+--- !u!1 &2117326124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2117326125}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2117326125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117326124}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.07393261, y: -0.169, z: -2.5169098}
+  m_LocalScale: {x: 0.13559872, y: 0.13559872, z: 0.13559872}
+  m_Children: []
+  m_Father: {fileID: 1423966668}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1001754324397399054
 PrefabInstance:
   m_ObjectHideFlags: 0

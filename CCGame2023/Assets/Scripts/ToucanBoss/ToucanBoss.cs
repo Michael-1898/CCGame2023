@@ -14,16 +14,24 @@ public class ToucanBoss : MonoBehaviour
 
     Rigidbody2D rb;
 
+    //variables for animator
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         jumpTimer = minJumpCooldown;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(anim.GetBool("isJumping") && rb.velocity.y < 0) {
+            anim.SetBool("isJumping", false);
+        }
+
         if(jumpTimer == 0) {
             jump = false;
         }
@@ -47,12 +55,15 @@ public class ToucanBoss : MonoBehaviour
 
         if(jump) {
             rb.velocity = Vector3.zero;
+
             // if((jumpTimer - minJumpCooldown) <= (maxJumpCooldown - jumpTimer)) {
             //     tempJumpStrength = jumpStrength + 0.5f;
             // } else {
             //     tempJumpStrength = jumpStrength - 1;
             // }
+
             rb.AddForce(transform.up * jumpStrength, ForceMode2D.Impulse);
+            anim.SetBool("isJumping", true);
             jumpTimer = 0;
         }
     }
