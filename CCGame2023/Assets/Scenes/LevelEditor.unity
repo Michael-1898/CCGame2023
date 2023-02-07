@@ -1783,6 +1783,7 @@ MonoBehaviour:
   levelNameText: {fileID: 1639080660}
   levelInformation: 
   xTile: {fileID: 11400000, guid: cd61cd6b560f4064aba2c5c8a97edba7, type: 2}
+  deleteTile: {fileID: 11400000, guid: cd61cd6b560f4064aba2c5c8a97edba7, type: 2}
   tilePreview: {fileID: 1533606992}
   columns: 50
   rows: 50

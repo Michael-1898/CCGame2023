@@ -19,6 +19,7 @@ public class tilemap : MonoBehaviour
     [SerializeField] private Text levelNameText;
     [SerializeField] private string levelInformation;
     [SerializeField] private Tile xTile;
+    [SerializeField] private Tile deleteTile;
     public GameObject tilePreview;
     SpriteRenderer tilePreviewSR;
     Tile currentTile;
@@ -53,7 +54,7 @@ public class tilemap : MonoBehaviour
                 tilePreviewSR.sprite = null;
                 delete=false;
             }
-            if (currentTileSize != new Vector3(1f, 1f, 0f) && currentTile.name != "delete")
+            if (currentTileSize != new Vector3(1f, 1f, 0f) && delete == false)
             {
                 tilePreviewSR.sprite = currentTile.sprite;
                 bool noXTiles = true;
@@ -87,8 +88,9 @@ public class tilemap : MonoBehaviour
                     }
                 }
             }
-            else if(currentTile.name != "delete")
+            else if(delete == false)
             {
+                print(currentTile.name);
                 tilePreviewSR.sprite = currentTile.sprite;
                 if (Input.GetMouseButton(0))
                 {
@@ -102,6 +104,8 @@ public class tilemap : MonoBehaviour
             }
             else
             {
+
+                tilePreviewSR.sprite = GameObject.Find("delete").GetComponent<Image>().sprite;
                 if (Input.GetMouseButton(0))
                 {
                     if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0))!=xTile)
@@ -113,7 +117,12 @@ public class tilemap : MonoBehaviour
                 }
             }
         }
-        else tilePreviewSR.sprite = null;
+        else
+        {
+            tilePreviewSR.sprite = null;
+            print("uoaef");
+        }
+            
 
         if(Input.GetKeyDown("p"))
         {
@@ -205,7 +214,7 @@ public class tilemap : MonoBehaviour
         if(name == "delete")
         {
             delete = true;
-          //  currentTile = GameObject.Find("delete");
+            currentTile = deleteTile;
             tilePreviewSR.sprite = GameObject.Find("delete").GetComponent<Image>().sprite;
         }
     }
