@@ -662,7 +662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423966664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.4, y: 3.3, z: 0}
+  m_LocalPosition: {x: -16.26, y: 5.1, z: 0}
   m_LocalScale: {x: 7.374701, y: 7.374701, z: 7.374701}
   m_Children:
   - {fileID: 2117326125}
@@ -681,10 +681,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3c420d91598184687c0a783b30838b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minJumpCooldown: 1.4
-  maxJumpCooldown: 1.6
-  jumpChance: 0.12
-  jumpStrength: 22
+  minJumpCooldown: 0.7
+  maxJumpCooldown: 2
+  maxJumpStrength: 0
+  minJumpStrength: 18
   anim: {fileID: 0}
 --- !u!95 &1423966670
 Animator:
