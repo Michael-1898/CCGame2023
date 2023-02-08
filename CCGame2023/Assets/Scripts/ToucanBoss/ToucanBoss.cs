@@ -18,6 +18,7 @@ public class ToucanBoss : MonoBehaviour
 
     //lateral movement variables
     [SerializeField] Transform player;
+    bool isFacingRight;
 
     Rigidbody2D rb;
 
@@ -36,6 +37,14 @@ public class ToucanBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //flipping to look at player
+        if(transform.position.x < player.position.x && !isFacingRight) {
+            Flip();
+        } else if(transform.position.x > player.position.x && isFacingRight) {
+            Flip();
+        }
+
+
         if(anim.GetBool("isJumping") && rb.velocity.y < 0) {
             anim.SetBool("isJumping", false);
         }
@@ -97,5 +106,10 @@ public class ToucanBoss : MonoBehaviour
         rb.AddForce(transform.up * jumpStrength, ForceMode2D.Impulse);
         anim.SetBool("isJumping", true);
         jumpTimer = 0;
+    }
+
+    void Flip() {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(new Vector3(0, 180, 0));
     }
 }

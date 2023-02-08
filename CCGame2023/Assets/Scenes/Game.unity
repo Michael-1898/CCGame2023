@@ -685,6 +685,7 @@ MonoBehaviour:
   maxJumpCooldown: 2
   maxJumpStrength: 29
   minJumpStrength: 11
+  player: {fileID: 327016858}
   anim: {fileID: 1423966670}
 --- !u!95 &1423966670
 Animator:
