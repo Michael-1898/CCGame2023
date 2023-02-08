@@ -681,11 +681,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea3c420d91598184687c0a783b30838b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minJumpCooldown: 0.7
+  minJumpCooldown: 0.8
   maxJumpCooldown: 2
-  maxJumpStrength: 0
-  minJumpStrength: 18
-  anim: {fileID: 0}
+  maxJumpStrength: 29
+  minJumpStrength: 11
+  anim: {fileID: 1423966670}
 --- !u!95 &1423966670
 Animator:
   serializedVersion: 3

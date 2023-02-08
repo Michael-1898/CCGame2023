@@ -16,6 +16,9 @@ public class ToucanBoss : MonoBehaviour
     [SerializeField] float minJumpStrength;
     float jumpStrength;
 
+    //lateral movement variables
+    [SerializeField] Transform player;
+
     Rigidbody2D rb;
 
     //variables for animator
@@ -40,6 +43,7 @@ public class ToucanBoss : MonoBehaviour
         // if(jumpTimer == 0) {
         //     jump = false;
         // }
+        
 
         jumpTimer += Time.deltaTime;
         jumpCooldown = Random.Range(minJumpCooldown, maxJumpCooldown);
@@ -74,9 +78,22 @@ public class ToucanBoss : MonoBehaviour
         // }
 
 
+    
+
+        //if jumpCooldown is low do a small jump if high do a little 
+        float jumpCooldownDiff = maxJumpCooldown - minJumpCooldown;
+        float jumpStrengthDiff = maxJumpStrength - minJumpStrength;
+        if(jumpCooldown <= (minJumpCooldown + (jumpCooldownDiff/3))) {
+            jumpStrength = Random.Range(minJumpStrength, minJumpStrength + (jumpStrengthDiff/3));
+        } else if(jumpCooldown <= (minJumpCooldown + (jumpCooldownDiff * (2/3)))) {
+            jumpStrength = Random.Range(minJumpStrength + (jumpStrengthDiff/3), minJumpStrength + (jumpStrengthDiff * (2/3)));
+        } else if(jumpCooldown <= maxJumpCooldown) {
+            jumpStrength = Random.Range(minJumpStrength + (jumpStrengthDiff * (2/3)), maxJumpStrength);
+        }
+        // Debug.Log(jumpCooldown);
+        // Debug.Log(jumpStrength);
 
         rb.velocity = Vector3.zero;
-        //if jumpCooldown is low do a small jump if high do a little jump
         rb.AddForce(transform.up * jumpStrength, ForceMode2D.Impulse);
         anim.SetBool("isJumping", true);
         jumpTimer = 0;
