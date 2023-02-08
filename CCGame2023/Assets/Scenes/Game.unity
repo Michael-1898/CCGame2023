@@ -662,7 +662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1423966664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.26, y: 5.1, z: 0}
+  m_LocalPosition: {x: -16.26, y: 0, z: 0}
   m_LocalScale: {x: 7.374701, y: 7.374701, z: 7.374701}
   m_Children:
   - {fileID: 2117326125}
@@ -682,10 +682,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minJumpCooldown: 0.8
-  maxJumpCooldown: 2
-  maxJumpStrength: 29
-  minJumpStrength: 11
+  maxJumpCooldown: 1.6
+  maxJumpStrength: 27
+  minJumpStrength: 13
   player: {fileID: 327016858}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 2117326124}
+  circleRadius: 0.6
   anim: {fileID: 1423966670}
 --- !u!95 &1423966670
 Animator:
@@ -1283,7 +1288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117326124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.07393261, y: -0.169, z: -2.5169098}
+  m_LocalPosition: {x: 0.136, y: -0.131, z: -2.5169098}
   m_LocalScale: {x: 0.13559872, y: 0.13559872, z: 0.13559872}
   m_Children: []
   m_Father: {fileID: 1423966668}
