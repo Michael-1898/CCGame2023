@@ -22,6 +22,7 @@ public class ToucanBoss : MonoBehaviour
     [SerializeField] float leftBound;
     [SerializeField] float rightBound;
     [SerializeField] float moveSpeed;
+    Vector2 reference;
 
     //variables for groundCheck
     bool isGrounded; //bool for ground check
@@ -50,6 +51,7 @@ public class ToucanBoss : MonoBehaviour
         jumpStrength = minJumpStrength;
         flightBoundSet = false;
         isFacingRight = false;
+        reference = player.position;
     }
 
     // Update is called once per frame
@@ -82,18 +84,30 @@ public class ToucanBoss : MonoBehaviour
             if(transform.position.x - player.position.x <= leftBound) { //if too far left
                 //move right
                 velocity.x = moveSpeed * (Time.deltaTime + 1);
-                if(!isFacingRight) Flip();
+                if(!isFacingRight) {
+                    Flip();
+                    reference = player.position;
+                }
             } else if(transform.position.x - player.position.x >= rightBound) { //if too far right
                 //move left
                 velocity.x = -moveSpeed * (Time.deltaTime + 1);
-                if(isFacingRight) Flip();
+                if(isFacingRight) {
+                    Flip();
+                    reference = player.position;
+                }
             } else if(velocity.x == 0) {
                 if(transform.position.x < player.position.x) {
                     velocity.x = moveSpeed * (Time.deltaTime + 1);
-                    if(!isFacingRight) Flip();
+                    if(!isFacingRight) {
+                        Flip();
+                        reference = player.position;
+                    }
                 } else if(transform.position.x > player.position.x) {
                     velocity.x = -moveSpeed * (Time.deltaTime + 1);
-                    if(isFacingRight) Flip();
+                    if(isFacingRight) {
+                        Flip();
+                        reference = player.position;
+                    }
                 }
                 
             }
@@ -126,7 +140,7 @@ public class ToucanBoss : MonoBehaviour
 
 
         //jump input code
-        if(!isKnocked && transform.position.y - player.position.y <= flightBound || isGrounded) {
+        if(!isKnocked && transform.position.y - reference.y <= flightBound || isGrounded) {
             Jump();
         }
     }
