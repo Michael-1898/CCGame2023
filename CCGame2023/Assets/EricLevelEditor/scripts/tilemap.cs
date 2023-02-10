@@ -195,6 +195,11 @@ public class tilemap : MonoBehaviour
                 {
                     tileInformation += allTileCharacters[j];
                 }
+                
+            }
+            if(currentTile == xTile)
+            {
+                tileInformation += "a";
             }
         }
         return(tileInformation);
