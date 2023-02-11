@@ -35,7 +35,7 @@ public class ToucanBoss : MonoBehaviour
     [SerializeField] float stunTime;
     bool isKnocked;
 
-    //attk variables
+    //dmg variables
     bool playerHit;
     [SerializeField] int enemyDmg;
     [SerializeField] float enemyKnockback;
