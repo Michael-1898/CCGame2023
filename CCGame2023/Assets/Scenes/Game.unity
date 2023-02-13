@@ -572,6 +572,7 @@ GameObject:
   - component: {fileID: 1344801588}
   - component: {fileID: 1344801587}
   - component: {fileID: 1344801586}
+  - component: {fileID: 1344801592}
   - component: {fileID: 1344801591}
   - component: {fileID: 1344801585}
   m_Layer: 9
@@ -772,6 +773,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 24
   hit: 0
+--- !u!114 &1344801592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344801584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb16a2f132c86ea46ba8630a943b173e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attkCooldown: 2
+  droppables:
+  - {fileID: 21300000, guid: f08530593d24d3343a1a82e1bfc911f5, type: 3}
+  - {fileID: 21300000, guid: 2d4698fd380e70f4d90265d7a09a6a63, type: 3}
+  - {fileID: 21300000, guid: 9b3aff716b37cb14daa5226fa41cd048, type: 3}
+  - {fileID: 21300000, guid: f51138c378ee75048987d67734c76d21, type: 3}
+  dropPoint: {fileID: 1058175561}
 --- !u!1 &1370708916
 GameObject:
   m_ObjectHideFlags: 0
