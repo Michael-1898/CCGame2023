@@ -286,10 +286,6 @@ public class MJB_PlayerMove : MonoBehaviour
         }
     }
 
-    void AirAttack() {
-        
-    }
-
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);

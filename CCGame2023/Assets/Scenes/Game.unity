@@ -340,7 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1058175562}
   - component: {fileID: 1058175563}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DropPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -355,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058175561}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.211, y: -0, z: -7.549536}
+  m_LocalPosition: {x: -0.211, y: -0, z: 0}
   m_LocalScale: {x: 0.45461133, y: 0.45461133, z: 0.45461133}
   m_Children: []
   m_Father: {fileID: 1344801590}
@@ -399,7 +399,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -786,12 +786,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attkCooldown: 2
+  holdTime: 2
   droppables:
   - {fileID: 21300000, guid: f08530593d24d3343a1a82e1bfc911f5, type: 3}
   - {fileID: 21300000, guid: 2d4698fd380e70f4d90265d7a09a6a63, type: 3}
   - {fileID: 21300000, guid: 9b3aff716b37cb14daa5226fa41cd048, type: 3}
   - {fileID: 21300000, guid: f51138c378ee75048987d67734c76d21, type: 3}
   dropPoint: {fileID: 1058175561}
+  dashSpeed: 17
+  dropObjects:
+  - {fileID: 3933871141709266813, guid: 4e3be2a62cc6f2649b8d5380ade4b8e0, type: 3}
+  - {fileID: 5616231602300649617, guid: 4406476bbc7699545b2e6ab10e7fc06c, type: 3}
+  - {fileID: 6492280869287426139, guid: 082c77edefd2e79498a9d6d6d289f328, type: 3}
+  - {fileID: 4898402326977720444, guid: bcbeab6e3fcf9a24fa86496122931ef0, type: 3}
 --- !u!1 &1370708916
 GameObject:
   m_ObjectHideFlags: 0
