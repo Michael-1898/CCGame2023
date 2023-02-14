@@ -36,6 +36,6 @@ public class LogBamboo : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        Destroy(this.gameObject, 0.5f);
+        Destroy(this.gameObject, 0.3f);
     }
 }

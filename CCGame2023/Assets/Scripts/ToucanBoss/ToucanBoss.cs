@@ -85,27 +85,23 @@ public class ToucanBoss : MonoBehaviour
                 //move right
                 velocity.x = moveSpeed * (Time.deltaTime + 1);
                 if(!isFacingRight) {
-                    Flip();
                     reference = player.position;
                 }
             } else if(transform.position.x - player.position.x >= rightBound) { //if too far right
                 //move left
                 velocity.x = -moveSpeed * (Time.deltaTime + 1);
                 if(isFacingRight) {
-                    Flip();
                     reference = player.position;
                 }
             } else if(velocity.x == 0) {
                 if(transform.position.x < player.position.x) {
                     velocity.x = moveSpeed * (Time.deltaTime + 1);
                     if(!isFacingRight) {
-                        Flip();
                         reference = player.position;
                     }
                 } else if(transform.position.x > player.position.x) {
                     velocity.x = -moveSpeed * (Time.deltaTime + 1);
                     if(isFacingRight) {
-                        Flip();
                         reference = player.position;
                     }
                 }
@@ -164,11 +160,6 @@ public class ToucanBoss : MonoBehaviour
         rb.velocity = new Vector2(velocity.x, 0);
         rb.AddForce(transform.up * jumpStrength, ForceMode2D.Impulse);
         anim.SetBool("isJumping", true);
-    }
-
-    void Flip() {
-        isFacingRight = !isFacingRight;
-        transform.Rotate(new Vector3(0, 180, 0));
     }
 
     void OnTriggerEnter2D(Collider2D col) {

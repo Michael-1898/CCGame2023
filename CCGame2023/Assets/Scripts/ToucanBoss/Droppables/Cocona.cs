@@ -54,6 +54,6 @@ public class Cocona : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        Destroy(this.gameObject, 0.5f);
+        Destroy(this.gameObject, 0.3f);
     }
 }

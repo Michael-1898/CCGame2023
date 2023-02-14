@@ -40,9 +40,11 @@ public class ToucanAttk : MonoBehaviour
     {
         //attk holding timer
         attkTimer += Time.deltaTime;
-        if(rb.velocity.x > 0 && isFacingRight) {
+
+        //makes toucan face correct direction
+        if(rb.velocity.x > 0 && !isFacingRight) {
             Flip();
-        } else if(rb.velocity.x < 0 && !isFacingRight) {
+        } else if(rb.velocity.x < 0 && isFacingRight) {
             Flip();
         }
 
@@ -71,11 +73,6 @@ public class ToucanAttk : MonoBehaviour
             rb.velocity = new Vector2(moveDir.x, moveDir.y);
             if(!isDashing) {
                 isDashing = true;
-                if(transform.position.x < target.transform.position.x && isFacingRight) {
-                    Flip();
-                } else if(transform.position.x > target.transform.position.x && !isFacingRight) {
-                    Flip();
-                }
             }
 
             //if toucan gets close enough, drop anvil
