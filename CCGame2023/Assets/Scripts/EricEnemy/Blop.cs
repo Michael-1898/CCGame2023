@@ -33,7 +33,7 @@ public class Blop : MonoBehaviour
         else grounded = false;
 
 
-        hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, 0.1f, 0f), Vector2.right * direction, 10f);
+        hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, 0.5f, 0f), Vector2.right * direction, 10f);
 
         if (hit.collider != null)
         {
@@ -71,34 +71,37 @@ public class Blop : MonoBehaviour
         {
             hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, -0.5f, 0f), Vector2.right*direction, 2f);
         } 
+        print(jump);
+        print(hit.collider);
         if(hit.collider != null && jump == true)
         {
+            print("functional?");
             if(hit.collider.gameObject.name != "Player")    
             {
-                rb.AddForce(Vector2.up * 12f);
+                
+
+                rb.AddForce(Vector2.up * 40f);
             }    
         }  
-
 
         
         if(rageTimer > 0f)
         {
             rageTimer -= Time.deltaTime;
-            speed = .2f;
+            speed = .15f;
         }
         else
         {
-            speed = 0.05f;
+            speed = 0.1f;
         }
 
         if(grounded)
         {
             rb.velocity += new Vector2(speed * direction, 0f);
         }
-
         if (Mathf.Abs(rb.velocity.x) > 4f)
         {
-            rb.velocity = new Vector3(rb.velocity.x* 0.98f, rb.velocity.y, 0f);
+            rb.velocity = new Vector3(rb.velocity.x* 0.99f, rb.velocity.y, 0f);
         }
 
     }
