@@ -6,10 +6,12 @@ public class Blop : MonoBehaviour
 {
     // Start is called before the first frame update
     Rigidbody2D rb;
+    bool grounded = true;
     bool jump = false;
     bool seePlayer = false;
     int direction = 1;
-    float speed = 2;
+    float speed = 0;
+    float rageTimer = 0f;
     
     void Start()
     {
@@ -21,37 +23,43 @@ public class Blop : MonoBehaviour
     {
         //checks for player
         jump = false;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, 0.1f, 0f), Vector2.right*direction, 10f);
+
+        //checks if grounded
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -1.1f, 0f), Vector2.up * -1, 1f);
+        if (hit.collider != null)
+        {
+            grounded = true;
+        }
+        else grounded = false;
 
 
-        if(hit.collider != null)
+        hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, 0.1f, 0f), Vector2.right * direction, 10f);
+
+        if (hit.collider != null)
         {
             if(hit.collider.gameObject.name == "Player")
             {
-                speed = 0.15f;
                 jump = true;
                 seePlayer = true;
+                rageTimer = 1.5f;
             }
             else
             {
-                speed = 0;
                 seePlayer = false;
-                rb.velocity = new Vector2(4f * direction, rb.velocity.y);
             }
         }
         else
         {
             jump = true;
-              
-                
-            speed = 0;
-            rb.velocity = new Vector2(4f * direction, rb.velocity.y);
             
             //checks for hole in ground
-            hit = Physics2D.Raycast(transform.position + new Vector3(1f*direction, -1f, 0f), Vector2.up*-1, 2f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(1.5f*direction, -1f, 0f), Vector2.up*-1, 2f);
             if(hit.collider == null)
             {
-                direction *= -1;
+                if(grounded)
+                {
+                    direction *= -1;
+                }
             }
         }
 
@@ -67,18 +75,30 @@ public class Blop : MonoBehaviour
         {
             if(hit.collider.gameObject.name != "Player")    
             {
-                rb.AddForce(Vector2.up * 15f);
+                rb.AddForce(Vector2.up * 12f);
             }    
         }  
 
 
         
-
-
-        rb.velocity += new Vector2(speed*direction, 0f);
-        if(Mathf.Abs(rb.velocity.x) > 4f)
+        if(rageTimer > 0f)
         {
-           rb.velocity = new Vector3(rb.velocity.x* 0.99f, rb.velocity.y, 0f);
+            rageTimer -= Time.deltaTime;
+            speed = .2f;
+        }
+        else
+        {
+            speed = 0.05f;
+        }
+
+        if(grounded)
+        {
+            rb.velocity += new Vector2(speed * direction, 0f);
+        }
+
+        if (Mathf.Abs(rb.velocity.x) > 4f)
+        {
+            rb.velocity = new Vector3(rb.velocity.x* 0.98f, rb.velocity.y, 0f);
         }
 
     }
