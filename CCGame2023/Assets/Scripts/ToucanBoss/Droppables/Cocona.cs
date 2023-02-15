@@ -9,7 +9,7 @@ public class Cocona : MonoBehaviour
     Vector3 dir;
 
     //bullet variables
-    public float Speed;
+    public float speed;
     [SerializeField] float liftTime;
     float timer;
 
@@ -28,23 +28,20 @@ public class Cocona : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
-        rb.AddForce(Vector2.up * 150 * Time.deltaTime);
+        rb.AddForce(Vector2.up * 150 * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
+
         if(timer < liftTime) {
             playerPos = Player.transform.position;
-            Vector2 velocity = (playerPos - transform.position).normalized * Speed * (Time.deltaTime + 1);
+            Vector2 velocity = (playerPos - transform.position).normalized * speed * (Time.deltaTime + 1);
             rb.velocity = new Vector2(velocity.x, rb.velocity.y);
             dir = (playerPos - transform.position);
-        } else {
-            rb.velocity = dir.normalized * Speed * (Time.deltaTime + 1);
         }
-
-        
-        timer += Time.deltaTime;
     }
 
     void OnCollisionEnter2D(Collision2D col) {

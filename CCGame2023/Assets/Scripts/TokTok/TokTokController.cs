@@ -11,9 +11,11 @@ public class TokTokController : MonoBehaviour
     //variables for ai
     bool grounded;
     bool hardGrounded;
+    bool walled;
     bool isFacingRight;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] GameObject groundCheck;
+    [SerializeField] GameObject wallCheck;
     [SerializeField] float circleRadius;
     [SerializeField] int enemyKnockback;
     [SerializeField] GameObject hardGroundCheck;
@@ -54,9 +56,10 @@ public class TokTokController : MonoBehaviour
 
         //ai (flipping at edges)
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
-        if(!grounded && isFacingRight && hardGrounded) {
+        walled = Physics2D.OverlapCircle(wallCheck.transform.position, circleRadius, groundLayer);
+        if((!grounded || walled) && isFacingRight && hardGrounded) {
             Flip();
-        } else if(!grounded && !isFacingRight && hardGrounded) {
+        } else if((!grounded || walled) && !isFacingRight && hardGrounded) {
             Flip();
         }
     }
@@ -90,5 +93,6 @@ public class TokTokController : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
         Gizmos.DrawWireSphere(hardGroundCheck.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(wallCheck.transform.position, circleRadius);
     }
 }

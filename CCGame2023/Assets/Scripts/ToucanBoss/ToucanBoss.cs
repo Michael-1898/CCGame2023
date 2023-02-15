@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ToucanBoss : MonoBehaviour
 {
+    //aggro variables
+    [SerializeField] float aggroRadius;
+    bool aggroTaken;
+    Vector2 startPosition;
+
     //fly variables
     [SerializeField] float maxJumpStrength;
     [SerializeField] float midJumpStrength;
@@ -46,18 +51,30 @@ public class ToucanBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         jumpStrength = minJumpStrength;
         flightBoundSet = false;
         isFacingRight = false;
         reference = player.position;
+        aggroTaken = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //checks if player is touching ground using overlap circle
+        //aggro detection
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+
+        //initial aggro code (once aggro is taken, enemy will permanently be aggro to player no matter how far they are)
+        if(distanceFromPlayer < aggroRadius && !aggroTaken) {
+            aggroTaken = true;
+            aggroRadius = 900;
+        }
+
+
+        //checks if toucan is touching ground using overlap circle
         isGrounded = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
     
 
@@ -84,12 +101,14 @@ public class ToucanBoss : MonoBehaviour
             if(transform.position.x - player.position.x <= leftBound) { //if too far left
                 //move right
                 velocity.x = moveSpeed * (Time.deltaTime + 1);
+                //switches reference for lateral bounds everytime toucan turns around
                 if(!isFacingRight) {
                     reference = player.position;
                 }
             } else if(transform.position.x - player.position.x >= rightBound) { //if too far right
                 //move left
                 velocity.x = -moveSpeed * (Time.deltaTime + 1);
+                //switches reference for lateral bounds everytime toucan turns around
                 if(isFacingRight) {
                     reference = player.position;
                 }
@@ -107,8 +126,9 @@ public class ToucanBoss : MonoBehaviour
                 }
                 
             }
-            rb.velocity = velocity;
-            
+            if(aggroTaken) {
+                rb.velocity = velocity;
+            }
         }
         
 
@@ -117,12 +137,12 @@ public class ToucanBoss : MonoBehaviour
         if(anim.GetBool("isJumping") && rb.velocity.y < 0) {
             anim.SetBool("isJumping", false);
 
-            //set new flight bound
+            //set new flight bound when at peak of jump
             flightBoundSet = false;
         }
 
 
-        if(!flightBoundSet) {
+        if(!flightBoundSet && aggroTaken) {
             int rand = Random.Range(1,4);
             if(rand == 1) {
                 flightBound = upperFlightBound;
@@ -136,9 +156,15 @@ public class ToucanBoss : MonoBehaviour
 
 
         //jump input code
-        if(!isKnocked && transform.position.y - reference.y <= flightBound || isGrounded) {
+        if(!isKnocked && transform.position.y - reference.y <= flightBound || isGrounded && aggroTaken) {
             Jump();
-        }
+        } else if(!aggroTaken && transform.position.y < startPosition.y) {
+            //jump code
+            Vector2 velocity = rb.velocity;
+            rb.velocity = new Vector2(velocity.x, 0);
+            rb.AddForce(transform.up * 17, ForceMode2D.Impulse);
+            anim.SetBool("isJumping", true);
+        }  
     }
 
     void Jump() {
@@ -187,6 +213,7 @@ public class ToucanBoss : MonoBehaviour
     private void OnDrawGizmos() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(transform.position, aggroRadius);
 
         Gizmos.DrawLine(new Vector2(player.position.x - 20, player.position.y + upperFlightBound), new Vector2(player.position.x + 20, player.position.y + upperFlightBound));
         Gizmos.DrawLine(new Vector2(player.position.x - 20, player.position.y + midFlightBound), new Vector2(player.position.x + 20, player.position.y + midFlightBound));

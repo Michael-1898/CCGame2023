@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ToucanAttk : MonoBehaviour
 {
+    //aggro variables
+    [SerializeField] float aggroRadius;
+    bool aggroTaken;
+    Vector2 startPosition;
+    [SerializeField] Transform player;
+
     //attk timing variables
     [SerializeField] float attkCooldown;
     float attkTimer;
@@ -29,6 +35,8 @@ public class ToucanAttk : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startPosition = transform.position;
+        aggroTaken = false;
         dropPointSR = dropPoint.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         holdingDroppable = false;
@@ -38,8 +46,21 @@ public class ToucanAttk : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+        //initial aggro code (once aggro is taken, enemy will permanently be aggro to player no matter how far they are)
+        if(distanceFromPlayer < aggroRadius && !aggroTaken) {
+            aggroTaken = true;
+            aggroRadius = 900;
+        }
+
         //attk holding timer
-        attkTimer += Time.deltaTime;
+        if(aggroTaken) {
+            attkTimer += Time.deltaTime;
+        }
+        if(GetComponent<Health>().hit) {
+            attkTimer = 0;
+        }
+
 
         //makes toucan face correct direction
         if(rb.velocity.x > 0 && !isFacingRight) {
@@ -51,7 +72,6 @@ public class ToucanAttk : MonoBehaviour
         if(attkTimer >= attkCooldown && !holdingDroppable) {
             //chooses object randomly
             objectNum = Random.Range(0,4);
-            objectNum = 3;
 
             dropPointSR.sprite = droppables[objectNum];
             holdingDroppable = true;

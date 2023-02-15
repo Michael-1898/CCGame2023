@@ -146,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &335029094
 Rigidbody2D:
   serializedVersion: 4
@@ -847,6 +847,7 @@ GameObject:
   - component: {fileID: 1344801586}
   - component: {fileID: 1344801592}
   - component: {fileID: 1344801591}
+  - component: {fileID: 1344801593}
   - component: {fileID: 1344801585}
   m_Layer: 9
   m_Name: ToucanBoss
@@ -854,7 +855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1344801585
 Animator:
   serializedVersion: 3
@@ -886,6 +887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bb7292f8492d04aaf71e2622d4cf94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aggroRadius: 20
   maxJumpStrength: 23
   midJumpStrength: 19
   minJumpStrength: 15
@@ -930,20 +932,17 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.07041873, y: 0.11433333}
-      - {x: 0.005942056, y: 0.14098321}
+    - - {x: 0.27035624, y: -0.12421194}
+      - {x: 0.2295853, y: 0.20823918}
+      - {x: -0.0044950256, y: 0.1670681}
       - {x: -0.056317493, y: 0.15854144}
       - {x: -0.16104232, y: 0.1870167}
       - {x: -0.31298587, y: 0.11188549}
       - {x: -0.30811617, y: -0.0015440425}
-      - {x: -0.1999451, y: -0.011488058}
+      - {x: -0.2234286, y: -0.03496453}
       - {x: -0.124563105, y: -0.12020217}
       - {x: 0.021290364, y: -0.20355816}
-      - {x: 0.18653727, y: -0.20106097}
-      - {x: 0.24776584, y: -0.1251754}
-      - {x: 0.24428008, y: -0.034682065}
-      - {x: 0.21830814, y: 0.04481781}
-      - {x: 0.13620253, y: 0.08944288}
+      - {x: 0.20219302, y: -0.20106097}
 --- !u!50 &1344801588
 Rigidbody2D:
   serializedVersion: 4
@@ -1045,6 +1044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 24
+  currentHealth: 0
   hit: 0
 --- !u!114 &1344801592
 MonoBehaviour:
@@ -1058,6 +1058,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb16a2f132c86ea46ba8630a943b173e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aggroRadius: 20
+  player: {fileID: 327016858}
   attkCooldown: 2
   holdTime: 2
   droppables:
@@ -1072,6 +1074,22 @@ MonoBehaviour:
   - {fileID: 5616231602300649617, guid: 4406476bbc7699545b2e6ab10e7fc06c, type: 3}
   - {fileID: 6492280869287426139, guid: 082c77edefd2e79498a9d6d6d289f328, type: 3}
   - {fileID: 4898402326977720444, guid: bcbeab6e3fcf9a24fa86496122931ef0, type: 3}
+--- !u!114 &1344801593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344801584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e1d39ce923ad604d9e9a6074d10130a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phases: 0f00000006000000
+  stunTime: 3
+  maxDamage: 1
+  thrust: 17
 --- !u!1 &1370708916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,12 +1821,12 @@ PrefabInstance:
     - target: {fileID: 2401932322914695391, guid: ca09996c170e6aa488c931f9dba20464,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.14
+      value: 24.06
       objectReference: {fileID: 0}
     - target: {fileID: 2401932322914695391, guid: ca09996c170e6aa488c931f9dba20464,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.23
+      value: -3.06
       objectReference: {fileID: 0}
     - target: {fileID: 2401932322914695391, guid: ca09996c170e6aa488c931f9dba20464,
         type: 3}
