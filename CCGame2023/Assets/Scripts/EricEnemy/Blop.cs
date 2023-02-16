@@ -25,7 +25,7 @@ public class Blop : MonoBehaviour
         jump = false;
 
         //checks if grounded
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -1.1f, 0f), Vector2.up * -1, 1f);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position + new Vector3(0f, -1f, 0f), new Vector2(0.5f, 0.01f), 0f, Vector2.up * -1, 1f);
         if (hit.collider != null)
         {
             grounded = true;
@@ -65,22 +65,18 @@ public class Blop : MonoBehaviour
 
         if(seePlayer)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, -0.5f, 0f), Vector2.right*direction, 3f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, -0.5f, 0f), Vector2.right*direction, 4f);
         }   
         else
         {
             hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, -0.5f, 0f), Vector2.right*direction, 2f);
         } 
-        print(jump);
-        print(hit.collider);
         if(hit.collider != null && jump == true)
         {
             print("functional?");
-            if(hit.collider.gameObject.name != "Player")    
+            if(hit.collider.gameObject.name != "Player" && grounded)    
             {
-                
-
-                rb.AddForce(Vector2.up * 40f);
+                rb.velocity = new Vector2(rb.velocity.x, 4f);
             }    
         }  
 
