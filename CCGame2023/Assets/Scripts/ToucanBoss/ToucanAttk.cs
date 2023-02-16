@@ -11,9 +11,9 @@ public class ToucanAttk : MonoBehaviour
     [SerializeField] Transform player;
 
     //attk timing variables
-    [SerializeField] float attkCooldown;
+    public float attkCooldown;
     float attkTimer;
-    [SerializeField] float holdTime;
+    public float holdTime;
 
     //droppable variables
     [SerializeField] Sprite[] droppables;
@@ -58,7 +58,7 @@ public class ToucanAttk : MonoBehaviour
             attkTimer += Time.deltaTime;
         }
         if(GetComponent<Health>().hit) {
-            attkTimer = 0;
+            attkTimer -= 0.2f;
         }
 
 

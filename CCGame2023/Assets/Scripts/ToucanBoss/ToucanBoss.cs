@@ -26,7 +26,7 @@ public class ToucanBoss : MonoBehaviour
     bool isFacingRight;
     [SerializeField] float leftBound;
     [SerializeField] float rightBound;
-    [SerializeField] float moveSpeed;
+    public float moveSpeed;
     Vector2 reference;
 
     //variables for groundCheck

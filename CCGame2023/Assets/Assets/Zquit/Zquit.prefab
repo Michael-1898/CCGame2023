@@ -122,7 +122,7 @@ BoxCollider2D:
   m_Offset: {x: 0.009525418, y: 1.391452}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.4970177, y: 0.11599517}
+    pivot: {x: 0.5, y: 0.15}
     oldSize: {x: 9.2, y: 9.36}
     newSize: {x: 9.2, y: 9.36}
     adaptiveTilingThreshold: 0.5
@@ -152,7 +152,7 @@ MonoBehaviour:
     m_Bits: 1
   player: {fileID: 0}
   attkCooldown: 2.5
-  attkingSpeed: 5.5
+  attkingSpeed: 7
   enemyDmg: 1
   stunTime: 1
 --- !u!114 &3720008993417496569
@@ -167,5 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 12
+  maxHealth: 3
+  currentHealth: 0
   hit: 0

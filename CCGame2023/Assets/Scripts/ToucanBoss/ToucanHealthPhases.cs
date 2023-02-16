@@ -74,6 +74,16 @@ public class ToucanHealthPhases : MonoBehaviour
 
                 //move to next phase
                 currentPhase++;
+
+                //difficulty increase
+                if(currentPhase == 1) {
+                    attkScript.attkCooldown = 1f;
+                    attkScript.holdTime = 1f;
+                    controllerScript.moveSpeed = 6;
+                }
+                if(currentPhase == 2) {
+                    controllerScript.moveSpeed = 9;
+                }
             }
         }
     }

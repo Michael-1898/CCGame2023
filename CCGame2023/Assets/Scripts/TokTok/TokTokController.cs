@@ -73,7 +73,7 @@ public class TokTokController : MonoBehaviour
 
 
     void OnCollisionEnter2D(Collision2D col) {
-        if(col.gameObject.CompareTag("Player")) {   //if collided with player
+        if(col.gameObject.CompareTag("Player") && col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime <= 0) {   //if collided with player
             //deal damage
             col.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDmg);
 

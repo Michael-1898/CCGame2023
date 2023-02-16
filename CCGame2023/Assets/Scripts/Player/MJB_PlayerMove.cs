@@ -88,7 +88,7 @@ public class MJB_PlayerMove : MonoBehaviour
     {
         //checks if player is touching ground using overlap circle
         ground = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
-
+        
 
         //player movement
         playerPos = transform.position;

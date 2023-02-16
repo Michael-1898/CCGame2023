@@ -280,7 +280,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
-  playerDamage: 3
+  playerDamage: 1
   playerKnockback: 9
   attkPushback: 12
   kbTotalTime: 0.2
