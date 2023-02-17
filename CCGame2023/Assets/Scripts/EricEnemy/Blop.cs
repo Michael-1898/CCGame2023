@@ -25,7 +25,7 @@ public class Blop : MonoBehaviour
         jump = false;
 
         //checks if grounded
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position + new Vector3(0f, -1f, 0f), new Vector2(0.5f, 0.01f), 0f, Vector2.up * -1, 1f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0f, -1.01f, 0f), Vector2.up * -1, .05f);
         if (hit.collider != null)
         {
             grounded = true;
@@ -50,10 +50,8 @@ public class Blop : MonoBehaviour
         }
         else
         {
-            jump = true;
-            
             //checks for hole in ground
-            hit = Physics2D.Raycast(transform.position + new Vector3(1.5f*direction, -1f, 0f), Vector2.up*-1, 2f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(1.2f*direction, -1f, 0f), Vector2.up*-1, 2f);
             if(hit.collider == null)
             {
                 if(grounded)
@@ -65,36 +63,54 @@ public class Blop : MonoBehaviour
 
         if(seePlayer)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, -0.5f, 0f), Vector2.right*direction, 4f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, -0.5f, 0f), Vector2.right*direction, 3.5f);
+            jump = true;
         }   
         else
         {
             hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, -0.5f, 0f), Vector2.right*direction, 2f);
+            jump = true;
         } 
-        if(hit.collider != null && jump == true)
+        if(hit.collider != null && jump == true && hit.collider.gameObject.name != "Player")
         {
-            print("functional?");
-            if(hit.collider.gameObject.name != "Player" && grounded)    
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, 0.5f, 0f), Vector2.right*direction, 3.5f);
+            if(hit.collider != null)
             {
-                rb.velocity = new Vector2(rb.velocity.x, 4f);
-            }    
+                if(hit.collider.gameObject.name != "Player")
+                {
+                    jump = false;
+                    hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, 1f, 0f), Vector2.right*direction, 0.5f);
+                    if(hit.collider != null)
+                    {
+                        direction *= -1;
+                        
+                    } 
+                }
+                
+                
+            }
+            if(grounded && jump)    
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 5f);
+            }
         }  
 
         
         if(rageTimer > 0f)
         {
             rageTimer -= Time.deltaTime;
-            speed = .15f;
+            speed = .1f;
         }
         else
         {
-            speed = 0.1f;
+            speed = 0.05f;
         }
-
-        if(grounded)
+        if((direction == 1 && rb.velocity.x < 0) || (direction == -1 && rb.velocity.x > 0))
         {
-            rb.velocity += new Vector2(speed * direction, 0f);
+            speed = 0.5f;
         }
+        rb.velocity += new Vector2(speed * direction, 0f);
+
         if (Mathf.Abs(rb.velocity.x) > 4f)
         {
             rb.velocity = new Vector3(rb.velocity.x* 0.99f, rb.velocity.y, 0f);
