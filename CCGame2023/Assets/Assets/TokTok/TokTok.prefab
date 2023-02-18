@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 2401932322914695362}
   - component: {fileID: 2401932322914695363}
   - component: {fileID: 2401932322914695364}
+  - component: {fileID: 1656460794248147756}
   m_Layer: 9
   m_Name: TokTok
   m_TagString: Untagged
@@ -137,7 +138,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9de91a997c55657408845d9fb503adb4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c6fdfb1651240ce4ca039255e38ac998, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,8 +165,8 @@ BoxCollider2D:
   m_Offset: {x: -0.0022814274, y: 1.3465618}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.15}
-    oldSize: {x: 9.2, y: 9.36}
+    pivot: {x: 0.37650385, y: 0.04094942}
+    oldSize: {x: 7.95, y: 6.49}
     newSize: {x: 9.2, y: 9.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -233,6 +234,25 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 0
   hit: 0
+--- !u!95 &1656460794248147756
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401932322914695365}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3fae95498804f8d499f4f1834d028658, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8330684809902948900
 GameObject:
   m_ObjectHideFlags: 0
