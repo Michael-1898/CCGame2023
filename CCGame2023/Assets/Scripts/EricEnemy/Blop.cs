@@ -37,7 +37,7 @@ public class Blop : MonoBehaviour
 
         if (hit.collider != null)
         {
-            if(hit.collider.gameObject.name == "Player")
+            if(hit.collider.gameObject.name == "Player" || hit.collider.gameObject.name == "Player(Clone)")
             {
                 jump = true;
                 seePlayer = true;
@@ -60,9 +60,9 @@ public class Blop : MonoBehaviour
         }
         
 
-        if (seePlayer)
+        if (rageTimer > 0f)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 3.5f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 5f);
             jump = true;
         }
         else
@@ -71,13 +71,13 @@ public class Blop : MonoBehaviour
             jump = true;
         }
             
-        if (hit.collider != null && jump == true && hit.collider.gameObject.name != "Player")
+        if (hit.collider != null && jump == true && (hit.collider.gameObject.name != "Player" && hit.collider.gameObject.name != "Player(Clone)"))
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, 0.5f, 0f), Vector2.right*direction, 3.0f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, 0.5f, 0f), Vector2.right*direction, 5.0f);
             if(hit.collider != null)
             {
                 
-                if(hit.collider.gameObject.name != "Player")
+                if(hit.collider.gameObject.name != "Player" && hit.collider.gameObject.name != "Player(Clone)")
                 {
                     jump = false;
                     hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, .5f, 0f), Vector2.right*direction, 0.5f);
@@ -87,10 +87,10 @@ public class Blop : MonoBehaviour
                     } 
                 }
 
-                hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 3.0f);
+                hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 5.0f);
                 if (hit.collider != null)
                 {
-                    if (hit.collider.gameObject.name != "Player")
+                    if (hit.collider.gameObject.name != "Player" && hit.collider.gameObject.name != "Player(Clone)")
                     {
                         jump = false;
                         hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 0.5f);
@@ -102,22 +102,20 @@ public class Blop : MonoBehaviour
                 }
 
             }
-            hit = Physics2D.Raycast(transform.position + new Vector3(0f, 0f, 0f), Vector2.up, 1.1f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0f, 1f, 0f), Vector2.up, 1.1f);
             if(hit.collider != null)
             {
                 print(hit.collider.gameObject.name);
                 jump = false;
                 hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -.5f, 0f), Vector2.right * direction, 0.5f);
-                if (hit.collider != null)
+                if (hit.collider != null && (hit.collider.gameObject.name != "Player" || hit.collider.gameObject.name != "Player(Clone)"))
                 {
                     direction *= -1;
                 }
             }
-            print(grounded);
-            print(jump);
             if (grounded && jump)    
             {
-                rb.velocity = new Vector2(rb.velocity.x, 5f);
+                rb.velocity = new Vector2(rb.velocity.x, 4.6f);
             }
         }  
 
@@ -125,11 +123,11 @@ public class Blop : MonoBehaviour
         if(rageTimer > 0f)
         {
             rageTimer -= Time.deltaTime;
-            speed = .15f;
+            speed = .11f;
         }
         else
         {
-            speed = 0.07f;
+            speed = 0.05f;
         }
         if((direction == 1 && rb.velocity.x < 0) || (direction == -1 && rb.velocity.x > 0))
         {
@@ -146,6 +144,5 @@ public class Blop : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x* 0.99f, rb.velocity.y, 0f);
         }
-        
     }
 }
