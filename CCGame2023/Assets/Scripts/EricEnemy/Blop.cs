@@ -105,7 +105,7 @@ public class Blop : MonoBehaviour
             hit = Physics2D.Raycast(transform.position + new Vector3(0f, 0f, 0f), Vector2.up, 1.1f);
             if(hit.collider != null)
             {
-                print("upo");
+                print(hit.collider.gameObject.name);
                 jump = false;
                 hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -.5f, 0f), Vector2.right * direction, 0.5f);
                 if (hit.collider != null)
@@ -113,7 +113,8 @@ public class Blop : MonoBehaviour
                     direction *= -1;
                 }
             }
-
+            print(grounded);
+            print(jump);
             if (grounded && jump)    
             {
                 rb.velocity = new Vector2(rb.velocity.x, 5f);
