@@ -50,7 +50,7 @@ public class Blop : MonoBehaviour
         }
         
         //checks for hole in ground
-        hit = Physics2D.Raycast(transform.position + new Vector3(1.2f*direction, -1f, 0f), Vector2.up*-1, 2f);
+        hit = Physics2D.Raycast(transform.position + new Vector3(1.2f*direction, -1f, 0f), Vector2.up*-1, 3f);
         if(hit.collider == null)
         {
             if(grounded)
@@ -113,7 +113,7 @@ public class Blop : MonoBehaviour
                     direction *= -1;
                 }
             }
-            if (grounded && jump)    
+            if (grounded && jump && (direction/rb.velocity.x) > 0)    
             {
                 rb.velocity = new Vector2(rb.velocity.x, 4.6f);
             }
@@ -123,15 +123,15 @@ public class Blop : MonoBehaviour
         if(rageTimer > 0f)
         {
             rageTimer -= Time.deltaTime;
-            speed = .11f;
+            speed = .12f;
         }
         else
         {
-            speed = 0.05f;
+            speed = 0.08f;
         }
         if((direction == 1 && rb.velocity.x < 0) || (direction == -1 && rb.velocity.x > 0))
         {
-            speed = 0.4f;
+            speed = 0.5f;
         }
 
         if(rb.velocity.x == 0)
@@ -142,7 +142,7 @@ public class Blop : MonoBehaviour
         rb.velocity += new Vector2(speed * direction, 0f);
         if (Mathf.Abs(rb.velocity.x) > 4f)
         {
-            rb.velocity = new Vector3(rb.velocity.x* 0.99f, rb.velocity.y, 0f);
+            rb.velocity = new Vector3(rb.velocity.x* 0.98f, rb.velocity.y, 0f);
         }
     }
 }
