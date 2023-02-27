@@ -10,22 +10,30 @@ public class WizardoMove : MonoBehaviour
     // Start is called before the first frame update
     public int teleportRange;
     [SerializeField] Tilemap tilemap;
+    [SerializeField] float teleportTimerLength;
+    float teleportTimer;
     
     void Start()
     {
         teleport();
+        teleportTimer = teleportTimerLength;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        teleportTimer -= Time.deltaTime;
+        if(teleportTimer < 0f)
+        {
+            teleport();
+            teleportTimer = teleportTimerLength;
+        }
     }
 
     public void teleport()
     {
         int counter = 0;
-        int random = Mathf.FloorToInt(Random.Range(0,100));
+        int random = Mathf.FloorToInt(Random.Range(0,500));
         bool teleported = false;
         
         print(random);
@@ -40,7 +48,7 @@ public class WizardoMove : MonoBehaviour
                     {
                         if(counter == random)
                         {
-                            transform.position = tilePosition + new Vector3(1f, 3f, 0f);
+                            transform.position = tilePosition + new Vector3(1f, 2.5f, 0f);
                             teleported = true;
                         }
                         counter++;
