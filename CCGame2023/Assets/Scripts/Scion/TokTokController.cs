@@ -14,6 +14,7 @@ public class TokTokController : MonoBehaviour
     bool walled;
     bool isFacingRight;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] LayerMask enemyLayer;
     [SerializeField] GameObject groundCheck;
     [SerializeField] GameObject wallCheck;
     [SerializeField] float circleRadius;
@@ -56,7 +57,7 @@ public class TokTokController : MonoBehaviour
 
         //ai (flipping at edges)
         grounded = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
-        walled = Physics2D.OverlapCircle(wallCheck.transform.position, circleRadius, groundLayer);
+        walled = Physics2D.OverlapCircle(wallCheck.transform.position, circleRadius, groundLayer | enemyLayer);
         if((!grounded || walled) && isFacingRight && hardGrounded) {
             Flip();
         } else if((!grounded || walled) && !isFacingRight && hardGrounded) {

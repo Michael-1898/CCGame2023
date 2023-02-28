@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 24
+  maxHealth: 8
   currentHealth: 0
   hit: 0
 --- !u!114 &7830055608519121089
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1d39ce923ad604d9e9a6074d10130a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phases: 0f00000006000000
+  phases: 0500000002000000
   stunTime: 3
   maxDamage: 1
   thrust: 17

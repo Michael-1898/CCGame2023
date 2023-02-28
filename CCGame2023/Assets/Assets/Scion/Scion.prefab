@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003346114956196157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.83, y: 1.11, z: 0}
+  m_LocalPosition: {x: -3.33, y: 1.11, z: 0}
   m_LocalScale: {x: 2.842787, y: 2.842787, z: 2.842787}
   m_Children: []
   m_Father: {fileID: 2401932322914695391}
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2401932322914695364}
   - component: {fileID: 1656460794248147756}
   m_Layer: 9
-  m_Name: TokTok
+  m_Name: Scion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,6 +212,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
   groundCheck: {fileID: 2401932322506080193}
   wallCheck: {fileID: 2003346114956196157}
   circleRadius: 0.16
