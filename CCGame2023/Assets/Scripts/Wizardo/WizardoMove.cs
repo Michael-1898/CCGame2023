@@ -9,7 +9,7 @@ public class WizardoMove : MonoBehaviour
 {
     // Start is called before the first frame update
     public int teleportRange;
-    public int tempRange;
+    int tempRange;
     Rigidbody2D rb;
     [SerializeField] Tilemap tilemap;
     [SerializeField] float teleportTimerLength;
@@ -42,7 +42,6 @@ public class WizardoMove : MonoBehaviour
         bool teleported = false;
         List<Vector3> potentialTeleportLocations = new List<Vector3>();
         
-        print(random);
 
         tempRange = teleportRange;
         bool noTiles = true;
@@ -56,7 +55,7 @@ public class WizardoMove : MonoBehaviour
                     Vector3Int tilePosition = new Vector3Int(Mathf.FloorToInt(transform.position.x+ 0.5f -(tempRange*0.5f)+col), Mathf.FloorToInt(transform.position.y + 0.5f -(tempRange*0.5f)+row), 0);
                     if(tilemap.GetTile(tilePosition) != null && tilemap.GetTile(tilePosition + new Vector3Int(0, 1, 0)) == null && tilemap.GetTile(tilePosition + new Vector3Int(0, 2, 0)) == null && tilemap.GetTile(tilePosition + new Vector3Int(0, 3, 0)) == null && (tilemap.GetTile(tilePosition + new Vector3Int(-1, 3, 0)) == null || tilemap.GetTile(tilePosition + new Vector3Int(1, 3, 0)) == null))
                     {
-                        RaycastHit2D hit = Physics2D.BoxCast(new Vector2(tilePosition.x, tilePosition.y + 3f), new Vector2(1f, 1f), 0f, -transform.up, 1.6f);
+                        RaycastHit2D hit = Physics2D.BoxCast(new Vector2(tilePosition.x, tilePosition.y + 3.5f), new Vector2(1f, 1f), 0f, -transform.up, 1.9f);
                         if(hit.collider == null)
                         {
                             potentialTeleportLocations.Add(tilePosition + new Vector3(0.5f, 2.5f, 0f));
@@ -68,8 +67,14 @@ public class WizardoMove : MonoBehaviour
             {
                 tempRange++;
             }
+            if(tempRange>100)
+            {
+                Destroy(gameObject);
+            }
+            
         }
         transform.position = potentialTeleportLocations[(random % potentialTeleportLocations.Count)];
+        rb.velocity = new Vector3(0f, 0f, 0f);
             
     }
 }
