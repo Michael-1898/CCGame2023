@@ -10,7 +10,7 @@ public class Enemy3Controller : MonoBehaviour
     [SerializeField] float runRadius;
     [SerializeField] float moveSpeed;
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] Transform player;
+    Transform player;
     bool aggroTaken;
 
     //attk variables
@@ -31,6 +31,7 @@ public class Enemy3Controller : MonoBehaviour
     {
         aggroTaken = false;
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

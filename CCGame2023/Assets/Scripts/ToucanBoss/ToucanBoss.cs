@@ -22,7 +22,7 @@ public class ToucanBoss : MonoBehaviour
     bool flightBoundSet;
 
     //lateral movement variables
-    [SerializeField] Transform player;
+    Transform player;
     bool isFacingRight;
     [SerializeField] float leftBound;
     [SerializeField] float rightBound;
@@ -51,6 +51,7 @@ public class ToucanBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         startPosition = transform.position;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();

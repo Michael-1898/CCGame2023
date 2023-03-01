@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phases: 0500000002000000
-  stunTime: 3
+  stunTime: 4
   maxDamage: 1
   thrust: 17
 --- !u!95 &7830055608519121097

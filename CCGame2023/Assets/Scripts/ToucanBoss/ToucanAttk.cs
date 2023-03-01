@@ -8,7 +8,7 @@ public class ToucanAttk : MonoBehaviour
     [SerializeField] float aggroRadius;
     bool aggroTaken;
     Vector2 startPosition;
-    [SerializeField] Transform player;
+    Transform player;
 
     //attk timing variables
     public float attkCooldown;
@@ -35,6 +35,7 @@ public class ToucanAttk : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         startPosition = transform.position;
         aggroTaken = false;
         dropPointSR = dropPoint.GetComponent<SpriteRenderer>();

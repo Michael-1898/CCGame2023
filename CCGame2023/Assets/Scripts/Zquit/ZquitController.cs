@@ -9,7 +9,7 @@ public class ZquitController : MonoBehaviour
     [SerializeField] float followRadius;
     [SerializeField] float moveSpeed;
     [SerializeField] LayerMask playerLayer;
-    [SerializeField] Transform player;
+    Transform player;
     bool isFacingRight;
 
     //attk variables
@@ -34,6 +34,7 @@ public class ZquitController : MonoBehaviour
         aggroTaken = false;
         rb = GetComponent<Rigidbody2D>();
         isFacingRight = false;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
