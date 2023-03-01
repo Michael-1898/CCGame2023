@@ -123,7 +123,7 @@ public class Blop : MonoBehaviour
         if(rageTimer > 0f)
         {
             rageTimer -= Time.deltaTime;
-            speed = .12f;
+            speed = .2f;
         }
         else
         {
