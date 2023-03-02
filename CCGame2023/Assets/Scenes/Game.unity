@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 37525655}
   - component: {fileID: 37525657}
   - component: {fileID: 37525656}
+  - component: {fileID: 37525658}
   m_Layer: 0
   m_Name: RoboBoss
   m_TagString: Untagged
@@ -148,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 37525653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.84, y: -0.74, z: 10}
+  m_LocalPosition: {x: 14.53, y: -0.93, z: 10}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 257987421}
@@ -213,23 +214,23 @@ CompositeCollider2D:
         Y: -9774318
   - m_Collider: {fileID: 948384399}
     m_ColliderPaths:
-    - - X: 3679704
+    - - X: 3679708
         Y: 8926338
-      - X: 3679704
+      - X: 3679708
         Y: 20141266
-      - X: -3600002
+      - X: -3599998
         Y: 20140973
-      - X: -3599709
+      - X: -3599705
         Y: 8926338
   - m_Collider: {fileID: 680495728}
     m_ColliderPaths:
-    - - X: -24886498
+    - - X: -24886494
         Y: 30336482
-      - X: 8596386
+      - X: 8596391
         Y: 11196976
-      - X: 13255460
+      - X: 13255465
         Y: 18886476
-      - X: -19780130
+      - X: -19780124
         Y: 38375720
   - m_Collider: {fileID: 626402370}
     m_ColliderPaths:
@@ -275,14 +276,14 @@ CompositeCollider2D:
       - {x: 2.3143845, y: 0.34149212}
       - {x: 1.7779856, y: 0.3415065}
       - {x: 1.7779564, y: 1.0266397}
-      - {x: 0.3679704, y: 1.0266575}
-      - {x: 0.3680202, y: 1.4007168}
-      - {x: 0.8596533, y: 1.1197219}
-      - {x: 1.3255205, y: 1.8886628}
-      - {x: -1.9780282, y: 3.8375485}
-      - {x: -2.488623, y: 3.0336328}
-      - {x: -0.359995, y: 1.8168496}
-      - {x: -0.3600038, y: 1.0266222}
+      - {x: 0.3679708, y: 1.0266575}
+      - {x: 0.3680206, y: 1.4007168}
+      - {x: 0.85965383, y: 1.1197219}
+      - {x: 1.325521, y: 1.8886628}
+      - {x: -1.9780276, y: 3.8375485}
+      - {x: -2.4886224, y: 3.0336328}
+      - {x: -0.3599946, y: 1.8168496}
+      - {x: -0.3600034, y: 1.0266222}
       - {x: -1.7931346, y: 1.0265812}
       - {x: -1.7931368, y: -0.8393218}
       - {x: -2.4560003, y: -0.8393551}
@@ -304,12 +305,32 @@ Rigidbody2D:
   m_Mass: 25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 6
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &37525658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37525653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24476ece536ce44295db3d508c60d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 4
+  minMoveMult: 0.8
+  maxMoveMult: 1.2
+  chaseRange: 12
+  moveCooldown: 4
+  minMoveDur: 0.5
+  maxMoveDur: 2
+  anim: {fileID: 37525655}
 --- !u!1 &257987420
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,8 +1994,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1993722674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
-  m_LocalScale: {x: 23.559668, y: 1, z: 1}
+  m_LocalPosition: {x: 10.229, y: -5, z: 0}
+  m_LocalScale: {x: 44.01767, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
