@@ -259,7 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpTime: 0.3
   playerSpeed: 7
-  jumpForce: 8
+  jumpForce: 11
   maxJumps: 2
   attkTimer: 0
   isAttacking: 0
