@@ -225,7 +225,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 828274285}
   - component: {fileID: 828274284}
   - component: {fileID: 828274287}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Wizardo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teleportRange: 25
   tilemap: {fileID: 1040823076}
-  teleportTimerLength: 1
+  teleportTimerLength: 5
 --- !u!50 &828274285
 Rigidbody2D:
   serializedVersion: 4
@@ -428,6 +428,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b2d3849523a5642b0afc40769d21ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireball: {fileID: 4383022247934067139, guid: 16edcee7ef4630d40ba4c83c93952990,
+    type: 3}
+  attacking: 0
 --- !u!1 &1040823073
 GameObject:
   m_ObjectHideFlags: 0

@@ -28,7 +28,7 @@ public class WizardoMove : MonoBehaviour
     void Update()
     {
         teleportTimer -= Time.deltaTime;
-        if(teleportTimer < 0f)
+        if(teleportTimer < 0f && gameObject.GetComponent<WizardoAttack>().attacking == false)
         {
             teleport();
             teleportTimer = teleportTimerLength;
