@@ -32,7 +32,7 @@ public class Blop : MonoBehaviour
         }
         else grounded = false;
 
-
+        print(grounded);
         hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, 0.5f, 0f), Vector2.right * direction, 10f);
 
         if (hit.collider != null)
@@ -55,6 +55,7 @@ public class Blop : MonoBehaviour
         {
             if(grounded)
             {
+                print("change direction");
                 direction *= -1;
             }
         }
