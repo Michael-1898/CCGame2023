@@ -31,6 +31,9 @@ public class RoboMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if(moveSpeed > 0) {
+            moveSpeed *= -1;
+        }
     }
 
     // Update is called once per frame
@@ -41,8 +44,10 @@ public class RoboMovement : MonoBehaviour
             int random = Random.Range(0,2); //randomizes move direciton (left or right)
             if(random == 0 && moveSpeed > 0) { //if movespeed is positive/right
                 moveSpeed *= -1;
+                anim.SetBool("Direction", true);
             } else if(random == 1 && moveSpeed < 0) {
                 moveSpeed *= -1;
+                anim.SetBool("Direction", false);
             }
 
             //randomizes movement multiplier and movement duration
