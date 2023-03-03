@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3720008993417496548}
   - component: {fileID: 3720008993417496569}
   m_Layer: 9
-  m_Name: Zquit
+  m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9de91a997c55657408845d9fb503adb4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f460189b0f11de0408657e6500bea514, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -122,8 +122,8 @@ BoxCollider2D:
   m_Offset: {x: 0.009525418, y: 1.391452}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.15}
-    oldSize: {x: 9.2, y: 9.36}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.36, y: 5.36}
     newSize: {x: 9.2, y: 9.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -150,7 +150,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 1
-  player: {fileID: 0}
   attkCooldown: 2.5
   attkingSpeed: 7
   enemyDmg: 1
