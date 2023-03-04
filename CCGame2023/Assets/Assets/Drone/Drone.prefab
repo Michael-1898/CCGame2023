@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3720008993417496549}
   - component: {fileID: 3720008993417496548}
   - component: {fileID: 3720008993417496569}
+  - component: {fileID: 7008704496599147943}
   m_Layer: 9
   m_Name: Drone
   m_TagString: Untagged
@@ -29,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3720008993417496547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.94, y: 2.74, z: 0}
-  m_LocalScale: {x: 0.17558801, y: 0.17558801, z: 0.17558801}
+  m_LocalPosition: {x: 6.0788, y: 2.7778, z: 0}
+  m_LocalScale: {x: 0.22732686, y: 0.22732686, z: 0.22732686}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f460189b0f11de0408657e6500bea514, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90da70e55f832604f9012069478efdf5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 9.2, y: 9.36}
+  m_Size: {x: 5.18, y: 3.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -119,18 +120,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009525418, y: 1.391452}
+  m_Offset: {x: -0.08324051, y: 1.391452}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.36, y: 5.36}
-    newSize: {x: 9.2, y: 9.36}
+    pivot: {x: 0.51787484, y: 0.2061681}
+    oldSize: {x: 5.18, y: 3.55}
+    newSize: {x: 5.18, y: 3.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.5190916, y: 2.8099205}
+  m_Size: {x: 5.20988, y: 2.8099205}
   m_EdgeRadius: 0
 --- !u!114 &3720008993417496548
 MonoBehaviour:
@@ -154,6 +155,7 @@ MonoBehaviour:
   attkingSpeed: 7
   enemyDmg: 1
   stunTime: 1
+  anim: {fileID: 7008704496599147943}
 --- !u!114 &3720008993417496569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,3 +171,22 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 0
   hit: 0
+--- !u!95 &7008704496599147943
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3720008993417496547}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 27f221e96963ac547a5708d5c1c016b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -27,6 +27,9 @@ public class ZquitController : MonoBehaviour
     [SerializeField] float stunTime;
     bool isKnocked;
 
+    //anim variable
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +64,8 @@ public class ZquitController : MonoBehaviour
             hitTimer = 0;
             if(isAttacking) {
                 isAttacking = false;
+                anim.SetBool("isAttking", false);
+                transform.Rotate(new Vector3(0, 0, -20));
             }
         }
 
@@ -99,6 +104,8 @@ public class ZquitController : MonoBehaviour
 
             if(attkTimer >= attkCooldown) {
                 isAttacking = true;
+                anim.SetBool("isAttking", true);
+                transform.Rotate(new Vector3(0, 0, 20));
                 attkTimer = 0;
                 Attack();
             }
@@ -110,6 +117,8 @@ public class ZquitController : MonoBehaviour
             if(distanceFromPlayer > followRadius + 10) {
                 rb.velocity = Vector3.zero;
                 isAttacking = false;
+                anim.SetBool("isAttking", false);
+                transform.Rotate(new Vector3(0, 0, -20));
             }
         }
         
@@ -126,6 +135,8 @@ public class ZquitController : MonoBehaviour
         if(col.gameObject.layer == 8) {
             rb.velocity = Vector3.zero;
             isAttacking = false;
+            anim.SetBool("isAttking", false);
+            transform.Rotate(new Vector3(0, 0, -20));
         }
         if(col.gameObject.CompareTag("Player") && !playerHit) {
             col.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDmg);
