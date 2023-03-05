@@ -13,6 +13,8 @@ public class RoboMovement : MonoBehaviour
     float moveMult;
 
     [SerializeField] float chaseRange; //if player leaves this radius, the boss will start chasing the player
+    Transform player;
+    bool isChasing;
     
     float moveTimer;
     [SerializeField] float moveCooldown;
@@ -22,6 +24,14 @@ public class RoboMovement : MonoBehaviour
     float movementDuration; //how long it will be moving for
     [SerializeField] float minMoveDur;
     [SerializeField] float maxMoveDur;
+
+
+    //variables for flipping
+    [SerializeField] float circleRadius;
+    [SerializeField] GameObject edgeCheckL;
+    [SerializeField] GameObject edgeCheckR;
+    [SerializeField] LayerMask groundLayer;
+    bool edged;
 
 
     //variables for animation
@@ -34,11 +44,27 @@ public class RoboMovement : MonoBehaviour
         if(moveSpeed > 0) {
             moveSpeed *= -1;
         }
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+
+        //if reaches edge move in other direction
+        if(edged && (Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false)) {
+            edged = false;
+            moveSpeed *= -1;
+            if(anim.GetBool("Direction") == true) {
+                anim.SetBool("Direction", false);
+            } else {
+                anim.SetBool("Direction", true);
+            }
+        } else if(!edged && Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == true && Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == true) {
+            edged = true;
+        }
+
         moveTimer += Time.deltaTime;
         if(moveTimer >= moveCooldown && !isMoving) {
             int random = Random.Range(0,2); //randomizes move direciton (left or right)
@@ -58,10 +84,26 @@ public class RoboMovement : MonoBehaviour
             anim.SetBool("isMoving", true);
         }
 
+        if(distanceFromPlayer > chaseRange && !isChasing) {
+            if(player.position.x < transform.position.x && moveSpeed > 0) {
+                moveSpeed *= -1;
+            } else if(player.position.x > transform.position.x && moveSpeed < 0) {
+                moveSpeed *= -1;
+            }
+            moveMult = maxMoveMult;
+            isChasing = true;
+            moveTimer = moveCooldown;
+        } else if(distanceFromPlayer <= chaseRange && isChasing) {
+            isChasing = false;
+        }
+
         if(isMoving) {
             rb.velocity = Vector2.right * moveSpeed * moveMult * (Time.deltaTime + 1);
             
-            timeMoving += Time.deltaTime;
+            if(!isChasing) {
+                timeMoving += Time.deltaTime;
+            }
+            
             if(timeMoving >= movementDuration) {
                 moveTimer = 0;
                 anim.SetBool("isMoving", false);
@@ -69,5 +111,12 @@ public class RoboMovement : MonoBehaviour
                 timeMoving = 0;
             }
         }
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(edgeCheckL.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(edgeCheckR.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
     }
 }
