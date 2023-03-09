@@ -286,7 +286,7 @@ public class MJB_PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.transform.position, circleRadius);
         Gizmos.DrawWireSphere(attkPoint1.transform.position, attkRadius);
