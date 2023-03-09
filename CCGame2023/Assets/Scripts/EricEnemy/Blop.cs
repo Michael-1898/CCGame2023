@@ -63,7 +63,7 @@ public class Blop : MonoBehaviour
 
         if (rageTimer > 0f)
         {
-            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 5f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 3f);
             jump = true;
         }
         else
@@ -103,7 +103,7 @@ public class Blop : MonoBehaviour
                 }
 
             }
-            hit = Physics2D.Raycast(transform.position + new Vector3(0f, 1f, 0f), Vector2.up, 1.1f);
+            hit = Physics2D.Raycast(transform.position + new Vector3(0f, 1.01f, 0f), Vector2.up, 1.1f);
             if(hit.collider != null)
             {
                 print(hit.collider.gameObject.name);
