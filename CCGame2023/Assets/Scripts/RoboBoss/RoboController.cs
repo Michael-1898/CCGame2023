@@ -67,10 +67,12 @@ public class RoboController : MonoBehaviour
         }
 
         if(canonShooting && Mathf.Round(canonPivot.rotation.z) != canonAngle) { //if not at correct angle yet
-            canonPivot.rotation = Quaternion.Euler(0f, 0f, canonRotateSpeed * Time.deltaTime); //rotate towards correct angle
-        } else if(Mathf.Round(canonPivot.rotation.z) == canonAngle) { //if at correct angle
+            canonPivot.rotation = Quaternion.Euler(0f, 0f, canonAngle/*canonRotateSpeed * Time.deltaTime*/); //rotate towards correct angle
+            print("rotating");
+        } else if(Mathf.Round(canonPivot.rotation.z) == canonAngle && canonShooting) { //if at correct angle
             Instantiate(canonBalls[Random.Range(0,3)], canonPoint.position, Quaternion.identity);
             canonShotTimer = 0;
+            canonShooting = false;
         }
     }
 

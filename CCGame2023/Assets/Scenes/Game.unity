@@ -353,16 +353,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attkPhaseLengths:
-  - 3
-  - 2
-  - 4
+  - 7
+  - 5
+  - 6
   canonShotCooldown: 1.2
   canonBalls:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6385822456214779418, guid: 13ee1b4caf0557649b80d7afe9cdc7e5, type: 3}
+  - {fileID: 7148188759163751886, guid: 02df47f20e9955948a251d2c967e7d3e, type: 3}
+  - {fileID: 7810438557098910212, guid: f8cdb4441c9ebb04190db03b7656655b, type: 3}
   canonPoint: {fileID: 1341461302}
-  canonPivot: {fileID: 0}
+  canonPivot: {fileID: 1390295749}
+  canonRotateSpeed: 80
 --- !u!1 &257987420
 GameObject:
   m_ObjectHideFlags: 0
