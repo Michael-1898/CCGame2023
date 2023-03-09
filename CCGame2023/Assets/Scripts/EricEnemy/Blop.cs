@@ -57,6 +57,7 @@ public class Blop : MonoBehaviour
             {
                 print("change direction");
                 direction *= -1;
+                transform.Rotate(new Vector3(0, 180, 0));
             }
         }
         
@@ -75,7 +76,7 @@ public class Blop : MonoBehaviour
         if (hit.collider != null && jump == true && (hit.collider.gameObject.name != "Player" && hit.collider.gameObject.name != "Player(Clone)"))
         {
             hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, 0.5f, 0f), Vector2.right*direction, 5.0f);
-            if(hit.collider != null)
+            if(hit.collider != null && hit.collider.gameObject.name != "Player" && hit.collider.gameObject.name != "Player(Clone)")
             {
                 
                 if(hit.collider.gameObject.name != "Player" && hit.collider.gameObject.name != "Player(Clone)")
@@ -84,7 +85,9 @@ public class Blop : MonoBehaviour
                     hit = Physics2D.Raycast(transform.position + new Vector3(0.6f*direction, .5f, 0f), Vector2.right*direction, 0.5f);
                     if(hit.collider != null)
                     {
+                        print("turn around 1");
                         direction *= -1;
+                        transform.Rotate(new Vector3(0, 180, 0));
                     } 
                 }
 
@@ -97,7 +100,9 @@ public class Blop : MonoBehaviour
                         hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -0.5f, 0f), Vector2.right * direction, 0.5f);
                         if (hit.collider != null)
                         {
+                            print(hit.collider.gameObject);
                             direction *= -1;
+                            transform.Rotate(new Vector3(0, 180, 0));
                         }
                     }
                 }
@@ -106,12 +111,13 @@ public class Blop : MonoBehaviour
             hit = Physics2D.Raycast(transform.position + new Vector3(0f, 1.01f, 0f), Vector2.up, 1.1f);
             if(hit.collider != null)
             {
-                print(hit.collider.gameObject.name);
+                print("turn around 3");
                 jump = false;
                 hit = Physics2D.Raycast(transform.position + new Vector3(0.6f * direction, -.5f, 0f), Vector2.right * direction, 0.5f);
                 if (hit.collider != null && (hit.collider.gameObject.name != "Player" || hit.collider.gameObject.name != "Player(Clone)"))
                 {
                     direction *= -1;
+                    transform.Rotate(new Vector3(0, 180, 0));
                 }
             }
             if (grounded && jump && (direction/rb.velocity.x) > 0)    
@@ -138,6 +144,7 @@ public class Blop : MonoBehaviour
         if(rb.velocity.x == 0)
         {
             direction *= -1;
+            transform.Rotate(new Vector3(0, 180, 0));
         }
         
         rb.velocity += new Vector2(speed * direction, 0f);
