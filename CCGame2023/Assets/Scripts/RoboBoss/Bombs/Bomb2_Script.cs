@@ -22,7 +22,7 @@ public class Bomb2_Script : MonoBehaviour
         explosionTimer += Time.deltaTime;
         if(explosionTimer >= explosionTime) {
             Collider2D hitObject = Physics2D.OverlapCircle(transform.position, explosionRadius, playerLayer);
-            if(hitObject) {
+            if(hitObject != null && !hitObject.Equals(null)) {
                 hitObject.GetComponent<PlayerHealth>().TakeDamage(bombDmg);
             }
             Destroy(gameObject);

@@ -22,7 +22,7 @@ public class Bomb1_Script : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col) {
         Collider2D hitObject = Physics2D.OverlapCircle(transform.position, explosionRadius, playerLayer);
-        if(hitObject) {
+        if(hitObject != null && !hitObject.Equals(null)) {
             hitObject.GetComponent<PlayerHealth>().TakeDamage(bombDmg);
         }
         Destroy(gameObject);
