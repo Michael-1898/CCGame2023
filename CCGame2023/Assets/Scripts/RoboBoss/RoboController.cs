@@ -18,6 +18,7 @@ public class RoboController : MonoBehaviour
     bool canonShooting;
     float canonAngle;
     [SerializeField] float canonRotateSpeed;
+    int angleAdder;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,6 @@ public class RoboController : MonoBehaviour
 
     void Attk1() { //canon shooting
         canonShotTimer += Time.deltaTime;
-        int angleAdder = 0;
     
         if(canonShotTimer >= canonShotCooldown && !canonShooting) {
             canonAngle = Random.Range(-150, 26);
@@ -61,7 +61,6 @@ public class RoboController : MonoBehaviour
             } else {
                 angleAdder = 360;
             }
-            print(angleAdder);
             
             //sets rotate speed to rotate towards angle from correct direction
             if(canonPivot.rotation.z < canonAngle && canonRotateSpeed < 0) {
@@ -75,9 +74,10 @@ public class RoboController : MonoBehaviour
 
         if(canonShooting && Mathf.Round(canonPivot.localRotation.eulerAngles.z - angleAdder) != canonAngle) { //if not at correct angle yet
             canonPivot.rotation = Quaternion.Euler(0f, 0f, canonAngle/*canonRotateSpeed * Time.deltaTime*/); //rotate towards correct angle
+            print(angleAdder);
             print("rotating");
-            print("angle adder: " + canonPivot.localRotation.eulerAngles.z - angleAdder);
-            print("no adder: " + canonPivot.localRotation.eulerAngles.z - angleAdder);
+            print("angle adder: " + (canonPivot.localRotation.eulerAngles.z - angleAdder));
+            print("no adder: " + (canonPivot.localRotation.eulerAngles.z));
         } else if(Mathf.Round(canonPivot.localRotation.eulerAngles.z - angleAdder) == canonAngle && canonShooting) { //if at correct angle
             print("boom");
             Instantiate(canonBalls[Random.Range(0,3)], canonPoint.position, Quaternion.identity);
