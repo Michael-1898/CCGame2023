@@ -17,6 +17,7 @@ public class tilemap : MonoBehaviour
 
     public List<Button> allTileButtons = new List<Button>();
     [SerializeField] private Text levelNameText;
+    [SerializeField] private Text creatorNameText;
     [SerializeField] private string levelInformation;
     [SerializeField] private Tile xTile;
     [SerializeField] private Tile deleteTile;
@@ -120,18 +121,12 @@ public class tilemap : MonoBehaviour
         else
         {
             tilePreviewSR.sprite = null;
-            print("uoaef");
         }
             
 
         if(Input.GetKeyDown("p"))
         {
             print(getTilemapInformation(columns, rows));
-        }
-        if(Input.GetKeyDown(";"))
-        {
-            string nameOfLevel = levelNameText.text;
-            saveLevel(nameOfLevel);
         }
     }
 
@@ -222,9 +217,18 @@ public class tilemap : MonoBehaviour
             currentTile = deleteTile;
             tilePreviewSR.sprite = GameObject.Find("delete").GetComponent<Image>().sprite;
         }
+        if(name == "CreateLevelButton")
+        {
+            string nameOfLevel = levelNameText.text;
+            string nameOfCreator = creatorNameText.text;
+            if(nameOfLevel != null && nameOfCreator != null)
+            {
+                saveLevel(nameOfLevel, nameOfCreator);
+            }
+        }
     }
 
-    public void saveLevel(string levelName)
+    public void saveLevel(string levelName, string creatorName)
     {
         bool fileExists = false;
         string fileName =  Application.streamingAssetsPath + "/" + levelName + ".txt";
@@ -249,6 +253,7 @@ public class tilemap : MonoBehaviour
                 stream = new FileStream(fileName, FileMode.OpenOrCreate); 
                 using (StreamWriter writer = new StreamWriter(stream))  
                 {  
+                    writer.WriteLine(creatorName);
                     writer.WriteLine(columns);
                     writer.WriteLine(rows);
                     print(getTilemapInformation(columns, rows));
