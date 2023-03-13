@@ -30,7 +30,25 @@ public class LevelSelection : MonoBehaviour
 
                 Text levelName = newPanel.transform.GetChild(0).gameObject.GetComponent<Text>();
                 levelName.text = i.Name.Substring(0, i.Name.Length-4);
+                try
+                { 
+                    print(i.DirectoryName);
+                    string fileName =  i.DirectoryName + "/" + i.Name + ".txt";
+                    StreamReader reader = new StreamReader(fileName);
+                    
+                        
+                        //string creatorName = reader.ReadLine();
+                        print("yay");
+                        //newPanel.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>().text = creatorName;
+                        print("double yay");
+                    
 
+                }
+                catch
+                {
+                    print("Failed to read creator name");
+                }
+                
                 /*try
                 { 
                     using (StreamReader reader = new StreamReader(fileName))  
