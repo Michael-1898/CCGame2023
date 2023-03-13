@@ -50,7 +50,9 @@ public class PlayerHealth : MonoBehaviour
             currentHealth -= dmg;
 
             if(currentHealth <= 0) {
-                hearts[0].sprite = emptyHeart;
+                for(int i = 0; i < hearts.Length; i++) {
+                    hearts[i].sprite = emptyHeart;
+                }
                 Die();
             }
         }

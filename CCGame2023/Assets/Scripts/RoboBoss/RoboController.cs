@@ -19,6 +19,8 @@ public class RoboController : MonoBehaviour
     float canonAngle;
     [SerializeField] float canonRotateSpeed;
     int angleAdder;
+    public Vector3 launchDir;
+    [SerializeField] float launchForce;
 
     // Start is called before the first frame update
     void Start()
@@ -74,13 +76,10 @@ public class RoboController : MonoBehaviour
 
         if(canonShooting && Mathf.Round(canonPivot.localRotation.eulerAngles.z - angleAdder) != canonAngle) { //if not at correct angle yet
             canonPivot.rotation = Quaternion.Euler(0f, 0f, canonAngle/*canonRotateSpeed * Time.deltaTime*/); //rotate towards correct angle
-            // print(angleAdder);
-            // print("rotating");
-            // print("angle adder: " + (canonPivot.localRotation.eulerAngles.z - angleAdder));
-            // print("no adder: " + (canonPivot.localRotation.eulerAngles.z));
         } else if(Mathf.Round(canonPivot.localRotation.eulerAngles.z - angleAdder) == canonAngle && canonShooting) { //if at correct angle
-            // print("boom");
-            Instantiate(canonBalls[Random.Range(0,3)], canonPoint.position, Quaternion.identity);
+            launchDir = (canonPoint.position - canonPivot.position).normalized;
+            GameObject bomb = Instantiate(canonBalls[Random.Range(0,3)], canonPoint.position, Quaternion.identity);
+            bomb.GetComponent<Rigidbody2D>().AddForce(launchDir * launchForce, ForceMode2D.Impulse);
             canonShotTimer = 0;
             canonShooting = false;
         }
