@@ -39,6 +39,7 @@ public class LoadLevel : MonoBehaviour
         { 
             using (StreamReader reader = new StreamReader(fileName))  
             {  
+                reader.ReadLine();
                 columns = int.Parse(reader.ReadLine());
                 rows = int.Parse(reader.ReadLine());
                 print(rows);

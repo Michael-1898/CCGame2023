@@ -32,15 +32,19 @@ public class LevelSelection : MonoBehaviour
                 levelName.text = i.Name.Substring(0, i.Name.Length-4);
                 try
                 { 
-                    print(i.DirectoryName);
-                    string fileName =  i.DirectoryName + "/" + i.Name + ".txt";
-                    StreamReader reader = new StreamReader(fileName);
+                    
+                    string fileName =  i.DirectoryName + "\\" + i.Name;
+                    print(fileName);
+                    using (StreamReader reader = new StreamReader(fileName))
+                    {
+                        string creatorName = reader.ReadLine();
+                        print("yay");
+                        newPanel.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>().text = creatorName;
+                        print("double yay");
+                    }
                     
                         
-                        //string creatorName = reader.ReadLine();
-                        print("yay");
-                        //newPanel.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>().text = creatorName;
-                        print("double yay");
+                        
                     
 
                 }
