@@ -685,9 +685,10 @@ MonoBehaviour:
   - {fileID: 7810438557098910212, guid: f8cdb4441c9ebb04190db03b7656655b, type: 3}
   canonPoint: {fileID: 2117782340266296534}
   canonPivot: {fileID: 2117782340582255909}
-  canonRotateSpeed: 80
+  canonRotateSpeed: 1
   launchDir: {x: 0, y: 0, z: 0}
   launchForce: 10
+  ramCooldown: 0
 --- !u!114 &2117782339254914938
 MonoBehaviour:
   m_ObjectHideFlags: 0

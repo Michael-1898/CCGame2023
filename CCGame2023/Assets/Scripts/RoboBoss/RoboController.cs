@@ -21,6 +21,12 @@ public class RoboController : MonoBehaviour
     int angleAdder;
     public Vector3 launchDir;
     [SerializeField] float launchForce;
+    float angleMover;
+    float priorAngle;
+
+    //variables for attk2
+    float ramTimer;
+    [SerializeField] float ramCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -65,22 +71,25 @@ public class RoboController : MonoBehaviour
             }
             
             //sets rotate speed to rotate towards angle from correct direction
-            if(canonPivot.rotation.z < canonAngle && canonRotateSpeed < 0) {
+            if(priorAngle < canonAngle && canonRotateSpeed < 0) {
                 canonRotateSpeed *= -1;
             }
-            if(canonPivot.rotation.z > canonAngle && canonRotateSpeed > 0) {
+            if(priorAngle > canonAngle && canonRotateSpeed > 0) {
                 canonRotateSpeed *= -1;
             }
             canonShooting = true;
         }
 
-        if(canonShooting && Mathf.Round(canonPivot.localRotation.eulerAngles.z - angleAdder) != canonAngle) { //if not at correct angle yet
-            canonPivot.rotation = Quaternion.Euler(0f, 0f, canonAngle/*canonRotateSpeed * Time.deltaTime*/); //rotate towards correct angle
-        } else if(Mathf.Round(canonPivot.localRotation.eulerAngles.z - angleAdder) == canonAngle && canonShooting) { //if at correct angle
+        if(canonShooting) { //if not at correct angle yet
+            canonPivot.rotation = Quaternion.Euler(0f, 0f, canonPivot.rotation.z + angleMover);
+            angleMover += canonRotateSpeed;
+        }
+        if(Mathf.Round(canonPivot.localRotation.eulerAngles.z - angleAdder) == canonAngle && canonShooting) { //if at correct angle
             launchDir = (canonPoint.position - canonPivot.position).normalized;
             GameObject bomb = Instantiate(canonBalls[Random.Range(0,3)], canonPoint.position, Quaternion.identity);
             bomb.GetComponent<Rigidbody2D>().AddForce(launchDir * launchForce, ForceMode2D.Impulse);
             canonShotTimer = 0;
+            priorAngle = canonPivot.localRotation.eulerAngles.z - angleAdder;
             canonShooting = false;
         }
     }

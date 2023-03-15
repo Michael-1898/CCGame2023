@@ -25,8 +25,6 @@ public class Bomb3_Script : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        Instantiate(explosionFX, transform.position, Quaternion.identity); //instantiate particle effect
-        
         if(col.gameObject.CompareTag("Player")) {   //if collided with player
             //deal damage
             col.gameObject.GetComponent<PlayerHealth>().TakeDamage(bombDmg);
