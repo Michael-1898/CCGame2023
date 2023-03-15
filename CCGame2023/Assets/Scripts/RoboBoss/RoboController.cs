@@ -27,6 +27,8 @@ public class RoboController : MonoBehaviour
     //variables for attk2
     float ramTimer;
     [SerializeField] float ramCooldown;
+    bool ramCharging;
+    bool isRamming;
 
     // Start is called before the first frame update
     void Start()
@@ -95,7 +97,33 @@ public class RoboController : MonoBehaviour
     }
 
     void Attk2() { //ramming
-        print("2");
+        ramTimer += Time.deltaTime;
+
+        if(ramTimer >= ramCooldown && !ramCharging) {
+            ramCharging = true;
+
+            //sets rotate speed to rotate towards angle from correct direction
+            if(priorAngle < 50 && canonRotateSpeed < 0) {
+                canonRotateSpeed *= -1;
+            }
+            if(priorAngle > 50 && canonRotateSpeed > 0) {
+                canonRotateSpeed *= -1;
+            }
+        }
+
+        if(ramCharging) {
+            canonPivot.rotation = Quaternion.Euler(0f, 0f, canonPivot.rotation.z + angleMover);
+            angleMover += canonRotateSpeed;
+        }
+
+        if(Mathf.Round(canonPivot.localRotation.eulerAngles.z) == 50 && ramCharging) {
+            isRamming = true;
+            ramCharging = false;
+        }
+
+        if(isRamming) {
+            GetComponent<RoboMovement>().enabled = false;
+        }
     }
 
     void Attk3() { //missile shooting

@@ -676,7 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attkPhaseLengths:
   - 12
-  - 2
+  - 12
   - 2
   canonShotCooldown: 1.2
   canonBalls:
@@ -688,7 +688,7 @@ MonoBehaviour:
   canonRotateSpeed: 1
   launchDir: {x: 0, y: 0, z: 0}
   launchForce: 10
-  ramCooldown: 0
+  ramCooldown: 3
 --- !u!114 &2117782339254914938
 MonoBehaviour:
   m_ObjectHideFlags: 0
