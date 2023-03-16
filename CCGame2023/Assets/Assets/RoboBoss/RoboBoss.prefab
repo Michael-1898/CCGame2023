@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &860105601326086124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8362615932493500205}
+  m_Layer: 0
+  m_Name: SmokePointL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8362615932493500205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860105601326086124}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.19, y: -2.48, z: 0}
+  m_LocalScale: {x: 3.1210594, y: 3.1210594, z: 3.1210594}
+  m_Children: []
+  m_Father: {fileID: 2117782339254914934}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117782338540772749
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +100,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 3005251022546630360, guid: 9505484a27d079a4d985bef991315d74,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -515,6 +545,8 @@ Transform:
   - {fileID: 2117782340377810833}
   - {fileID: 8622270919911337690}
   - {fileID: 9048225862441912076}
+  - {fileID: 687505261129888757}
+  - {fileID: 8362615932493500205}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -678,9 +710,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attkPhaseLengths:
   - 12
-  - 12
+  - 15
   - 2
-  canonShotCooldown: 1
+  canonShotCooldown: 0.75
   canonBalls:
   - {fileID: 6385822456214779418, guid: 13ee1b4caf0557649b80d7afe9cdc7e5, type: 3}
   - {fileID: 7148188759163751886, guid: 02df47f20e9955948a251d2c967e7d3e, type: 3}
@@ -690,7 +722,7 @@ MonoBehaviour:
   canonRotateSpeed: 1
   launchDir: {x: 0, y: 0, z: 0}
   launchForce: 7
-  ramCooldown: 3
+  ramCooldown: 2.7
   ramSpeed: 8
   circleRadius: 0.16
   edgeCheckL: {fileID: 2117782339000520646}
@@ -702,6 +734,10 @@ MonoBehaviour:
     m_Bits: 256
   enemyDmg: 1
   enemyKnockback: 10
+  ramChargeTime: 2.5
+  smokeFX: {fileID: 3809984422667603870, guid: c26163d67f0d00c419711f6667514020, type: 3}
+  smokePtL: {fileID: 8362615932493500205}
+  smokePtR: {fileID: 687505261129888757}
 --- !u!114 &2117782339254914938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,7 +946,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 7250333775390964769, guid: 9505484a27d079a4d985bef991315d74,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1078,7 +1114,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 991755671695543442, guid: 9505484a27d079a4d985bef991315d74, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1159,7 +1195,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -8648610211690903572, guid: 9505484a27d079a4d985bef991315d74,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1273,7 +1309,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -6490420007399575861, guid: 9505484a27d079a4d985bef991315d74,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1355,7 +1391,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7399300242487252367, guid: 9505484a27d079a4d985bef991315d74,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1368,6 +1404,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4191501913862376117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 687505261129888757}
+  m_Layer: 0
+  m_Name: SmokePointR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &687505261129888757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191501913862376117}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.19, y: -2.48, z: 0}
+  m_LocalScale: {x: 3.1210594, y: 3.1210594, z: 3.1210594}
+  m_Children: []
+  m_Father: {fileID: 2117782339254914934}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5530541895099324140
 GameObject:
   m_ObjectHideFlags: 0

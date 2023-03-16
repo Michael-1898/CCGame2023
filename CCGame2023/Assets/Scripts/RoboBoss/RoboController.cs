@@ -41,12 +41,20 @@ public class RoboController : MonoBehaviour
     bool isHitting;
     [SerializeField] int enemyDmg;
     [SerializeField] float enemyKnockback;
+    float ramChargeTimer;
+    [SerializeField] float ramChargeTime;
+    [SerializeField] GameObject smokeFX;
+    [SerializeField] Transform smokePtL;
+    [SerializeField] Transform smokePtR;
+    bool smoked;
 
     // Start is called before the first frame update
     void Start()
     {
+        smoked = false;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        priorAngle = 0;
     }
 
     // Update is called once per frame
@@ -115,8 +123,16 @@ public class RoboController : MonoBehaviour
         }
 
         if(ramTimer >= ramCooldown && !ramCharging) {
-            ramCharging = true;
             GetComponent<RoboMovement>().enabled = false;
+
+            //sets movement direction towards player
+            if(player.position.x < transform.position.x && !smoked) {
+                Instantiate(smokeFX, smokePtR.position, Quaternion.Euler(0, 0, -25.5f));
+                smoked = true;
+            } else if(player.position.x >= transform.position.x && !smoked) {
+                Instantiate(smokeFX, smokePtL.position, Quaternion.Euler(0, 0, 25.5f));
+                smoked = true;
+            }
 
             //sets rotate speed to rotate towards angle from correct direction
             if(priorAngle < 50 && canonRotateSpeed < 0) {
@@ -125,14 +141,20 @@ public class RoboController : MonoBehaviour
             if(priorAngle > 50 && canonRotateSpeed > 0) {
                 canonRotateSpeed *= -1;
             }
+
+            ramCharging = true;
         }
 
         if(ramCharging && Mathf.Round(canonPivot.localRotation.eulerAngles.z) != 50) {
             canonPivot.rotation = Quaternion.Euler(0f, 0f, canonPivot.rotation.z + angleMover);
             angleMover += canonRotateSpeed;
+            priorAngle = priorAngle = canonPivot.localRotation.eulerAngles.z;
+        }
+        if(ramCharging && ramChargeTimer < ramChargeTime) {
+            ramChargeTimer += Time.deltaTime;
         }
 
-        if(Mathf.Round(canonPivot.localRotation.eulerAngles.z) == 50 && ramCharging) {
+        if(Mathf.Round(canonPivot.localRotation.eulerAngles.z) == 50 && ramCharging && ramChargeTimer >= ramChargeTime) {
             //sets movement direction towards player
             if(player.position.x < transform.position.x && ramSpeed > 0) {
                 ramSpeed *= -1;
@@ -151,9 +173,10 @@ public class RoboController : MonoBehaviour
             rb.velocity = Vector2.right * ramSpeed * (Time.deltaTime + 1);
             //if hitting a wall, or off an edge
             if(Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(wallCheckL.transform.position, circleRadius, groundLayer) == true || Physics2D.OverlapCircle(wallCheckR.transform.position, circleRadius, groundLayer) == true || isHitting) {
-                print("ram ended");
                 ramTimer = 0;
                 GetComponent<RoboMovement>().enabled = true;
+                smoked = false;
+                ramChargeTimer = 0;
                 isRamming = false;
             }
         }
@@ -182,9 +205,8 @@ public class RoboController : MonoBehaviour
     }
 
     void OnCollisionExit2D(Collision2D col) {
-        if(col.gameObject.CompareTag("Player") && col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime <= 0) {
+        if(isHitting) {
             isHitting = false;
-            print("col end");
         }
     }
 
