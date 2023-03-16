@@ -680,7 +680,7 @@ MonoBehaviour:
   - 12
   - 12
   - 2
-  canonShotCooldown: 1.2
+  canonShotCooldown: 1
   canonBalls:
   - {fileID: 6385822456214779418, guid: 13ee1b4caf0557649b80d7afe9cdc7e5, type: 3}
   - {fileID: 7148188759163751886, guid: 02df47f20e9955948a251d2c967e7d3e, type: 3}
@@ -689,7 +689,7 @@ MonoBehaviour:
   canonPivot: {fileID: 2117782340582255909}
   canonRotateSpeed: 1
   launchDir: {x: 0, y: 0, z: 0}
-  launchForce: 10
+  launchForce: 7
   ramCooldown: 3
   ramSpeed: 8
   circleRadius: 0.16
@@ -699,7 +699,9 @@ MonoBehaviour:
   wallCheckR: {fileID: 6394933693919916399}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
+  enemyDmg: 1
+  enemyKnockback: 10
 --- !u!114 &2117782339254914938
 MonoBehaviour:
   m_ObjectHideFlags: 0

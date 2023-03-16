@@ -38,6 +38,9 @@ public class RoboController : MonoBehaviour
     [SerializeField] GameObject wallCheckL;
     [SerializeField] GameObject wallCheckR;
     [SerializeField] LayerMask groundLayer;
+    bool isHitting;
+    [SerializeField] int enemyDmg;
+    [SerializeField] float enemyKnockback;
 
     // Start is called before the first frame update
     void Start()
@@ -113,6 +116,7 @@ public class RoboController : MonoBehaviour
 
         if(ramTimer >= ramCooldown && !ramCharging) {
             ramCharging = true;
+            GetComponent<RoboMovement>().enabled = false;
 
             //sets rotate speed to rotate towards angle from correct direction
             if(priorAngle < 50 && canonRotateSpeed < 0) {
@@ -129,8 +133,6 @@ public class RoboController : MonoBehaviour
         }
 
         if(Mathf.Round(canonPivot.localRotation.eulerAngles.z) == 50 && ramCharging) {
-            GetComponent<RoboMovement>().enabled = false;
-
             //sets movement direction towards player
             if(player.position.x < transform.position.x && ramSpeed > 0) {
                 ramSpeed *= -1;
@@ -148,10 +150,10 @@ public class RoboController : MonoBehaviour
 
             rb.velocity = Vector2.right * ramSpeed * (Time.deltaTime + 1);
             //if hitting a wall, or off an edge
-            if(Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(wallCheckL.transform.position, circleRadius, groundLayer) == true || Physics2D.OverlapCircle(wallCheckR.transform.position, circleRadius, groundLayer) == true) {
+            if(Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(wallCheckL.transform.position, circleRadius, groundLayer) == true || Physics2D.OverlapCircle(wallCheckR.transform.position, circleRadius, groundLayer) == true || isHitting) {
                 print("ram ended");
                 ramTimer = 0;
-                GetComponent<RoboMovement>().enabled = false;
+                GetComponent<RoboMovement>().enabled = true;
                 isRamming = false;
             }
         }
@@ -159,6 +161,31 @@ public class RoboController : MonoBehaviour
 
     void Attk3() { //missile shooting
         print("3");
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        if(col.gameObject.CompareTag("Player") && col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime <= 0) {   //if collided with player
+            //deal damage
+            col.gameObject.GetComponent<PlayerHealth>().TakeDamage(enemyDmg);
+
+            //set kb time for player
+            col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime = col.gameObject.GetComponent<MJB_PlayerMove>().kbTotalTime;
+
+            if(transform.position.x < col.transform.position.x) {   //if player is on right
+                col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.right * enemyKnockback * (Time.deltaTime + 1);
+            } else {    //if player is on left
+                col.gameObject.GetComponent<Rigidbody2D>().velocity = -Vector2.right * enemyKnockback * (Time.deltaTime + 1);
+            }
+
+            isHitting = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D col) {
+        if(col.gameObject.CompareTag("Player") && col.gameObject.GetComponent<MJB_PlayerMove>().kbCurrentTime <= 0) {
+            isHitting = false;
+            print("col end");
+        }
     }
 
     private void OnDrawGizmosSelected() {
