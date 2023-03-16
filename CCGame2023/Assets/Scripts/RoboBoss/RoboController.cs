@@ -29,11 +29,21 @@ public class RoboController : MonoBehaviour
     [SerializeField] float ramCooldown;
     bool ramCharging;
     bool isRamming;
+    Transform player;
+    [SerializeField] float ramSpeed;
+    Rigidbody2D rb;
+    [SerializeField] float circleRadius;
+    [SerializeField] GameObject edgeCheckL;
+    [SerializeField] GameObject edgeCheckR;
+    [SerializeField] GameObject wallCheckL;
+    [SerializeField] GameObject wallCheckR;
+    [SerializeField] LayerMask groundLayer;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        rb = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -97,7 +107,9 @@ public class RoboController : MonoBehaviour
     }
 
     void Attk2() { //ramming
-        ramTimer += Time.deltaTime;
+        if(!isRamming) {
+            ramTimer += Time.deltaTime;
+        }
 
         if(ramTimer >= ramCooldown && !ramCharging) {
             ramCharging = true;
@@ -111,22 +123,49 @@ public class RoboController : MonoBehaviour
             }
         }
 
-        if(ramCharging) {
+        if(ramCharging && Mathf.Round(canonPivot.localRotation.eulerAngles.z) != 50) {
             canonPivot.rotation = Quaternion.Euler(0f, 0f, canonPivot.rotation.z + angleMover);
             angleMover += canonRotateSpeed;
         }
 
         if(Mathf.Round(canonPivot.localRotation.eulerAngles.z) == 50 && ramCharging) {
+            GetComponent<RoboMovement>().enabled = false;
+
+            //sets movement direction towards player
+            if(player.position.x < transform.position.x && ramSpeed > 0) {
+                ramSpeed *= -1;
+            } else if(player.position.x >= transform.position.x && ramSpeed < 0) {
+                ramSpeed *= -1;
+            }
+
             isRamming = true;
             ramCharging = false;
         }
 
         if(isRamming) {
-            GetComponent<RoboMovement>().enabled = false;
+            
+            float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+
+            rb.velocity = Vector2.right * ramSpeed * (Time.deltaTime + 1);
+            //if hitting a wall, or off an edge
+            if(Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(wallCheckL.transform.position, circleRadius, groundLayer) == true || Physics2D.OverlapCircle(wallCheckR.transform.position, circleRadius, groundLayer) == true) {
+                print("ram ended");
+                ramTimer = 0;
+                GetComponent<RoboMovement>().enabled = false;
+                isRamming = false;
+            }
         }
     }
 
     void Attk3() { //missile shooting
         print("3");
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(edgeCheckL.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(edgeCheckR.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(wallCheckL.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(wallCheckR.transform.position, circleRadius);
     }
 }
