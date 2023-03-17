@@ -53,14 +53,24 @@ public class RoboMovement : MonoBehaviour
         float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
 
         //if reaches edge move in other direction
-        if(edged && (Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false)) {
+        if(edged && Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false) {
             edged = false;
-            moveSpeed *= -1;
-            if(anim.GetBool("Direction") == true) {
-                anim.SetBool("Direction", false);
-            } else {
-                anim.SetBool("Direction", true);
+            if(moveSpeed < 0) {
+                moveSpeed *= -1;
             }
+            anim.SetBool("Direction", false);
+            movementDuration = 0.5f;
+            isMoving = true;
+
+        } else if(edged && Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false) {
+            edged = false;
+            if(moveSpeed > 0) {
+                moveSpeed *= -1;
+            }
+            anim.SetBool("Direction", true);
+            movementDuration = 0.5f;
+            isMoving = true;
+
         } else if(!edged && Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == true && Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == true) {
             edged = true;
         }

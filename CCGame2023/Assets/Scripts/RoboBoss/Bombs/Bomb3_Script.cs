@@ -6,13 +6,15 @@ public class Bomb3_Script : MonoBehaviour
 {
     [SerializeField] float lifeTime;
     float lifeTimer;
-    [SerializeField] int bombDmg;
     [SerializeField] GameObject explosionFX;
+    Transform player;
+    [SerializeField] GameObject triggerCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
 
     // Update is called once per frame
@@ -25,9 +27,6 @@ public class Bomb3_Script : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col) {
-        if(col.gameObject.CompareTag("Player")) {   //if collided with player
-            //deal damage
-            col.gameObject.GetComponent<PlayerHealth>().TakeDamage(bombDmg);
-        }
+        
     }
 }

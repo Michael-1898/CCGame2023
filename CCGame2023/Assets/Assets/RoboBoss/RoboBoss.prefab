@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860105601326086124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.19, y: -2.48, z: 0}
+  m_LocalPosition: {x: -3.86, y: -2.48, z: 0}
   m_LocalScale: {x: 3.1210594, y: 3.1210594, z: 3.1210594}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}
@@ -722,8 +722,8 @@ MonoBehaviour:
   canonRotateSpeed: 1
   launchDir: {x: 0, y: 0, z: 0}
   launchForce: 7
-  ramCooldown: 2.7
-  ramSpeed: 8
+  ramCooldown: 1
+  ramSpeed: 9.5
   circleRadius: 0.16
   edgeCheckL: {fileID: 2117782339000520646}
   edgeCheckR: {fileID: 2117782340377810832}
@@ -734,7 +734,7 @@ MonoBehaviour:
     m_Bits: 256
   enemyDmg: 1
   enemyKnockback: 10
-  ramChargeTime: 2.5
+  ramChargeTime: 2
   smokeFX: {fileID: 3809984422667603870, guid: c26163d67f0d00c419711f6667514020, type: 3}
   smokePtL: {fileID: 8362615932493500205}
   smokePtR: {fileID: 687505261129888757}
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24476ece536ce44295db3d508c60d9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 3.5
   minMoveMult: 0.8
   maxMoveMult: 1.2
   chaseRange: 13
@@ -1428,7 +1428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4191501913862376117}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.19, y: -2.48, z: 0}
+  m_LocalPosition: {x: 3.85, y: -2.48, z: 0}
   m_LocalScale: {x: 3.1210594, y: 3.1210594, z: 3.1210594}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}

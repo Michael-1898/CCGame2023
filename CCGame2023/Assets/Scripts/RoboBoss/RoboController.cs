@@ -63,6 +63,14 @@ public class RoboController : MonoBehaviour
         attkPhaseTimer += Time.deltaTime;
         if(attkPhaseTimer >= attkPhaseLengths[currentPhase]) {
             currentPhase++;
+            if(currentPhase == 1) {
+                ramTimer = 0;
+                GetComponent<RoboMovement>().enabled = true;
+                smoked = false;
+                ramChargeTimer = 0;
+                isRamming = false;
+                ramCharging = false;
+            }
             attkPhaseTimer = 0;
             if(currentPhase > attkPhaseLengths.Length - 1) {
                 currentPhase = 0;
@@ -122,7 +130,7 @@ public class RoboController : MonoBehaviour
             ramTimer += Time.deltaTime;
         }
 
-        if(ramTimer >= ramCooldown && !ramCharging) {
+        if(ramTimer >= ramCooldown && !ramCharging && !isRamming && Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == true && Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == true) {
             GetComponent<RoboMovement>().enabled = false;
 
             //sets movement direction towards player
@@ -158,8 +166,10 @@ public class RoboController : MonoBehaviour
             //sets movement direction towards player
             if(player.position.x < transform.position.x && ramSpeed > 0) {
                 ramSpeed *= -1;
+                print("dir change");
             } else if(player.position.x >= transform.position.x && ramSpeed < 0) {
                 ramSpeed *= -1;
+                print("dir change");
             }
 
             isRamming = true;
@@ -167,9 +177,6 @@ public class RoboController : MonoBehaviour
         }
 
         if(isRamming) {
-            
-            float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
-
             rb.velocity = Vector2.right * ramSpeed * (Time.deltaTime + 1);
             //if hitting a wall, or off an edge
             if(Physics2D.OverlapCircle(edgeCheckL.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(edgeCheckR.transform.position, circleRadius, groundLayer) == false || Physics2D.OverlapCircle(wallCheckL.transform.position, circleRadius, groundLayer) == true || Physics2D.OverlapCircle(wallCheckR.transform.position, circleRadius, groundLayer) == true || isHitting) {
