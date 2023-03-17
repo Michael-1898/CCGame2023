@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -20,6 +21,13 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
+        hearts[0] = GameObject.Find("Canvas").transform.GetChild(0).GetChild(0).GetComponent<Image>();
+        hearts[1] = GameObject.Find("Canvas").transform.GetChild(0).GetChild(1).GetComponent<Image>();
+        hearts[2] = GameObject.Find("Canvas").transform.GetChild(0).GetChild(2).GetComponent<Image>();
+        hearts[3] = GameObject.Find("Canvas").transform.GetChild(0).GetChild(3).GetComponent<Image>();
+        hearts[4] = GameObject.Find("Canvas").transform.GetChild(0).GetChild(4).GetComponent<Image>();
+        hearts[5] = GameObject.Find("Canvas").transform.GetChild(0).GetChild(5).GetComponent<Image>();
+        hearts[6] = GameObject.Find("Canvas").transform.GetChild(0).GetChild(6).GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -31,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
 
         for(int i = 0; i < hearts.Length; i++) {
             if(i < currentHealth) {
-                hearts[i].sprite = fullHeart;
+               hearts[i].sprite = fullHeart;
             } else {
                 hearts[i].sprite = emptyHeart;
             }
@@ -61,5 +69,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Die() {
         Destroy(gameObject);
+        SceneManager.LoadScene(0);
     }
 }
