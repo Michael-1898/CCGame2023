@@ -158,7 +158,7 @@ public class ZquitController : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmosSelected() {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, aggroRadius);
         Gizmos.DrawWireSphere(transform.position, followRadius);
