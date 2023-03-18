@@ -1340,7 +1340,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level Editon
+  m_Text: Level Editor
 --- !u!222 &777211842
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1728,7 +1728,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Plays
+  m_Text: Play Tutorial
 --- !u!222 &1340231442
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1884,7 +1884,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level Sefection
+  m_Text: Level Selection
 --- !u!222 &1460211727
 CanvasRenderer:
   m_ObjectHideFlags: 0

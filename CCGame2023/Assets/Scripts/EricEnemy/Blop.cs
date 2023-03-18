@@ -122,7 +122,7 @@ public class Blop : MonoBehaviour
             }
             if (grounded && jump && (direction/rb.velocity.x) > 0)    
             {
-                rb.velocity = new Vector2(rb.velocity.x, 4.6f);
+                rb.velocity = new Vector2(rb.velocity.x, 5.5f);
             }
         }  
 

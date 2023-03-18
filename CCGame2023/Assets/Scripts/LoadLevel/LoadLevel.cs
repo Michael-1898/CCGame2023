@@ -34,7 +34,6 @@ public class LoadLevel : MonoBehaviour
     void PrintLevel(string levelName)
     {
         string fileName =  Application.streamingAssetsPath + "/" + levelName;
-        print(fileName);
         try
         { 
             using (StreamReader reader = new StreamReader(fileName))  
@@ -42,9 +41,7 @@ public class LoadLevel : MonoBehaviour
                 reader.ReadLine();
                 columns = int.Parse(reader.ReadLine());
                 rows = int.Parse(reader.ReadLine());
-                print(rows);
                 levelInformation = reader.ReadLine();
-                print(levelInformation);
             }  
 
         }

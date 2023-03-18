@@ -11,6 +11,7 @@ public class LevelSelection : MonoBehaviour
     public GameObject levelPanel;
     Vector3 newPanelPosition = new Vector3(-6f, 2.5f, 0f);
     [SerializeField] RectTransform canvas;
+    int numberOfPanels = 0;
 
     void Start()
     {
@@ -34,13 +35,10 @@ public class LevelSelection : MonoBehaviour
                 { 
                     
                     string fileName =  i.DirectoryName + "\\" + i.Name;
-                    print(fileName);
                     using (StreamReader reader = new StreamReader(fileName))
                     {
                         string creatorName = reader.ReadLine();
-                        print("yay");
                         newPanel.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Text>().text = creatorName;
-                        print("double yay");
                     }
                     
                         
@@ -52,7 +50,7 @@ public class LevelSelection : MonoBehaviour
                 {
                     print("Failed to read creator name");
                 }
-                
+                numberOfPanels++;
                 /*try
                 { 
                     using (StreamReader reader = new StreamReader(fileName))  
@@ -75,6 +73,13 @@ public class LevelSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if((Input.GetKey("left") || Input.GetKey("a")) && transform.position.x > 0f)
+        {
+            transform.position += new Vector3(-0.1f, 0f, 0f);
+        }
+        if ((Input.GetKey("right") || Input.GetKey("d")) && transform.position.x < Mathf.Floor(((numberOfPanels-1)/2)-2)*5)
+        {
+            transform.position += new Vector3(0.1f, 0f, 0f);
+        }
     }
 }
