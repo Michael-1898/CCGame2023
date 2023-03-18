@@ -25,6 +25,10 @@ public class MJB_PlayerMove : MonoBehaviour
     public bool attkAnimPlaying;
     public bool canRotate;
     public int attkType; //int which uses numbers to describe type of attack (0 is normal, 1 is side aerial, 2 is down aerial, 3 is up aerial)
+    
+    float groundedTimer = 0f;
+    Vector3 lastGroundedPosition;
+    
 
     //variables for attk func
     [SerializeField] private float attkLunge;
@@ -81,6 +85,7 @@ public class MJB_PlayerMove : MonoBehaviour
         canRotate = true;
         attkNum = 0;
         attkStart = false;
+        lastGroundedPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -88,8 +93,11 @@ public class MJB_PlayerMove : MonoBehaviour
     {
         //checks if player is touching ground using overlap circle
         ground = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
-        
 
+        groundedTimer += Time.deltaTime;
+        
+        
+        
         //player movement
         playerPos = transform.position;
         Vector2 velocity = rb.velocity;
@@ -166,9 +174,16 @@ public class MJB_PlayerMove : MonoBehaviour
         {
             isGrounded = true;
             numJumps = maxJumps;
-
             myAnim.SetBool("isJumping", false);
             myAnim.SetBool("JumpPeaked", false);
+
+            //code to save player location in case they fall off the map
+            if (groundedTimer > 1f)
+            {
+                groundedTimer = 0f;
+                lastGroundedPosition = transform.position;
+            }
+
         } else {
             isGrounded = false;
             
@@ -176,6 +191,29 @@ public class MJB_PlayerMove : MonoBehaviour
             {
                 numJumps--;
             }
+        }
+        print(GetComponent<PlayerHealth>().invincible);
+        if (groundedTimer > 1f)
+        {
+            GetComponent<PlayerHealth>().invincible = false;
+            if(isGrounded)
+            {
+                groundedTimer = 0f;
+                lastGroundedPosition = transform.position;
+            }
+                
+                
+        }
+
+        //code to check if player fell off map and then teleports them
+        if (transform.position.y < -10f)
+        {
+            GetComponent<PlayerHealth>().TakeDamage(1);
+            GetComponent<PlayerHealth>().invincible = true;
+            groundedTimer = 0f;
+            transform.position = lastGroundedPosition;
+            
+            
         }
 
         //jump code (initial jump)
