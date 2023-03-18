@@ -14,7 +14,9 @@ public class tilemap : MonoBehaviour
     public static List<string> allTileCharacters = new List<string>();
     public static List<GameObject> allTileGameObjects = new List<GameObject>();
     public static List<Vector3> allTileSizes = new List<Vector3>();
+    public static List<int> allTileLimits = new List<int>();
 
+    public List<int> allTileCurrentNumbers = new List<int>();
     public List<Button> allTileButtons = new List<Button>();
     [SerializeField] private Text levelNameText;
     [SerializeField] private Text creatorNameText;
@@ -24,6 +26,7 @@ public class tilemap : MonoBehaviour
     public GameObject tilePreview;
     SpriteRenderer tilePreviewSR;
     Tile currentTile;
+    int currentTileIndex;
     Vector3Int currentDeletionLocation;
     Vector3 currentTileSize;
     bool delete = false;
@@ -38,6 +41,13 @@ public class tilemap : MonoBehaviour
     {
         tilePreviewSR = tilePreview.GetComponent<SpriteRenderer>();
         Cursor.lockState = CursorLockMode.Confined;
+
+        print(allTileCharacters.Count + " YOULOUIHN");
+        print(allTileLimits.Count + " yugebosh");
+        for (int i = 0; i < allTileLimits.Count; i++)
+        {
+            allTileCurrentNumbers.Add(0);
+        }
     }
 
     // Update is called once per frame
@@ -68,40 +78,60 @@ public class tilemap : MonoBehaviour
                 }
                 if (noXTiles)
                 {
-                    if (Input.GetMouseButtonDown(0))
+                   
+                    if(allTileLimits[currentTileIndex] > allTileCurrentNumbers[currentTileIndex])
                     {
-
-                        if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0)) != xTile)
+                        if (Input.GetMouseButtonDown(0))
                         {
-                            currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
-                            deleteXTiles();
-                            tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
-                        }
-                        for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
-                        {
-                            if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0)) != xTile)
+                            GameObject.Find("Warning Text").GetComponent<Text>().text = "";
+                            if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0)) != xTile)
                             {
-                                currentDeletionLocation = new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0);
+                                currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
                                 deleteXTiles();
+                                tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                                allTileCurrentNumbers[currentTileIndex]++;
                             }
-                            tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
+                            for (int m = 1; m < (currentTileSize.x * currentTileSize.y); m++)
+                            {
+                                if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0)) != xTile)
+                                {
+                                    currentDeletionLocation = new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0);
+                                    deleteXTiles();
+                                }
+                                tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt((tilePreview.transform.position.x - 0.5f) + (m % currentTileSize.x)), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f) + Mathf.FloorToInt(m / currentTileSize.x), 0), xTile);
+                            }
                         }
                     }
+                    else
+                    {
+                        GameObject.Find("Warning Text").GetComponent<Text>().text = "Maximum number of the object/tile";
+                    }
+                           
+                   
                 }
             }
             else if(delete == false)
             {
-                print(currentTile.name);
                 tilePreviewSR.sprite = currentTile.sprite;
-                if (Input.GetMouseButton(0))
+          
+                if(allTileLimits[currentTileIndex] > allTileCurrentNumbers[currentTileIndex])
                 {
-                    if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0))!=xTile)
+                    GameObject.Find("Warning Text").GetComponent<Text>().text = "";
+                    if(Input.GetMouseButton(0))
                     {
-                        currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
-                        deleteXTiles();
-                        tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                        if (tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0))!=xTile && tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0)) != currentTile)
+                        {
+                            currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
+                            deleteXTiles();
+                            tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), currentTile);
+                            allTileCurrentNumbers[currentTileIndex]++;
+                        }
                     }
+                        
                 }
+                else GameObject.Find("Warning Text").GetComponent<Text>().text = "Maximum number of the object/tile";
+
+                
             }
             else
             {
@@ -113,7 +143,18 @@ public class tilemap : MonoBehaviour
                     {
                         currentDeletionLocation = new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0);
                         deleteXTiles();
+
+                        TileBase tempTile = tilemap1.GetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0));
                         tilemap1.SetTile(new Vector3Int(Mathf.FloorToInt(tilePreview.transform.position.x - 0.5f), Mathf.FloorToInt(tilePreview.transform.position.y - 0.5f), 0), null);
+                        
+                        for(int z = 0; z < allTileCharacters.Count; z++)
+                        {
+                            if(allTiles[z] == tempTile)
+                            {
+                                allTileCurrentNumbers[z]--;
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -137,6 +178,7 @@ public class tilemap : MonoBehaviour
             if (tilemap1.GetTile(currentDeletionLocation) == tilemap.allTiles[temp] && tilemap1.GetTile(currentDeletionLocation) != null && tilemap1.GetTile(currentDeletionLocation) != xTile)
             {
                 print(tilemap.allTiles[temp]);
+                allTileCurrentNumbers[temp]--;
                 for (int temp2 = 1; temp2 < (tilemap.allTileSizes[temp].x * tilemap.allTileSizes[temp].y); temp2++)
                 {
                     print(new Vector3Int(Mathf.FloorToInt(currentDeletionLocation.x + (temp2 % tilemap.allTileSizes[temp].x)), currentDeletionLocation.y + Mathf.FloorToInt(temp2 / tilemap.allTileSizes[temp].x), 0));
@@ -208,6 +250,7 @@ public class tilemap : MonoBehaviour
             {
                 currentTile = allTiles[i];
                 currentTileSize = allTileSizes[i];
+                currentTileIndex = i;
                 delete = false;
             }
         }
@@ -215,16 +258,23 @@ public class tilemap : MonoBehaviour
         {
             delete = true;
             currentTile = deleteTile;
+            currentTileIndex = 0;
             tilePreviewSR.sprite = GameObject.Find("delete").GetComponent<Image>().sprite;
         }
         if(name == "CreateLevelButton")
         {
             string nameOfLevel = levelNameText.text;
             string nameOfCreator = creatorNameText.text;
-            if(nameOfLevel != null && nameOfCreator != null)
+            print(creatorNameText.text);
+            if (nameOfLevel != "" && nameOfCreator != "")
             {
-                saveLevel(nameOfLevel, nameOfCreator);
+                if(allTileCurrentNumbers[5] == 1)
+                {
+                    saveLevel(nameOfLevel, nameOfCreator);
+                }
+                else GameObject.Find("Warning Text").GetComponent<Text>().text = "Please place down the character";
             }
+            else GameObject.Find("Warning Text").GetComponent<Text>().text = "Fill in both name of level and creator name";
         }
     }
 
@@ -232,7 +282,6 @@ public class tilemap : MonoBehaviour
     {
         bool fileExists = false;
         string fileName =  Application.streamingAssetsPath + "/" + levelName + ".txt";
-        print(fileName + "        this is me");       
 
         DirectoryInfo dir = new DirectoryInfo(Application.streamingAssetsPath);
         FileInfo[] info = dir.GetFiles("*.*");
@@ -241,7 +290,7 @@ public class tilemap : MonoBehaviour
             if(File.Exists(fileName))
             {
                 fileExists = true;
-                print("IT'S A MATCH");
+                GameObject.Find("Warning Text").GetComponent<Text>().text = "There is already a level named that. Please rename your level";
             }
         }
 
@@ -256,7 +305,6 @@ public class tilemap : MonoBehaviour
                     writer.WriteLine(creatorName);
                     writer.WriteLine(columns);
                     writer.WriteLine(rows);
-                    print(getTilemapInformation(columns, rows));
                     writer.WriteLine(getTilemapInformation(columns, rows));  
                 }  
                 SceneManager.LoadScene("LevelSelection");
