@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MJB_PlayerMove : MonoBehaviour
 {
@@ -91,6 +92,12 @@ public class MJB_PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //return to main menu
+        if(Input.GetKeyDown("escape")) {
+            SceneManager.LoadScene(0);
+        }
+
+
         //checks if player is touching ground using overlap circle
         ground = Physics2D.OverlapCircle(groundCheck.transform.position, circleRadius, groundLayer);
 
