@@ -192,7 +192,7 @@ public class MJB_PlayerMove : MonoBehaviour
                 numJumps--;
             }
         }
-        print(GetComponent<PlayerHealth>().invincible);
+        //print(GetComponent<PlayerHealth>().invincible);
         if (groundedTimer > 1f)
         {
             GetComponent<PlayerHealth>().invincible = false;
