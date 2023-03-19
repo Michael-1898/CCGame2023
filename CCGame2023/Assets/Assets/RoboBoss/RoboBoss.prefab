@@ -713,6 +713,7 @@ MonoBehaviour:
   - 12
   - 15
   - 1
+  aggroRadius: 15
   canonShotCooldown: 0.75
   canonBalls:
   - {fileID: 6385822456214779418, guid: 13ee1b4caf0557649b80d7afe9cdc7e5, type: 3}
@@ -777,7 +778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 8
+  maxHealth: 12
   currentHealth: 0
   hit: 0
 --- !u!1 &2117782339783229856

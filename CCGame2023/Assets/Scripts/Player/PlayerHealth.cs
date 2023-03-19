@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerHealth : MonoBehaviour
 {
     //variables for health
-    [SerializeField] private int maxHealth;
-    int currentHealth;
+    [SerializeField] int maxHealth;
+    public int currentHealth;
     public bool hit;
     public bool invincible;
 

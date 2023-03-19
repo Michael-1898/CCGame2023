@@ -8,6 +8,8 @@ public class RoboController : MonoBehaviour
     float attkPhaseTimer;
     [SerializeField] float[] attkPhaseLengths;
     int currentPhase;
+    [SerializeField] float aggroRadius;
+    bool aggroTaken;
 
     //variables for attk1
     float canonShotTimer;
@@ -51,6 +53,7 @@ public class RoboController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        aggroTaken = false;
         smoked = false;
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -60,7 +63,17 @@ public class RoboController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        attkPhaseTimer += Time.deltaTime;
+        if(!aggroTaken) {
+            float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
+            if(distanceFromPlayer < aggroRadius) {
+                aggroTaken = true;
+            }
+        }
+
+        if(aggroTaken) {
+            attkPhaseTimer += Time.deltaTime;
+        }
+        
         if(attkPhaseTimer >= attkPhaseLengths[currentPhase]) {
             currentPhase++;
             if(currentPhase == 1) {
@@ -223,5 +236,6 @@ public class RoboController : MonoBehaviour
         Gizmos.DrawWireSphere(edgeCheckR.transform.position, circleRadius);
         Gizmos.DrawWireSphere(wallCheckL.transform.position, circleRadius);
         Gizmos.DrawWireSphere(wallCheckR.transform.position, circleRadius);
+        Gizmos.DrawWireSphere(transform.position, aggroRadius);
     }
 }
