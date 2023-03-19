@@ -66781,16 +66781,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3624078812657250626, guid: e2ea95c4ae3258e43a6b6932854c948f,
-        type: 3}
-      propertyPath: attkPushback
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 3624078812657250626, guid: e2ea95c4ae3258e43a6b6932854c948f,
-        type: 3}
-      propertyPath: playerKnockback
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 3624078812657250628, guid: e2ea95c4ae3258e43a6b6932854c948f,
         type: 3}
       propertyPath: m_Name
