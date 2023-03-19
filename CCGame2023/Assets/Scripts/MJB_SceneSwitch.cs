@@ -11,7 +11,7 @@ public class MJB_SceneSwitch : MonoBehaviour
     {
         if(gameObject.name=="btnEditor")
         {
-            print("Hi");
+            //print("Hi");
         }
     }
 
