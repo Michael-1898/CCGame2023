@@ -513,6 +513,7 @@ GameObject:
   - component: {fileID: 2117782339254914936}
   - component: {fileID: 2117782339254914939}
   - component: {fileID: 2117782339254914938}
+  - component: {fileID: 481572837448521986}
   m_Layer: 9
   m_Name: RoboBoss
   m_TagString: Untagged
@@ -711,7 +712,7 @@ MonoBehaviour:
   attkPhaseLengths:
   - 12
   - 15
-  - 2
+  - 1
   canonShotCooldown: 0.75
   canonBalls:
   - {fileID: 6385822456214779418, guid: 13ee1b4caf0557649b80d7afe9cdc7e5, type: 3}
@@ -764,6 +765,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   anim: {fileID: 2117782339254914935}
+--- !u!114 &481572837448521986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117782339254914933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c891b5be7724e41806b8f58227fcae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 8
+  currentHealth: 0
+  hit: 0
 --- !u!1 &2117782339783229856
 GameObject:
   m_ObjectHideFlags: 0

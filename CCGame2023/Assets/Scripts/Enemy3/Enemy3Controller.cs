@@ -12,6 +12,7 @@ public class Enemy3Controller : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     Transform player;
     bool aggroTaken;
+    bool isFacingRight;
 
     //attk variables
     [SerializeField] int enemyDmg;
@@ -19,6 +20,7 @@ public class Enemy3Controller : MonoBehaviour
     [SerializeField] float attkCooldown;
     float attkTimer;
     [SerializeField] GameObject bullet;
+    float shotOffset;
 
     //knockbacked variables
     float hitTimer;
@@ -37,6 +39,16 @@ public class Enemy3Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //flipping to look at player
+        if(transform.position.x < player.position.x && !isFacingRight) {
+            Flip();
+            shotOffset = 0.7f;
+        } else if(transform.position.x > player.position.x && isFacingRight) {
+            Flip();
+            shotOffset = -0.7f;
+        }
+
+
         //linear drag when knockbacked
         if(GetComponent<Health>().hit == true && rb.drag == 0) {
             rb.drag = 1.5f;
@@ -116,7 +128,13 @@ public class Enemy3Controller : MonoBehaviour
 
 
     void Attack() {
-        Instantiate(bullet, transform.position, Quaternion.identity);
+        Instantiate(bullet, new Vector3(transform.position.x + shotOffset, transform.position.y, 0), Quaternion.identity);
+    }
+
+
+    void Flip() {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(new Vector3(0, 180, 0));
     }
 
 
