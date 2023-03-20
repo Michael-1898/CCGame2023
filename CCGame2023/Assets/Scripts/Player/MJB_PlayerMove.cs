@@ -219,6 +219,7 @@ public class MJB_PlayerMove : MonoBehaviour
             GetComponent<PlayerHealth>().invincible = true;
             groundedTimer = 0f;
             transform.position = lastGroundedPosition;
+            numJumps = maxJumps;
             
             
         }
