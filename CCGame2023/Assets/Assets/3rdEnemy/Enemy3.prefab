@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca78240da54ba4c4c8c11d12e44e1247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRadius: 10
-  followRadius: 6
-  runRadius: 5
+  aggroRadius: 12
+  followRadius: 5
+  runRadius: 4
   moveSpeed: 2
   playerLayer:
     serializedVersion: 2
