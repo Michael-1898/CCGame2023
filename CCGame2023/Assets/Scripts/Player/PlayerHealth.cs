@@ -11,6 +11,9 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public bool hit;
     public bool invincible;
+    float iFrameTimer;
+    [SerializeField] float iFrameTime;
+    bool iFrameActive;
 
     //variables for health display
     [SerializeField] Image[] hearts;
@@ -50,10 +53,17 @@ public class PlayerHealth : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+
+        if(iFrameActive) {
+            iFrameTimer += Time.deltaTime;
+            if(iFrameTimer >= iFrameTime) {
+                iFrameActive = false;
+            }
+        }
     }
 
     public void TakeDamage(int dmg) {
-        if(!invincible) {
+        if(!invincible && !iFrameActive) {
             hit = true;
             currentHealth -= dmg;
 
@@ -63,6 +73,9 @@ public class PlayerHealth : MonoBehaviour
                 }
                 Die();
             }
+
+            iFrameTimer = 0;
+            iFrameActive = true;
         }
         
     }

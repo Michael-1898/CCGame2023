@@ -304,8 +304,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 7
+  currentHealth: 0
   hit: 0
   invincible: 0
+  iFrameTime: 0.5
   hearts:
   - {fileID: 0}
   - {fileID: 0}
