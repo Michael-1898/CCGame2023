@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blop : MonoBehaviour
+public class RockMan : MonoBehaviour
 {
     // Start is called before the first frame update
     Rigidbody2D rb;
