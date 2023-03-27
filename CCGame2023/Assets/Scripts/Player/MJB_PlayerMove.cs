@@ -108,7 +108,7 @@ public class MJB_PlayerMove : MonoBehaviour
         //player movement
         playerPos = transform.position;
         Vector2 velocity = rb.velocity;
-        if(kbCurrentTime <= 0) {
+        if(kbCurrentTime <= 0 && canRotate) {
             velocity.x = Input.GetAxis("Horizontal") * playerSpeed * (Time.deltaTime + 1);
         } else {
             kbCurrentTime -= Time.deltaTime;
@@ -158,6 +158,7 @@ public class MJB_PlayerMove : MonoBehaviour
 
         if(comboDone == true) {
             attkTimer += Time.deltaTime;
+
             if(attkTimer >= attkCooldown) {
                 if(attkNum > 1) {
                     attkRadius /= 1.2f;
@@ -166,6 +167,9 @@ public class MJB_PlayerMove : MonoBehaviour
                 comboDone = false;
                 attkTimer = 0f;
                 attkNum = 0;
+                if(isGrounded) {
+                    rb.velocity = Vector3.zero;
+                }
                 
                 GetComponent<PlayerHealth>().invincible = false;
             }
@@ -274,11 +278,13 @@ public class MJB_PlayerMove : MonoBehaviour
         if(attkNum == 1 && attkType < 2) {
             attkPos = attkPoint1.transform.position;
         } else if(attkNum == 2) {
+            rb.velocity = Vector3.zero;
             rb.AddForce(-transform.right * attkLunge, ForceMode2D.Impulse);
             attkPos = attkPoint2.transform.position;
             attkRadius *= 1.2f;
         } else if(attkNum == 3) {
-            rb.AddForce(-transform.right * 1.4f * attkLunge, ForceMode2D.Impulse);
+            rb.velocity = Vector3.zero;
+            rb.AddForce(-transform.right * 1.2f * attkLunge, ForceMode2D.Impulse);
             attkPos = attkPoint2.transform.position;
 
             //adds invincibility on third attack
