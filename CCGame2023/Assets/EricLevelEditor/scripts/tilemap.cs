@@ -23,6 +23,7 @@ public class tilemap : MonoBehaviour
     [SerializeField] private string levelInformation;
     [SerializeField] private Tile xTile;
     [SerializeField] private Tile deleteTile;
+    [SerializeField] private Tile rectangleToolTile;
     public GameObject tilePreview;
     SpriteRenderer tilePreviewSR;
     Tile currentTile;
@@ -30,6 +31,8 @@ public class tilemap : MonoBehaviour
     Vector3Int currentDeletionLocation;
     Vector3 currentTileSize;
     bool delete = false;
+    bool rectangleTool = false;
+    bool rectangleToolFirstClick = false;
 
     public int columns;
     public int rows;
@@ -65,7 +68,7 @@ public class tilemap : MonoBehaviour
                 tilePreviewSR.sprite = null;
                 delete=false;
             }
-            if (currentTileSize != new Vector3(1f, 1f, 0f) && delete == false)
+            if (currentTileSize != new Vector3(1f, 1f, 0f) && delete == false && rectangleTool == false)
             {
                 tilePreviewSR.sprite = currentTile.sprite;
                 bool noXTiles = true;
@@ -110,7 +113,7 @@ public class tilemap : MonoBehaviour
                    
                 }
             }
-            else if(delete == false)
+            else if(delete == false && rectangleTool == false)
             {
                 tilePreviewSR.sprite = currentTile.sprite;
           
@@ -133,7 +136,7 @@ public class tilemap : MonoBehaviour
 
                 
             }
-            else
+            else if(delete == true)
             {
 
                 tilePreviewSR.sprite = GameObject.Find("delete").GetComponent<Image>().sprite;
@@ -157,6 +160,30 @@ public class tilemap : MonoBehaviour
                         
                     }
                 }
+            }
+            else if(rectangleTool == true)
+            {
+                tilePreviewSR.sprite = GameObject.Find("rectangleTool").GetComponent<Image>().sprite;
+
+                /*
+
+
+
+
+
+
+
+
+                WORK HERE NEXT TIME
+
+
+
+
+
+
+
+
+                */
             }
         }
         else
@@ -252,14 +279,24 @@ public class tilemap : MonoBehaviour
                 currentTileSize = allTileSizes[i];
                 currentTileIndex = i;
                 delete = false;
+                rectangleTool = false;
             }
         }
         if(name == "delete")
         {
             delete = true;
+            rectangleTool = false;
             currentTile = deleteTile;
             currentTileIndex = 0;
             tilePreviewSR.sprite = GameObject.Find("delete").GetComponent<Image>().sprite;
+        }
+        if(name == "rectangleTool")
+        {
+            rectangleTool = true;
+            delete = false;
+            currentTile = rectangleToolTile;
+            currentTileIndex = 0;
+            tilePreviewSR.sprite = GameObject.Find("rectangleTool").GetComponent<Image>().sprite;
         }
         if(name == "CreateLevelButton")
         {
