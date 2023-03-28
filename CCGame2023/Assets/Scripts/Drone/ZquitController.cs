@@ -11,6 +11,7 @@ public class ZquitController : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     Transform player;
     bool isFacingRight;
+    Transform drone;
 
     //attk variables
     [SerializeField] float attkCooldown;
@@ -33,6 +34,7 @@ public class ZquitController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        drone = transform;
         isAttacking = false;
         aggroTaken = false;
         rb = GetComponent<Rigidbody2D>();
@@ -43,6 +45,10 @@ public class ZquitController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!isAttacking && drone.localRotation.eulerAngles.z != 0) {
+            transform.rotation = Quaternion.Euler(0f, drone.localRotation.eulerAngles.y, 0f);
+        }
+
         //linear drag when knockbacked
         if(GetComponent<Health>().hit == true && rb.drag == 0) {
             rb.drag = 1.5f;
@@ -114,7 +120,7 @@ public class ZquitController : MonoBehaviour
 
         //attk stop code
         if(isAttacking) {
-            if(distanceFromPlayer > followRadius + 10) {
+            if(distanceFromPlayer > followRadius + 10 || transform.GetChild(0).GetComponent<IgnorePlayerCol>().touching) {
                 rb.velocity = Vector3.zero;
                 isAttacking = false;
                 anim.SetBool("isAttking", false);

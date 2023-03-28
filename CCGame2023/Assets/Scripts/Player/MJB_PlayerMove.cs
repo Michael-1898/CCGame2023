@@ -108,6 +108,7 @@ public class MJB_PlayerMove : MonoBehaviour
         //player movement
         playerPos = transform.position;
         Vector2 velocity = rb.velocity;
+        myAnim.SetFloat("yVelocity", velocity.y);
         if(kbCurrentTime <= 0 && canRotate) {
             velocity.x = Input.GetAxis("Horizontal") * playerSpeed * (Time.deltaTime + 1);
         } else {
@@ -167,7 +168,7 @@ public class MJB_PlayerMove : MonoBehaviour
                 comboDone = false;
                 attkTimer = 0f;
                 attkNum = 0;
-                if(isGrounded) {
+                if(ground) {
                     rb.velocity = Vector3.zero;
                 }
                 
@@ -303,28 +304,30 @@ public class MJB_PlayerMove : MonoBehaviour
         //foreach collider in hit enemies do damage/knock back
         foreach(Collider2D hitEnemy in hitEnemies) {
 
-            //get component to get health/damage script of enemy and apply damage 
-            hitEnemy.GetComponent<Health>().TakeDamage(playerDamage);
+            //get component to get health/damage script of enemy and apply damage
+            if(!hitEnemy.gameObject.CompareTag("ObstacleCollider")) {
+                hitEnemy.GetComponent<Health>().TakeDamage(playerDamage);
 
-            //knockback
-            if(attkNum < 3 && attkType < 2) {
-                //knockback according to direction (if hit enemy is on left or right of player)
-                if(transform.position.x < hitEnemy.transform.position.x) {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * playerKnockback * (Time.deltaTime + 1);
-                } else {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * playerKnockback * (Time.deltaTime + 1);
-                }
-            } else if(attkNum == 3 && attkType < 2) {
-                if(transform.position.x < hitEnemy.transform.position.x) {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
-                } else {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
-                }
-            } else if(attkType > 1) {
-                if(transform.position.y < hitEnemy.transform.position.y) {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.up * playerKnockback * (Time.deltaTime + 1);
-                } else {
-                    hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.up * playerKnockback * (Time.deltaTime + 1);
+                //knockback
+                if(attkNum < 3 && attkType < 2) {
+                    //knockback according to direction (if hit enemy is on left or right of player)
+                    if(transform.position.x < hitEnemy.transform.position.x) {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * playerKnockback * (Time.deltaTime + 1);
+                    } else {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * playerKnockback * (Time.deltaTime + 1);
+                    }
+                } else if(attkNum == 3 && attkType < 2) {
+                    if(transform.position.x < hitEnemy.transform.position.x) {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
+                    } else {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
+                    }
+                } else if(attkType > 1) {
+                    if(transform.position.y < hitEnemy.transform.position.y) {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.up * playerKnockback * (Time.deltaTime + 1);
+                    } else {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.up * playerKnockback * (Time.deltaTime + 1);
+                    }
                 }
             }
         }
