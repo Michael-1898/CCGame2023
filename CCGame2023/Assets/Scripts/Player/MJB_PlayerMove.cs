@@ -316,11 +316,17 @@ public class MJB_PlayerMove : MonoBehaviour
                     } else {
                         hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * playerKnockback * (Time.deltaTime + 1);
                     }
-                } else if(attkNum == 3 && attkType < 2) {
+                } else if(attkNum == 3 && attkType < 2 && !hitEnemy.gameObject.CompareTag("LargeBoss")) {
                     if(transform.position.x < hitEnemy.transform.position.x) {
                         hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
                     } else {
                         hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback * 3.5f) * (Time.deltaTime + 1);
+                    }
+                } else if(attkNum == 3 && attkType < 2 && hitEnemy.gameObject.CompareTag("LargeBoss")) {
+                    if(transform.position.x < hitEnemy.transform.position.x) {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = Vector2.right * (playerKnockback) * (Time.deltaTime + 1);
+                    } else {
+                        hitEnemy.GetComponent<Rigidbody2D>().velocity = -Vector2.right * (playerKnockback) * (Time.deltaTime + 1);
                     }
                 } else if(attkType > 1) {
                     if(transform.position.y < hitEnemy.transform.position.y) {

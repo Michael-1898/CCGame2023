@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 481572837448521986}
   m_Layer: 9
   m_Name: RoboBoss
-  m_TagString: Untagged
+  m_TagString: LargeBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
