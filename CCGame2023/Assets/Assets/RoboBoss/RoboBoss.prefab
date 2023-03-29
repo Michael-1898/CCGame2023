@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 3.1210594, y: 3.1210594, z: 3.1210594}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117782338540772749
 GameObject:
@@ -388,7 +388,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117782339202221244
 GameObject:
@@ -542,6 +542,7 @@ Transform:
   - {fileID: 2117782340582255909}
   - {fileID: 2117782338762453920}
   - {fileID: 2117782339783229857}
+  - {fileID: 8643164349221904478}
   - {fileID: 2117782339000520647}
   - {fileID: 2117782340377810833}
   - {fileID: 8622270919911337690}
@@ -712,7 +713,7 @@ MonoBehaviour:
   attkPhaseLengths:
   - 12
   - 15
-  - 1
+  - 15
   aggroRadius: 15
   canonShotCooldown: 0.75
   canonBalls:
@@ -740,6 +741,10 @@ MonoBehaviour:
   smokeFX: {fileID: 3809984422667603870, guid: c26163d67f0d00c419711f6667514020, type: 3}
   smokePtL: {fileID: 8362615932493500205}
   smokePtR: {fileID: 687505261129888757}
+  missile: {fileID: 4705795956737334312, guid: 67acaa6ef02c3f34a9e4213ab1e35f07, type: 3}
+  missileCooldown: 1.5
+  missilePt: {fileID: 8643164349221904478}
+  missileSpeed: 5
 --- !u!114 &2117782339254914938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,7 +1065,7 @@ Transform:
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117782340392650916
 GameObject:
@@ -1449,7 +1454,7 @@ Transform:
   m_LocalScale: {x: 3.1210594, y: 3.1210594, z: 3.1210594}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5530541895099324140
 GameObject:
@@ -1479,7 +1484,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6394933693919916399
 GameObject:
@@ -1509,5 +1514,35 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2117782339254914934}
-  m_RootOrder: 13
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6421406527360461985
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8643164349221904478}
+  m_Layer: 0
+  m_Name: MissilePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8643164349221904478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6421406527360461985}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.71, y: 0.95, z: 0}
+  m_LocalScale: {x: 3.1210594, y: 3.1210594, z: 3.1210594}
+  m_Children: []
+  m_Father: {fileID: 2117782339254914934}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

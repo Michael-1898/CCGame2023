@@ -50,6 +50,14 @@ public class RoboController : MonoBehaviour
     [SerializeField] Transform smokePtR;
     bool smoked;
 
+    //variables for attk3
+    [SerializeField] GameObject missile;
+    [SerializeField] float missileCooldown;
+    float missileTimer;
+    [SerializeField] Transform missilePt;
+    float missileAngle;
+    [SerializeField] float missileSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,6 +112,10 @@ public class RoboController : MonoBehaviour
     }
 
     void Attk1() { //canon shooting
+        if(GetComponent<RoboMovement>().enabled == false) {
+            GetComponent<RoboMovement>().enabled = true;
+        }
+
         canonShotTimer += Time.deltaTime;
     
         if(canonShotTimer >= canonShotCooldown && !canonShooting) {
@@ -203,7 +215,19 @@ public class RoboController : MonoBehaviour
     }
 
     void Attk3() { //missile shooting
-        print("3");
+        if(GetComponent<RoboMovement>().enabled == true) {
+            GetComponent<RoboMovement>().enabled = false;
+        }
+
+        missileTimer += Time.deltaTime;
+        if(missileTimer >= missileCooldown) {
+            //fire missile
+            missileAngle = Random.Range(-1f, 10f); //sets random angle for missiel to spawn at, so they don't all take same path up
+            GameObject newMissile = Instantiate(missile, missilePt.position, Quaternion.Euler(0, 0, missileAngle));
+            newMissile.GetComponent<Rigidbody2D>().velocity = (newMissile.transform.GetChild(0).transform.position - newMissile.transform.GetChild(1).transform.position).normalized * missileSpeed * (Time.deltaTime + 1);
+
+            missileTimer = 0;
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col) {
