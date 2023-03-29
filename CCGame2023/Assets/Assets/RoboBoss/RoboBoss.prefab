@@ -742,6 +742,7 @@ MonoBehaviour:
   smokePtL: {fileID: 8362615932493500205}
   smokePtR: {fileID: 687505261129888757}
   missile: {fileID: 4705795956737334312, guid: 67acaa6ef02c3f34a9e4213ab1e35f07, type: 3}
+  loadCooldown: 0.2
   missileCooldown: 1.5
   missilePt: {fileID: 8643164349221904478}
   missileSpeed: 5

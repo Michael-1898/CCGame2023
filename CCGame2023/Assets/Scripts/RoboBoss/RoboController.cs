@@ -52,6 +52,8 @@ public class RoboController : MonoBehaviour
 
     //variables for attk3
     [SerializeField] GameObject missile;
+    [SerializeField] float loadCooldown;
+    float loadTimer;
     [SerializeField] float missileCooldown;
     float missileTimer;
     [SerializeField] Transform missilePt;
@@ -191,10 +193,8 @@ public class RoboController : MonoBehaviour
             //sets movement direction towards player
             if(player.position.x < transform.position.x && ramSpeed > 0) {
                 ramSpeed *= -1;
-                print("dir change");
             } else if(player.position.x >= transform.position.x && ramSpeed < 0) {
                 ramSpeed *= -1;
-                print("dir change");
             }
 
             isRamming = true;
